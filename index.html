@@ -1,75 +1,125 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Football Prop Edge</title><link rel="stylesheet" href="styles.css">
-</head><body>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09111c">
+<title>Football Prop Edge</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 <div class="site-shell">
-<nav class="topnav">
-  <a class="brand" href="#top">Football Prop Edge</a>
-  <div class="navlinks">
-    <a href="#best">Best Predictions</a>
-    <a href="#all">All Projections</a>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a class="brand-lockup" href="#top">
+      <span class="brand-mark">FPE</span>
+      <span class="brand-copy">
+        <strong>Football Prop Edge</strong>
+        <small>ML player projections</small>
+      </span>
+    </a>
+
+    <div class="navlinks">
+      <a href="#best">Best Predictions</a>
+      <a href="#all">Full Board</a>
+      <span class="live-pill"><span class="live-dot"></span> Week <span id="navWeek">—</span></span>
+    </div>
   </div>
 </nav>
 
 <header class="hero" id="top">
-  <div>
-    <p class="eyebrow">MACHINE-LEARNING NFL PROJECTIONS</p>
-    <h1>Find the edge before kickoff.</h1>
-    <p class="sub">Independent rushing, receiving, and touchdown projections built from recent usage and historical NFL data. No sportsbook lines, team logos, or player photos.</p>
+  <div class="hero-copy">
+    <p class="eyebrow">NFL • MACHINE LEARNING • WEEKLY PROJECTIONS</p>
+    <h1>Cleaner projections.<br><span>Sharper decisions.</span></h1>
+    <p class="sub">Independent rushing, receiving, and touchdown projections built from historical NFL data and recent player usage — without sportsbook lines, player photos, or team logos.</p>
     <div class="hero-actions">
-      <a class="primary-btn" href="#best">See Best Predictions</a>
-      <span id="updated" class="updated">Loading…</span>
+      <a class="primary-btn" href="#best">Explore top projections</a>
+      <a class="secondary-btn" href="#all">View full board</a>
+    </div>
+    <div class="hero-meta">
+      <span id="updated">Loading latest model run…</span>
     </div>
   </div>
-  <div class="hero-orb">
-    <span>ML</span>
-    <strong>NFL</strong>
-    <small>Projection Engine</small>
+
+  <div class="hero-panel" aria-hidden="true">
+    <div class="mini-label">Projection engine</div>
+    <div class="hero-score">3</div>
+    <div class="hero-score-label">prediction markets</div>
+    <div class="hero-tags">
+      <span>Rushing</span><span>Receiving</span><span>TD</span>
+    </div>
   </div>
 </header>
 
 <main>
 <section class="hero-grid">
-  <div class="stat stat-rush"><span>Week</span><strong id="week">—</strong><small>Current slate</small></div>
-  <div class="stat stat-rec"><span>Players</span><strong id="count">—</strong><small>Projected</small></div>
-  <div class="stat stat-td"><span>Model data</span><strong>nflverse</strong><small>Free + reproducible</small></div>
+  <div class="stat stat-rush"><span>Current slate</span><strong id="week">—</strong><small>NFL week</small></div>
+  <div class="stat stat-rec"><span>Player pool</span><strong id="count">—</strong><small>active projections</small></div>
+  <div class="stat stat-td"><span>Data source</span><strong>nflverse</strong><small>free + reproducible</small></div>
 </section>
 
 <section id="best" class="best-section rush-title">
-  <div class="section-head"><div><p class="eyebrow">RUNNING BACKS</p><h2>Top rushing projections</h2></div><p>Highest projected rushing yards among RBs.</p></div>
+  <div class="section-head">
+    <div><p class="eyebrow">RUNNING BACKS</p><h2>Top rushing projections</h2></div>
+    <p>Highest projected rushing yards among RBs.</p>
+  </div>
   <div id="rbCards" class="prediction-grid"></div>
 </section>
 
 <section class="best-section rec-title">
-  <div class="section-head"><div><p class="eyebrow">RECEIVERS</p><h2>Top receiving projections</h2></div><p>Highest projected receiving yards among WRs and TEs.</p></div>
+  <div class="section-head">
+    <div><p class="eyebrow">RECEIVERS</p><h2>Top receiving projections</h2></div>
+    <p>Highest projected receiving yards among WRs and TEs.</p>
+  </div>
   <div id="wrCards" class="prediction-grid"></div>
 </section>
 
 <section class="best-section td-title">
-  <div class="section-head"><div><p class="eyebrow">TOUCHDOWNS</p><h2>Highest touchdown probabilities</h2></div><p>Top model-estimated anytime TD probabilities.</p></div>
+  <div class="section-head">
+    <div><p class="eyebrow">TOUCHDOWNS</p><h2>Highest touchdown probabilities</h2></div>
+    <p>Top model-estimated anytime TD probabilities.</p>
+  </div>
   <div id="tdCards" class="prediction-grid"></div>
 </section>
 
-<section id="all" class="section-head"><div><p class="eyebrow">FULL BOARD</p><h2>All player projections</h2></div><p>Search and sort the full slate.</p></section>
-<section class="controls">
-<input id="search" placeholder="Search player or team…" aria-label="Search">
-<select id="position"><option value="">All positions</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select>
-<select id="team"><option value="">All teams</option></select>
-<select id="metric"><option value="rushing_yards">Rushing yards</option><option value="receiving_yards">Receiving yards</option><option value="td_probability">TD probability</option></select>
+<section id="all" class="section-head board-head">
+  <div><p class="eyebrow">FULL BOARD</p><h2>All player projections</h2></div>
+  <p>Search, filter, and sort the current slate.</p>
 </section>
 
-<section><div class="table-wrap"><table><thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Opp</th><th>Rush Yds</th><th>Rec Yds</th><th>TD %</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+<section class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input id="search" placeholder="Search player or team…" aria-label="Search">
+  </div>
+  <select id="position"><option value="">All positions</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select>
+  <select id="team"><option value="">All teams</option></select>
+  <select id="metric"><option value="rushing_yards">Sort: rushing yards</option><option value="receiving_yards">Sort: receiving yards</option><option value="td_probability">Sort: TD probability</option></select>
+</section>
+
+<section class="table-wrap">
+<table>
+<thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Opp</th><th>Rush Yds</th><th>Rec Yds</th><th>TD %</th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+</section>
 
 <section class="model-card">
-  <div class="section-head"><div><p class="eyebrow">VALIDATION</p><h2>Model health</h2></div></div>
-  <p>Models are selected using walk-forward season validation. Training data is shifted so only prior-game information is used for a projection.</p>
+  <div class="section-head">
+    <div><p class="eyebrow">VALIDATION</p><h2>Model health</h2></div>
+    <p>Walk-forward testing, not random splitting.</p>
+  </div>
+  <p class="model-copy">Models are selected using time-aware validation. Training features are shifted so the game being predicted never leaks into its own feature set.</p>
   <div id="metrics" class="metrics"></div>
 </section>
 </main>
 
-<footer>For personal analytical use. Projections are estimates, not guarantees.</footer>
+<footer>
+  <span>Football Prop Edge</span>
+  <span>For personal analytical use. Projections are estimates, not guarantees.</span>
+</footer>
 </div>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>
