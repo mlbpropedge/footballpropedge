@@ -48,6 +48,160 @@ def _regression_candidates():
     }
 
 
+def _make_regressor(name: str, params: dict | None = None):
+    params = params or {}
+    if name == "hist_gradient_boosting":
+        config = {
+            "loss": "absolute_error",
+            "learning_rate": 0.05,
+            "max_iter": 350,
+            "max_leaf_nodes": 24,
+            "min_samples_leaf": 20,
+            "l2_regularization": 2.0,
+            "random_state": RANDOM_STATE,
+        }
+        config.update(params)
+        return HistGradientBoostingRegressor(**config)
+    if name == "extra_trees":
+        config = {
+            "n_estimators": 350,
+            "min_samples_leaf": 6,
+            "max_features": 0.75,
+            "n_jobs": -1,
+            "random_state": RANDOM_STATE,
+        }
+        config.update(params)
+        return ExtraTreesRegressor(**config)
+    raise ValueError(f"Unknown regressor: {name}")
+
+
+def _hgb_parameter_grid() -> list[dict]:
+    # Deliberately small, structured search: enough variation to matter without
+    # turning routine site refreshes into an expensive brute-force sweep.
+    return [
+        {"learning_rate": 0.05, "max_iter": 350, "max_leaf_nodes": 24, "min_samples_leaf": 20, "l2_regularization": 2.0},
+        {"learning_rate": 0.03, "max_iter": 500, "max_leaf_nodes": 20, "min_samples_leaf": 20, "l2_regularization": 2.0},
+        {"learning_rate": 0.04, "max_iter": 450, "max_leaf_nodes": 16, "min_samples_leaf": 20, "l2_regularization": 3.0},
+        {"learning_rate": 0.04, "max_iter": 450, "max_leaf_nodes": 24, "min_samples_leaf": 30, "l2_regularization": 4.0},
+        {"learning_rate": 0.06, "max_iter": 300, "max_leaf_nodes": 16, "min_samples_leaf": 30, "l2_regularization": 3.0},
+        {"learning_rate": 0.03, "max_iter": 550, "max_leaf_nodes": 32, "min_samples_leaf": 30, "l2_regularization": 5.0},
+        {"learning_rate": 0.05, "max_iter": 400, "max_leaf_nodes": 12, "min_samples_leaf": 25, "l2_regularization": 4.0},
+        {"learning_rate": 0.035, "max_iter": 500, "max_leaf_nodes": 24, "min_samples_leaf": 40, "l2_regularization": 6.0},
+    ]
+
+
+def tune_regression_hyperparameters(df: pd.DataFrame, target: str) -> dict:
+    frame = _role_frame(df, target)
+    seasons = sorted(int(s) for s in frame["season"].dropna().unique())
+    if len(seasons) < 4:
+        return {
+            "available": False,
+            "selected_params": _hgb_parameter_grid()[0],
+            "reason": "not enough seasons",
+        }
+
+    final_season = seasons[-1]
+    selection_seasons = seasons[-4:-1]
+    candidates = _hgb_parameter_grid()
+    results = []
+
+    for idx, params in enumerate(candidates):
+        fold_maes = []
+        fold_rows = []
+        for test_season in selection_seasons:
+            train = frame[frame["season"] < test_season]
+            test = frame[frame["season"] == test_season]
+            if len(train) < 400 or len(test) < 40:
+                continue
+            Xtr, ytr = _clean_xy(train, target)
+            Xte, yte = _clean_xy(test, target)
+            model = _make_regressor("hist_gradient_boosting", params)
+            model.fit(Xtr, ytr)
+            pred = np.clip(model.predict(Xte), 0, None)
+            mae = float(mean_absolute_error(yte, pred))
+            fold_maes.append(mae)
+            fold_rows.append({
+                "season": int(test_season),
+                "samples": int(len(test)),
+                "mae": round(mae, 3),
+            })
+
+        results.append({
+            "candidate": idx,
+            "params": params,
+            "selection_mae": round(float(np.mean(fold_maes)), 3) if fold_maes else None,
+            "folds": fold_rows,
+        })
+
+    viable = [r for r in results if r["selection_mae"] is not None]
+    if not viable:
+        return {
+            "available": False,
+            "selected_params": candidates[0],
+            "reason": "no viable folds",
+            "candidates": results,
+        }
+
+    winner = min(viable, key=lambda row: row["selection_mae"])
+    default = results[0]
+
+    train = frame[frame["season"] < final_season]
+    test = frame[frame["season"] == final_season]
+    holdout = {"season": int(final_season), "samples": int(len(test)), "mae": None}
+    default_holdout = None
+    if len(train) >= 400 and len(test) >= 40:
+        Xtr, ytr = _clean_xy(train, target)
+        Xte, yte = _clean_xy(test, target)
+
+        tuned_model = _make_regressor("hist_gradient_boosting", winner["params"])
+        tuned_model.fit(Xtr, ytr)
+        tuned_pred = np.clip(tuned_model.predict(Xte), 0, None)
+        holdout["mae"] = round(float(mean_absolute_error(yte, tuned_pred)), 3)
+
+        default_model = _make_regressor("hist_gradient_boosting", candidates[0])
+        default_model.fit(Xtr, ytr)
+        default_pred = np.clip(default_model.predict(Xte), 0, None)
+        default_holdout = round(float(mean_absolute_error(yte, default_pred)), 3)
+
+    selection_gain = (
+        round(float(default["selection_mae"] - winner["selection_mae"]), 3)
+        if default["selection_mae"] is not None
+        else None
+    )
+    holdout_gain = (
+        round(float(default_holdout - holdout["mae"]), 3)
+        if default_holdout is not None and holdout["mae"] is not None
+        else None
+    )
+
+    # Only deploy a tuned configuration when it improved the selection folds
+    # and did not lose on the untouched newest-season check.
+    deploy_tuned = bool(
+        winner["candidate"] != 0
+        and selection_gain is not None
+        and selection_gain > 0
+        and (holdout_gain is None or holdout_gain >= 0)
+    )
+    selected = winner["params"] if deploy_tuned else candidates[0]
+
+    return {
+        "available": True,
+        "selection_seasons": [int(x) for x in selection_seasons],
+        "final_holdout": holdout,
+        "default_holdout_mae": default_holdout,
+        "selected_candidate": int(winner["candidate"]),
+        "selected_params": selected,
+        "proposed_params": winner["params"],
+        "default_selection_mae": default["selection_mae"],
+        "best_selection_mae": winner["selection_mae"],
+        "selection_gain_yards": selection_gain,
+        "holdout_gain_yards": holdout_gain,
+        "deployed_tuned_params": deploy_tuned,
+        "decision": "tuned parameters deployed" if deploy_tuned else "default parameters retained",
+        "candidates": results,
+    }
+
+
 def _classification_candidates():
     return {
         "hist_gradient_boosting": HistGradientBoostingClassifier(
@@ -125,7 +279,12 @@ def _baseline_predictions(test: pd.DataFrame, target: str) -> dict[str, np.ndarr
     }
 
 
-def benchmark_regression(df: pd.DataFrame, target: str, model_name: str) -> dict:
+def benchmark_regression(
+    df: pd.DataFrame,
+    target: str,
+    model_name: str,
+    model_params: dict | None = None,
+) -> dict:
     frame = _role_frame(df, target)
     seasons = sorted(int(s) for s in frame["season"].dropna().unique())
     test_seasons = seasons[-3:] if len(seasons) >= 4 else seasons[-1:]
@@ -142,7 +301,7 @@ def benchmark_regression(df: pd.DataFrame, target: str, model_name: str) -> dict
 
         Xtr, ytr = _clean_xy(train, target)
         Xte, yte = _clean_xy(test, target)
-        model = _regression_candidates()[model_name]
+        model = _make_regressor(model_name, model_params)
         model.fit(Xtr, ytr)
         model_pred = np.clip(model.predict(Xte), 0, None)
         abs_err = np.abs(yte.to_numpy() - model_pred)
@@ -395,20 +554,28 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
 
     rush_name, rush_cv = walk_forward_regression(df, "rushing_yards")
     rec_name, rec_cv = walk_forward_regression(df, "receiving_yards")
+    rush_tuning = tune_regression_hyperparameters(df, "rushing_yards")
+    rec_tuning = tune_regression_hyperparameters(df, "receiving_yards")
+    rush_params = rush_tuning.get("selected_params") if rush_name == "hist_gradient_boosting" else None
+    rec_params = rec_tuning.get("selected_params") if rec_name == "hist_gradient_boosting" else None
     td_name, td_cv = walk_forward_td(df)
     td_base_rate, td_calibration_slope, td_calibration = fit_td_calibration(
         df, td_name
     )
 
-    rush_benchmark = benchmark_regression(df, "rushing_yards", rush_name)
-    rec_benchmark = benchmark_regression(df, "receiving_yards", rec_name)
+    rush_benchmark = benchmark_regression(
+        df, "rushing_yards", rush_name, rush_params
+    )
+    rec_benchmark = benchmark_regression(
+        df, "receiving_yards", rec_name, rec_params
+    )
 
     X_rush, y_rush = _clean_xy(rush_df, "rushing_yards")
-    rush_model = _regression_candidates()[rush_name]
+    rush_model = _make_regressor(rush_name, rush_params)
     rush_model.fit(X_rush, y_rush)
 
     X_rec, y_rec = _clean_xy(rec_df, "receiving_yards")
-    rec_model = _regression_candidates()[rec_name]
+    rec_model = _make_regressor(rec_name, rec_params)
     rec_model.fit(X_rec, y_rec)
 
     X_td, y_td = _clean_xy(td_df, "touchdown")
@@ -435,6 +602,7 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
             "cv_mae": avg_cv(rush_cv.get(rush_name, []), "mae"),
             "train_mae": round(float(rush_train_mae), 3),
             "benchmark": rush_benchmark,
+            "hyperparameter_tuning": rush_tuning,
         },
         "receiving": {
             "model": rec_name,
@@ -444,6 +612,7 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
             "cv_mae": avg_cv(rec_cv.get(rec_name, []), "mae"),
             "train_mae": round(float(rec_train_mae), 3),
             "benchmark": rec_benchmark,
+            "hyperparameter_tuning": rec_tuning,
         },
         "touchdown": {
             "model": td_name,
