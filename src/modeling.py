@@ -129,6 +129,7 @@ def benchmark_regression(df: pd.DataFrame, target: str, model_name: str) -> dict
     test_seasons = seasons[-3:] if len(seasons) >= 4 else seasons[-1:]
     model_scores = []
     baseline_scores = {k: [] for k in ("last_3", "last_5", "season_average", "workload")}
+    diagnostic_rows = []
     sample_count = 0
 
     for test_season in test_seasons:
@@ -142,8 +143,15 @@ def benchmark_regression(df: pd.DataFrame, target: str, model_name: str) -> dict
         model = _regression_candidates()[model_name]
         model.fit(Xtr, ytr)
         model_pred = np.clip(model.predict(Xte), 0, None)
-        model_scores.extend(np.abs(yte.to_numpy() - model_pred).tolist())
+        abs_err = np.abs(yte.to_numpy() - model_pred)
+        model_scores.extend(abs_err.tolist())
         sample_count += len(test)
+
+        workload_col = "carries_avg_3" if target == "rushing_yards" else "targets_avg_3"
+        diag = test[["position", workload_col]].copy()
+        diag["abs_error"] = abs_err
+        diag["workload"] = pd.to_numeric(diag[workload_col], errors="coerce").fillna(0.0)
+        diagnostic_rows.append(diag[["position", "workload", "abs_error"]])
 
         for name, pred in _baseline_predictions(test, target).items():
             baseline_scores[name].extend(np.abs(yte.to_numpy() - pred).tolist())
@@ -156,6 +164,29 @@ def benchmark_regression(df: pd.DataFrame, target: str, model_name: str) -> dict
     valid = {k: v for k, v in baselines.items() if v is not None}
     best_baseline_name = min(valid, key=valid.get) if valid else None
     best_baseline_mae = valid.get(best_baseline_name) if best_baseline_name else None
+
+    error_breakdown = {"by_position": {}, "by_workload": {}}
+    if diagnostic_rows:
+        diagnostics = pd.concat(diagnostic_rows, ignore_index=True)
+        for pos, grp in diagnostics.groupby("position"):
+            if len(grp) >= 30:
+                error_breakdown["by_position"][str(pos)] = {
+                    "samples": int(len(grp)),
+                    "mae": round(float(grp["abs_error"].mean()), 3),
+                }
+
+        bins = [-0.001, 4, 8, 14, float("inf")]
+        labels = ["low", "medium", "high", "elite"]
+        diagnostics["workload_bucket"] = pd.cut(
+            diagnostics["workload"], bins=bins, labels=labels
+        )
+        for bucket, grp in diagnostics.groupby("workload_bucket", observed=True):
+            if len(grp) >= 30:
+                error_breakdown["by_workload"][str(bucket)] = {
+                    "samples": int(len(grp)),
+                    "mae": round(float(grp["abs_error"].mean()), 3),
+                    "avg_workload": round(float(grp["workload"].mean()), 2),
+                }
 
     return {
         "samples": int(sample_count),
@@ -176,6 +207,7 @@ def benchmark_regression(df: pd.DataFrame, target: str, model_name: str) -> dict
             and best_baseline_mae is not None
             and model_mae < best_baseline_mae
         ),
+        "error_breakdown": error_breakdown,
     }
 
 
