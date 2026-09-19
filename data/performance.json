@@ -1,0 +1,10 @@
+{
+  "graded_predictions": 0,
+  "graded_weeks": 0,
+  "weeks": [],
+  "rushing_mae": null,
+  "receiving_mae": null,
+  "td_brier": null,
+  "weekly_results": [],
+  "note": "Weekly grading will appear after an archived prediction week has completed."
+}
