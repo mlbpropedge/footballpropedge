@@ -7,25 +7,40 @@
       {
         "season": 2024,
         "samples": 1836,
-        "mae": 19.502,
-        "rmse": 27.941
+        "mae": 19.438,
+        "rmse": 27.807
       },
       {
         "season": 2025,
         "samples": 1761,
-        "mae": 19.263,
-        "rmse": 28.436
+        "mae": 19.276,
+        "rmse": 28.446
       },
       {
         "season": 2026,
         "samples": 98,
-        "mae": 19.848,
-        "rmse": 28.314
+        "mae": 20.347,
+        "rmse": 29.695
       }
     ],
-    "cv_mae": 19.538,
-    "train_mae": 18.115,
-    "overfit_ratio": 1.08,
+    "cv_mae": 19.687,
+    "train_mae": 17.893,
+    "benchmark": {
+      "samples": 3695,
+      "model_mae": 19.385,
+      "baselines": {
+        "last_3": 21.328,
+        "last_5": 20.67,
+        "season_average": 21.315,
+        "workload": 20.969
+      },
+      "best_baseline": "last_5",
+      "best_baseline_mae": 20.67,
+      "model_improvement_yards": 1.285,
+      "model_improvement_pct": 6.22,
+      "beats_best_baseline": true
+    },
+    "overfit_ratio": 1.1,
     "overfit_flag": false
   },
   "receiving": {
@@ -36,25 +51,40 @@
       {
         "season": 2024,
         "samples": 3761,
-        "mae": 19.77,
-        "rmse": 27.826
+        "mae": 19.587,
+        "rmse": 27.738
       },
       {
         "season": 2025,
         "samples": 3727,
-        "mae": 19.287,
-        "rmse": 27.171
+        "mae": 19.167,
+        "rmse": 27.107
       },
       {
         "season": 2026,
         "samples": 210,
-        "mae": 20.435,
-        "rmse": 29.15
+        "mae": 20.734,
+        "rmse": 29.9
       }
     ],
-    "cv_mae": 19.831,
-    "train_mae": 18.917,
-    "overfit_ratio": 1.05,
+    "cv_mae": 19.829,
+    "train_mae": 19.195,
+    "benchmark": {
+      "samples": 7698,
+      "model_mae": 19.415,
+      "baselines": {
+        "last_3": 21.899,
+        "last_5": 20.997,
+        "season_average": 21.367,
+        "workload": 21.897
+      },
+      "best_baseline": "last_5",
+      "best_baseline_mae": 20.997,
+      "model_improvement_yards": 1.582,
+      "model_improvement_pct": 7.53,
+      "beats_best_baseline": true
+    },
+    "overfit_ratio": 1.03,
     "overfit_flag": false
   },
   "touchdown": {
@@ -70,14 +100,14 @@
       {
         "season": 2025,
         "samples": 3728,
-        "brier": 0.1791
+        "brier": 0.1788
       },
       {
         "season": 2026,
         "samples": 214,
-        "brier": 0.1932
+        "brier": 0.1965
       }
     ],
-    "cv_brier": 0.184
+    "cv_brier": 0.185
   }
 }
