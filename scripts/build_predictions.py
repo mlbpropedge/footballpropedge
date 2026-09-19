@@ -21,10 +21,44 @@ from src.features import (
 )
 from src.modeling import fit_models, predict
 
+def attach_schedule_context(stats: pd.DataFrame, schedules: pd.DataFrame) -> pd.DataFrame:
+    """Attach leakage-safe historical home/away context to player rows."""
+    out = stats.copy()
+    season_games = schedules.copy()
+    if "game_type" in season_games.columns:
+        season_games = season_games[season_games["game_type"].astype(str).eq("REG")]
+
+    home_rows = season_games[["season", "week", "home_team"]].rename(
+        columns={"home_team": "recent_team"}
+    )
+    home_rows["home_game"] = 1.0
+    away_rows = season_games[["season", "week", "away_team"]].rename(
+        columns={"away_team": "recent_team"}
+    )
+    away_rows["home_game"] = 0.0
+    context = pd.concat([home_rows, away_rows], ignore_index=True).drop_duplicates(
+        ["season", "week", "recent_team"]
+    )
+
+    out = out.merge(
+        context,
+        on=["season", "week", "recent_team"],
+        how="left",
+        suffixes=("", "_schedule"),
+    )
+    if "home_game_schedule" in out.columns:
+        out["home_game"] = out["home_game_schedule"].fillna(out.get("home_game", 0.0))
+        out = out.drop(columns=["home_game_schedule"])
+    else:
+        out["home_game"] = out.get("home_game", 0.0)
+    out["home_game"] = pd.to_numeric(out["home_game"], errors="coerce").fillna(0.0)
+    return out
+
+
 
 def next_week_context(
     schedules: pd.DataFrame, season: int, completed_week: int
-) -> tuple[int, dict]:
+) -> tuple[int, dict, dict]:
     """Return the next real regular-season slate based on scheduled game dates.
 
     Do not infer the upcoming week as completed_week + 1. Player-stat feeds can
@@ -63,19 +97,23 @@ def next_week_context(
 
     games = season_games[season_games["week"] == next_week]
     opponent = {}
+    home_game = {}
     for _, g in games.iterrows():
         away, home = g.get("away_team"), g.get("home_team")
         if pd.notna(away) and pd.notna(home):
             opponent[str(away)] = str(home)
             opponent[str(home)] = str(away)
-    return next_week, opponent
+            home_game[str(away)] = 0.0
+            home_game[str(home)] = 1.0
+    return next_week, opponent, home_game
 
 
 def attach_matchup_features(
-    features: pd.DataFrame, stats: pd.DataFrame, opponents: dict
+    features: pd.DataFrame, stats: pd.DataFrame, opponents: dict, home_games: dict
 ) -> pd.DataFrame:
     out = features.copy()
     out["opponent"] = out["recent_team"].map(opponents).fillna("TBD")
+    out["home_game"] = out["recent_team"].map(home_games).fillna(0.0)
 
     defense = latest_defense_features(stats)
     if not defense.empty:
@@ -248,13 +286,14 @@ def main():
 
     stats = load_player_stats(TRAINING_SEASONS, refresh=True)
     stats = stats[stats["season"].isin(TRAINING_SEASONS)].copy()
+    schedules = load_schedules(refresh=True)
+    stats = attach_schedule_context(stats, schedules)
     current = stats[stats["season"] == CURRENT_SEASON]
     if current.empty:
         raise RuntimeError(f"No {CURRENT_SEASON} player stats found upstream.")
 
     completed_week = int(pd.to_numeric(current["week"], errors="coerce").max())
-    schedules = load_schedules(refresh=True)
-    projection_week, opponents = next_week_context(
+    projection_week, opponents, home_games = next_week_context(
         schedules, CURRENT_SEASON, completed_week
     )
 
@@ -263,7 +302,9 @@ def main():
 
     features = latest_player_features(stats)
     latest_current = features[features["season"] == CURRENT_SEASON].copy()
-    latest_current = attach_matchup_features(latest_current, stats, opponents)
+    latest_current = attach_matchup_features(
+        latest_current, stats, opponents, home_games
+    )
     latest_current["projection_week"] = projection_week
     preds = predict(bundle, latest_current)
 
