@@ -8,17 +8,18 @@
 <main>
 <section class="controls">
 <input id="search" placeholder="Search player or team…" aria-label="Search">
-<select id="position"><option value="">All positions</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select>
+<select id="position"><option value="">All positions</option><option>QB</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select>
 <select id="team"><option value="">All teams</option></select>
 <select id="metric"><option value="rushing_yards">Rushing yards</option><option value="receiving_yards">Receiving yards</option><option value="td_probability">TD probability</option></select>
 </section>
 <section class="hero-grid">
 <div class="stat"><span>Week</span><strong id="week">—</strong></div>
-<div class="stat"><span>Players</span><strong id="count">—</strong></div>
+<div class="stat"><span>Players shown</span><strong id="count">—</strong></div>
 <div class="stat"><span>Data</span><strong>nflverse</strong></div>
 </section>
 <section><div class="table-wrap"><table><thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Opp</th><th>Rush Yds</th><th>Rec Yds</th><th>TD %</th></tr></thead><tbody id="rows"></tbody></table></div></section>
-<section class="model-card"><h2>Model validation</h2><p>Models are selected using walk-forward season validation. Training data is shifted so only prior-game information is used for a projection.</p><div id="metrics" class="metrics"></div></section>
+<section class="model-card"><h2>Live tracked performance</h2><p>These numbers use projections archived before completed games. They stay blank until this system has a completed week to grade.</p><div id="performance" class="metrics"></div></section>
+<section class="model-card"><h2>Walk-forward model validation</h2><p>Each market is trained and scored only on players with a real pre-game role. Features are shifted so the game being predicted cannot leak into its own inputs.</p><div id="metrics" class="metrics"></div></section>
 </main>
-<footer>For personal analytical use. Projections are estimates, not guarantees.</footer>
+<footer>For personal analytical use. Projections are statistical estimates, not guarantees.</footer>
 <script src="app.js"></script></body></html>
