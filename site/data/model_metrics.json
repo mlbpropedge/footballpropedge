@@ -1,68 +1,83 @@
 {
   "rushing": {
     "model": "hist_gradient_boosting",
+    "role_filtered": true,
+    "training_samples": 12125,
     "walk_forward": [
       {
         "season": 2024,
-        "mae": 6.756,
-        "rmse": 17.245
+        "samples": 1836,
+        "mae": 19.782,
+        "rmse": 28.244
       },
       {
         "season": 2025,
-        "mae": 5.792,
-        "rmse": 15.886
+        "samples": 1761,
+        "mae": 19.29,
+        "rmse": 28.426
       },
       {
         "season": 2026,
-        "mae": 5.559,
-        "rmse": 15.864
+        "samples": 98,
+        "mae": 20.211,
+        "rmse": 28.824
       }
     ],
-    "cv_mae": 6.036,
-    "train_mae": 6.066,
-    "overfit_ratio": 1.0,
+    "cv_mae": 19.761,
+    "train_mae": 18.151,
+    "overfit_ratio": 1.09,
     "overfit_flag": false
   },
   "receiving": {
     "model": "hist_gradient_boosting",
+    "role_filtered": true,
+    "training_samples": 26004,
     "walk_forward": [
       {
         "season": 2024,
-        "mae": 15.78,
-        "rmse": 24.414
+        "samples": 3761,
+        "mae": 19.695,
+        "rmse": 27.704
       },
       {
         "season": 2025,
-        "mae": 15.044,
-        "rmse": 23.472
+        "samples": 3727,
+        "mae": 19.295,
+        "rmse": 27.121
       },
       {
         "season": 2026,
-        "mae": 16.053,
-        "rmse": 25.235
+        "samples": 210,
+        "mae": 20.362,
+        "rmse": 29.055
       }
     ],
-    "cv_mae": 15.626,
-    "train_mae": 15.907,
-    "overfit_ratio": 0.98,
+    "cv_mae": 19.784,
+    "train_mae": 19.108,
+    "overfit_ratio": 1.04,
     "overfit_flag": false
   },
   "touchdown": {
     "model": "hist_gradient_boosting",
+    "role_filtered": true,
+    "training_samples": 25857,
     "walk_forward": [
       {
         "season": 2024,
-        "brier": 0.1415
+        "samples": 3798,
+        "brier": 0.1793
       },
       {
         "season": 2025,
-        "brier": 0.1384
+        "samples": 3728,
+        "brier": 0.1788
       },
       {
         "season": 2026,
-        "brier": 0.1427
+        "samples": 214,
+        "brier": 0.1967
       }
     ],
-    "cv_brier": 0.141
+    "cv_brier": 0.185
   }
 }
