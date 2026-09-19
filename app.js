@@ -221,7 +221,8 @@ function renderMetrics(){
     <div class="metric-box">
       <b>${labels[k]||k}</b>
       <span>${v.model||"—"}<br>
-      ${v.cv_mae!=null?`CV MAE: ${v.cv_mae} yds`:v.cv_brier!=null?`Brier: ${v.cv_brier}`:"Validation pending"}
+      ${v.cv_mae!=null?`CV MAE: ${v.cv_mae} yds`:v.cv_brier!=null?`Calibrated Brier: ${v.cv_brier}`:"Validation pending"}
+      ${k==="touchdown"&&v.calibration?.available?`<br>Calibration change: ${Number(v.calibration.improvement_pct||0).toFixed(1)}%`:""}
       ${v.overfit_flag?" • overfit flag":""}</span>
     </div>`
   ).join("");

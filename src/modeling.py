@@ -23,6 +23,8 @@ class ModelBundle:
     rushing_model: object
     receiving_model: object
     td_model: object
+    td_calibration_base_rate: float
+    td_calibration_slope: float
     metrics: dict
 
 
@@ -281,6 +283,106 @@ def walk_forward_td(df: pd.DataFrame) -> tuple[str, dict]:
     return winner, details
 
 
+def apply_td_calibration(
+    probabilities: np.ndarray,
+    base_rate: float,
+    slope: float,
+) -> np.ndarray:
+    """Shrink or expand raw TD probabilities around the historical base rate."""
+    probabilities = np.asarray(probabilities, dtype=float)
+    calibrated = float(base_rate) + float(slope) * (
+        probabilities - float(base_rate)
+    )
+    return np.clip(calibrated, 0.001, 0.999)
+
+
+def fit_td_calibration(df: pd.DataFrame, model_name: str) -> tuple[float, float, dict]:
+    """Fit and honestly evaluate a lightweight time-aware TD calibrator.
+
+    Every probability is generated out of sample by a model trained only on
+    earlier seasons. Calibration parameters are selected on the older 80% of
+    those predictions and evaluated on the newest 20%. Deployment parameters
+    are then refit on all out-of-sample predictions for the next future slate.
+    """
+    frame = _role_frame(df, "touchdown").copy()
+    seasons = sorted(int(s) for s in frame["season"].dropna().unique())
+    test_seasons = seasons[-3:] if len(seasons) >= 4 else seasons[-1:]
+    rows = []
+
+    for test_season in test_seasons:
+        train = frame[frame["season"] < test_season]
+        test = frame[frame["season"] == test_season]
+        if len(train) < 400 or len(test) < 40 or train["touchdown"].nunique() < 2:
+            continue
+        Xtr, ytr = _clean_xy(train, "touchdown")
+        Xte, yte = _clean_xy(test, "touchdown")
+        model = _classification_candidates()[model_name]
+        model.fit(Xtr, ytr)
+        prob = np.clip(model.predict_proba(Xte)[:, 1], 0.001, 0.999)
+        for season, week, actual, raw_prob in zip(
+            test["season"], test["week"], yte.to_numpy(), prob
+        ):
+            rows.append(
+                {
+                    "season": int(season),
+                    "week": int(week),
+                    "actual": int(actual),
+                    "raw_probability": float(raw_prob),
+                }
+            )
+
+    if len(rows) < 100:
+        return 0.20, 1.0, {
+            "method": "time-aware linear probability scaling",
+            "samples": len(rows),
+            "available": False,
+        }
+
+    oof = pd.DataFrame(rows).sort_values(["season", "week"]).reset_index(drop=True)
+    split = max(50, int(len(oof) * 0.80))
+    split = min(split, len(oof) - 30)
+    older, newest = oof.iloc[:split], oof.iloc[split:]
+    candidate_slopes = np.linspace(0.0, 1.5, 61)
+
+    def best_parameters(part: pd.DataFrame) -> tuple[float, float]:
+        actual = part["actual"].to_numpy(dtype=float)
+        raw = part["raw_probability"].to_numpy(dtype=float)
+        base = float(actual.mean())
+        slope = min(
+            candidate_slopes,
+            key=lambda value: brier_score_loss(
+                actual, apply_td_calibration(raw, base, float(value))
+            ),
+        )
+        return base, float(slope)
+
+    eval_base, eval_slope = best_parameters(older)
+    eval_actual = newest["actual"].to_numpy(dtype=float)
+    eval_raw = newest["raw_probability"].to_numpy(dtype=float)
+    eval_calibrated = apply_td_calibration(eval_raw, eval_base, eval_slope)
+    raw_brier = float(brier_score_loss(eval_actual, eval_raw))
+    calibrated_brier = float(brier_score_loss(eval_actual, eval_calibrated))
+
+    deploy_base, deploy_slope = best_parameters(oof)
+    improvement = raw_brier - calibrated_brier
+    return deploy_base, deploy_slope, {
+        "method": "time-aware linear probability scaling",
+        "available": True,
+        "leakage_safe": True,
+        "samples": int(len(oof)),
+        "evaluation_samples": int(len(newest)),
+        "base_rate": round(float(deploy_base), 4),
+        "slope": round(float(deploy_slope), 3),
+        "raw_brier": round(raw_brier, 4),
+        "calibrated_brier": round(calibrated_brier, 4),
+        "improvement": round(improvement, 4),
+        "improvement_pct": round(100.0 * improvement / raw_brier, 2)
+        if raw_brier > 0
+        else 0.0,
+        "improves_brier": bool(calibrated_brier < raw_brier),
+    }
+
+
 def fit_models(df: pd.DataFrame) -> ModelBundle:
     rush_df = _role_frame(df, "rushing_yards")
     rec_df = _role_frame(df, "receiving_yards")
@@ -289,6 +391,9 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
     rush_name, rush_cv = walk_forward_regression(df, "rushing_yards")
     rec_name, rec_cv = walk_forward_regression(df, "receiving_yards")
     td_name, td_cv = walk_forward_td(df)
+    td_base_rate, td_calibration_slope, td_calibration = fit_td_calibration(
+        df, td_name
+    )
 
     rush_benchmark = benchmark_regression(df, "rushing_yards", rush_name)
     rec_benchmark = benchmark_regression(df, "receiving_yards", rec_name)
@@ -340,7 +445,11 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
             "role_filtered": True,
             "training_samples": int(len(td_df)),
             "walk_forward": td_cv.get(td_name, []),
-            "cv_brier": avg_cv(td_cv.get(td_name, []), "brier"),
+            "raw_cv_brier": avg_cv(td_cv.get(td_name, []), "brier"),
+            "cv_brier": td_calibration.get("calibrated_brier")
+            if td_calibration.get("available")
+            else avg_cv(td_cv.get(td_name, []), "brier"),
+            "calibration": td_calibration,
         },
     }
 
@@ -354,7 +463,14 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
             cv and cv / max(tr, 0.01) > 1.8
         )
 
-    return ModelBundle(rush_model, rec_model, td_model, metrics)
+    return ModelBundle(
+        rush_model,
+        rec_model,
+        td_model,
+        td_base_rate,
+        td_calibration_slope,
+        metrics,
+    )
 
 
 def predict(bundle: ModelBundle, features: pd.DataFrame) -> pd.DataFrame:
@@ -363,7 +479,12 @@ def predict(bundle: ModelBundle, features: pd.DataFrame) -> pd.DataFrame:
 
     rush = np.clip(bundle.rushing_model.predict(X), 0, None)
     rec = np.clip(bundle.receiving_model.predict(X), 0, None)
-    td = np.clip(bundle.td_model.predict_proba(X)[:, 1], 0.001, 0.999)
+    td_raw = np.clip(bundle.td_model.predict_proba(X)[:, 1], 0.001, 0.999)
+    td = apply_td_calibration(
+        td_raw,
+        bundle.td_calibration_base_rate,
+        bundle.td_calibration_slope,
+    )
 
     # Do not extrapolate market-specific models far outside their trained roles.
     rush = np.where(out["carries_avg_3"].fillna(0) >= 1.0, rush, 0.0)
