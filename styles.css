@@ -207,6 +207,7 @@ main{padding-top:8px;padding-bottom:42px}
 }
 .projection{font-size:34px;font-weight:950;letter-spacing:-.045em;margin:19px 0 10px}
 .projection small{font-size:12px;color:#8296ac;font-weight:750;letter-spacing:0}
+.edge-row{display:flex;justify-content:space-between;align-items:center;margin:2px 0 10px;padding:9px 10px;border-radius:10px;background:#0d1926;border:1px solid #20344b}.edge-label{color:#8196ac;font-size:10px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.edge-score{font-size:18px;letter-spacing:-.03em;color:#f5f8fc}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px}
 .chip{
   padding:5px 8px;border-radius:999px;
