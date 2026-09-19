@@ -24,10 +24,10 @@
       }
     ],
     "cv_mae": 19.751,
-    "train_mae": 17.915,
+    "train_mae": 18.426,
     "benchmark": {
       "samples": 3695,
-      "model_mae": 19.334,
+      "model_mae": 19.309,
       "baselines": {
         "last_3": 21.328,
         "last_5": 20.67,
@@ -36,49 +36,310 @@
       },
       "best_baseline": "last_5",
       "best_baseline_mae": 20.67,
-      "model_improvement_yards": 1.336,
-      "model_improvement_pct": 6.46,
+      "model_improvement_yards": 1.361,
+      "model_improvement_pct": 6.59,
       "beats_best_baseline": true,
       "error_breakdown": {
         "by_position": {
           "QB": {
             "samples": 1057,
-            "mae": 13.264
+            "mae": 13.262
           },
           "RB": {
             "samples": 2573,
-            "mae": 22.053
+            "mae": 22.006
           },
           "WR": {
             "samples": 41,
-            "mae": 7.007
+            "mae": 7.253
           }
         },
         "by_workload": {
           "low": {
             "samples": 1222,
-            "mae": 12.111,
+            "mae": 12.076,
             "avg_workload": 2.78
           },
           "medium": {
             "samples": 1059,
-            "mae": 17.135,
+            "mae": 17.106,
             "avg_workload": 5.87
           },
           "high": {
             "samples": 775,
-            "mae": 25.133,
+            "mae": 25.203,
             "avg_workload": 11.05
           },
           "elite": {
             "samples": 639,
-            "mae": 29.757,
+            "mae": 29.642,
             "avg_workload": 17.6
           }
         }
       }
     },
-    "overfit_ratio": 1.1,
+    "hyperparameter_tuning": {
+      "available": true,
+      "selection_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "final_holdout": {
+        "season": 2026,
+        "samples": 98,
+        "mae": 20.474
+      },
+      "default_holdout_mae": 20.666,
+      "selected_candidate": 6,
+      "selected_params": {
+        "learning_rate": 0.05,
+        "max_iter": 400,
+        "max_leaf_nodes": 12,
+        "min_samples_leaf": 25,
+        "l2_regularization": 4.0
+      },
+      "proposed_params": {
+        "learning_rate": 0.05,
+        "max_iter": 400,
+        "max_leaf_nodes": 12,
+        "min_samples_leaf": 25,
+        "l2_regularization": 4.0
+      },
+      "default_selection_mae": 18.867,
+      "best_selection_mae": 18.827,
+      "selection_gain_yards": 0.04,
+      "holdout_gain_yards": 0.192,
+      "deployed_tuned_params": true,
+      "decision": "tuned parameters deployed",
+      "candidates": [
+        {
+          "candidate": 0,
+          "params": {
+            "learning_rate": 0.05,
+            "max_iter": 350,
+            "max_leaf_nodes": 24,
+            "min_samples_leaf": 20,
+            "l2_regularization": 2.0
+          },
+          "selection_mae": 18.867,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 1829,
+              "mae": 18.014
+            },
+            {
+              "season": 2024,
+              "samples": 1836,
+              "mae": 19.47
+            },
+            {
+              "season": 2025,
+              "samples": 1761,
+              "mae": 19.118
+            }
+          ]
+        },
+        {
+          "candidate": 1,
+          "params": {
+            "learning_rate": 0.03,
+            "max_iter": 500,
+            "max_leaf_nodes": 20,
+            "min_samples_leaf": 20,
+            "l2_regularization": 2.0
+          },
+          "selection_mae": 18.859,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 1829,
+              "mae": 17.991
+            },
+            {
+              "season": 2024,
+              "samples": 1836,
+              "mae": 19.433
+            },
+            {
+              "season": 2025,
+              "samples": 1761,
+              "mae": 19.152
+            }
+          ]
+        },
+        {
+          "candidate": 2,
+          "params": {
+            "learning_rate": 0.04,
+            "max_iter": 450,
+            "max_leaf_nodes": 16,
+            "min_samples_leaf": 20,
+            "l2_regularization": 3.0
+          },
+          "selection_mae": 18.847,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 1829,
+              "mae": 17.971
+            },
+            {
+              "season": 2024,
+              "samples": 1836,
+              "mae": 19.459
+            },
+            {
+              "season": 2025,
+              "samples": 1761,
+              "mae": 19.111
+            }
+          ]
+        },
+        {
+          "candidate": 3,
+          "params": {
+            "learning_rate": 0.04,
+            "max_iter": 450,
+            "max_leaf_nodes": 24,
+            "min_samples_leaf": 30,
+            "l2_regularization": 4.0
+          },
+          "selection_mae": 18.919,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 1829,
+              "mae": 18.09
+            },
+            {
+              "season": 2024,
+              "samples": 1836,
+              "mae": 19.414
+            },
+            {
+              "season": 2025,
+              "samples": 1761,
+              "mae": 19.253
+            }
+          ]
+        },
+        {
+          "candidate": 4,
+          "params": {
+            "learning_rate": 0.06,
+            "max_iter": 300,
+            "max_leaf_nodes": 16,
+            "min_samples_leaf": 30,
+            "l2_regularization": 3.0
+          },
+          "selection_mae": 18.867,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 1829,
+              "mae": 17.996
+            },
+            {
+              "season": 2024,
+              "samples": 1836,
+              "mae": 19.43
+            },
+            {
+              "season": 2025,
+              "samples": 1761,
+              "mae": 19.175
+            }
+          ]
+        },
+        {
+          "candidate": 5,
+          "params": {
+            "learning_rate": 0.03,
+            "max_iter": 550,
+            "max_leaf_nodes": 32,
+            "min_samples_leaf": 30,
+            "l2_regularization": 5.0
+          },
+          "selection_mae": 18.915,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 1829,
+              "mae": 18.058
+            },
+            {
+              "season": 2024,
+              "samples": 1836,
+              "mae": 19.505
+            },
+            {
+              "season": 2025,
+              "samples": 1761,
+              "mae": 19.183
+            }
+          ]
+        },
+        {
+          "candidate": 6,
+          "params": {
+            "learning_rate": 0.05,
+            "max_iter": 400,
+            "max_leaf_nodes": 12,
+            "min_samples_leaf": 25,
+            "l2_regularization": 4.0
+          },
+          "selection_mae": 18.827,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 1829,
+              "mae": 17.934
+            },
+            {
+              "season": 2024,
+              "samples": 1836,
+              "mae": 19.435
+            },
+            {
+              "season": 2025,
+              "samples": 1761,
+              "mae": 19.112
+            }
+          ]
+        },
+        {
+          "candidate": 7,
+          "params": {
+            "learning_rate": 0.035,
+            "max_iter": 500,
+            "max_leaf_nodes": 24,
+            "min_samples_leaf": 40,
+            "l2_regularization": 6.0
+          },
+          "selection_mae": 18.912,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 1829,
+              "mae": 18.026
+            },
+            {
+              "season": 2024,
+              "samples": 1836,
+              "mae": 19.489
+            },
+            {
+              "season": 2025,
+              "samples": 1761,
+              "mae": 19.221
+            }
+          ]
+        }
+      ]
+    },
+    "overfit_ratio": 1.07,
     "overfit_flag": false
   },
   "receiving": {
@@ -158,6 +419,267 @@
           }
         }
       }
+    },
+    "hyperparameter_tuning": {
+      "available": true,
+      "selection_seasons": [
+        2023,
+        2024,
+        2025
+      ],
+      "final_holdout": {
+        "season": 2026,
+        "samples": 210,
+        "mae": 20.698
+      },
+      "default_holdout_mae": 20.654,
+      "selected_candidate": 4,
+      "selected_params": {
+        "learning_rate": 0.05,
+        "max_iter": 350,
+        "max_leaf_nodes": 24,
+        "min_samples_leaf": 20,
+        "l2_regularization": 2.0
+      },
+      "proposed_params": {
+        "learning_rate": 0.06,
+        "max_iter": 300,
+        "max_leaf_nodes": 16,
+        "min_samples_leaf": 30,
+        "l2_regularization": 3.0
+      },
+      "default_selection_mae": 19.545,
+      "best_selection_mae": 19.498,
+      "selection_gain_yards": 0.047,
+      "holdout_gain_yards": -0.044,
+      "deployed_tuned_params": false,
+      "decision": "default parameters retained",
+      "candidates": [
+        {
+          "candidate": 0,
+          "params": {
+            "learning_rate": 0.05,
+            "max_iter": 350,
+            "max_leaf_nodes": 24,
+            "min_samples_leaf": 20,
+            "l2_regularization": 2.0
+          },
+          "selection_mae": 19.545,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 3802,
+              "mae": 19.822
+            },
+            {
+              "season": 2024,
+              "samples": 3761,
+              "mae": 19.661
+            },
+            {
+              "season": 2025,
+              "samples": 3727,
+              "mae": 19.151
+            }
+          ]
+        },
+        {
+          "candidate": 1,
+          "params": {
+            "learning_rate": 0.03,
+            "max_iter": 500,
+            "max_leaf_nodes": 20,
+            "min_samples_leaf": 20,
+            "l2_regularization": 2.0
+          },
+          "selection_mae": 19.515,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 3802,
+              "mae": 19.757
+            },
+            {
+              "season": 2024,
+              "samples": 3761,
+              "mae": 19.646
+            },
+            {
+              "season": 2025,
+              "samples": 3727,
+              "mae": 19.141
+            }
+          ]
+        },
+        {
+          "candidate": 2,
+          "params": {
+            "learning_rate": 0.04,
+            "max_iter": 450,
+            "max_leaf_nodes": 16,
+            "min_samples_leaf": 20,
+            "l2_regularization": 3.0
+          },
+          "selection_mae": 19.508,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 3802,
+              "mae": 19.772
+            },
+            {
+              "season": 2024,
+              "samples": 3761,
+              "mae": 19.611
+            },
+            {
+              "season": 2025,
+              "samples": 3727,
+              "mae": 19.14
+            }
+          ]
+        },
+        {
+          "candidate": 3,
+          "params": {
+            "learning_rate": 0.04,
+            "max_iter": 450,
+            "max_leaf_nodes": 24,
+            "min_samples_leaf": 30,
+            "l2_regularization": 4.0
+          },
+          "selection_mae": 19.521,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 3802,
+              "mae": 19.733
+            },
+            {
+              "season": 2024,
+              "samples": 3761,
+              "mae": 19.66
+            },
+            {
+              "season": 2025,
+              "samples": 3727,
+              "mae": 19.169
+            }
+          ]
+        },
+        {
+          "candidate": 4,
+          "params": {
+            "learning_rate": 0.06,
+            "max_iter": 300,
+            "max_leaf_nodes": 16,
+            "min_samples_leaf": 30,
+            "l2_regularization": 3.0
+          },
+          "selection_mae": 19.498,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 3802,
+              "mae": 19.733
+            },
+            {
+              "season": 2024,
+              "samples": 3761,
+              "mae": 19.625
+            },
+            {
+              "season": 2025,
+              "samples": 3727,
+              "mae": 19.137
+            }
+          ]
+        },
+        {
+          "candidate": 5,
+          "params": {
+            "learning_rate": 0.03,
+            "max_iter": 550,
+            "max_leaf_nodes": 32,
+            "min_samples_leaf": 30,
+            "l2_regularization": 5.0
+          },
+          "selection_mae": 19.53,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 3802,
+              "mae": 19.774
+            },
+            {
+              "season": 2024,
+              "samples": 3761,
+              "mae": 19.674
+            },
+            {
+              "season": 2025,
+              "samples": 3727,
+              "mae": 19.142
+            }
+          ]
+        },
+        {
+          "candidate": 6,
+          "params": {
+            "learning_rate": 0.05,
+            "max_iter": 400,
+            "max_leaf_nodes": 12,
+            "min_samples_leaf": 25,
+            "l2_regularization": 4.0
+          },
+          "selection_mae": 19.503,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 3802,
+              "mae": 19.759
+            },
+            {
+              "season": 2024,
+              "samples": 3761,
+              "mae": 19.628
+            },
+            {
+              "season": 2025,
+              "samples": 3727,
+              "mae": 19.123
+            }
+          ]
+        },
+        {
+          "candidate": 7,
+          "params": {
+            "learning_rate": 0.035,
+            "max_iter": 500,
+            "max_leaf_nodes": 24,
+            "min_samples_leaf": 40,
+            "l2_regularization": 6.0
+          },
+          "selection_mae": 19.521,
+          "folds": [
+            {
+              "season": 2023,
+              "samples": 3802,
+              "mae": 19.779
+            },
+            {
+              "season": 2024,
+              "samples": 3761,
+              "mae": 19.637
+            },
+            {
+              "season": 2025,
+              "samples": 3727,
+              "mae": 19.148
+            }
+          ]
+        }
+      ]
     },
     "overfit_ratio": 1.04,
     "overfit_flag": false

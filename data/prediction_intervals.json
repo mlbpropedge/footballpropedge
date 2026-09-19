@@ -5,16 +5,16 @@
   "receiving_samples": 4123,
   "rushing_quantiles": {
     "GLOBAL": [
-      -20.84,
-      39.76
+      -21.02,
+      39.95
     ],
     "OTHER": [
-      -13.99,
-      28.28
+      -13.47,
+      29.64
     ],
     "RB": [
-      -23.1,
-      48.18
+      -23.48,
+      47.69
     ]
   },
   "receiving_quantiles": {
