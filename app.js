@@ -28,11 +28,22 @@ function bestCard(x,i,type){
       ? `${rec.toFixed(1)}<small> projected rec yds</small>`
       : `${td.toFixed(1)}%<small> TD probability</small>`;
 
-  const chips=isRush
-    ? [`${x.recent_carries ?? 0} carries L3`,`${x.recent_rush_yards ?? 0} rush yds L3`]
+  const edge=isRush
+    ? Number(x.rush_edge_score||0)
     : isRec
-      ? [`${x.recent_targets ?? 0} targets L3`,`${x.recent_rec_yards ?? 0} rec yds L3`]
-      : [`${rush.toFixed(1)} rush yds`,`${rec.toFixed(1)} rec yds`];
+      ? Number(x.receiving_edge_score||0)
+      : Number(x.td_edge_score||0);
+  const matchup=isRush
+    ? Number(x.rush_matchup_score||0)
+    : isRec
+      ? Number(x.receiving_matchup_score||0)
+      : Number(x.td_matchup_score||0);
+
+  const chips=isRush
+    ? [`${x.recent_carries ?? 0} carries L3`,`Matchup ${matchup.toFixed(0)}/100`]
+    : isRec
+      ? [`${x.recent_targets ?? 0} targets L3`,`Matchup ${matchup.toFixed(0)}/100`]
+      : [`${rush.toFixed(1)} rush yds`,`Matchup ${matchup.toFixed(0)}/100`];
 
   return `<article class="prediction-card ${type}">
     <div class="card-top">
@@ -46,6 +57,7 @@ function bestCard(x,i,type){
       <div class="rank">#${i+1}</div>
     </div>
     <div class="projection">${value}</div>
+    <div class="edge-row"><span class="edge-label">Edge Score</span><strong class="edge-score">${edge.toFixed(1)}</strong></div>
     <div class="chip-row">${chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>
   </article>`;
 }
@@ -97,16 +109,16 @@ function setup(){
 function renderBest(){
   const rb=[...payload.players]
     .filter(x=>x.position==="RB")
-    .sort((a,b)=>Number(b.rushing_yards||0)-Number(a.rushing_yards||0))
+    .sort((a,b)=>Number(b.rush_edge_score||0)-Number(a.rush_edge_score||0))
     .slice(0,6);
 
   const wr=[...payload.players]
     .filter(x=>["WR","TE"].includes(x.position))
-    .sort((a,b)=>Number(b.receiving_yards||0)-Number(a.receiving_yards||0))
+    .sort((a,b)=>Number(b.receiving_edge_score||0)-Number(a.receiving_edge_score||0))
     .slice(0,6);
 
   const td=[...payload.players]
-    .sort((a,b)=>Number(b.td_probability||0)-Number(a.td_probability||0))
+    .sort((a,b)=>Number(b.td_edge_score||0)-Number(a.td_edge_score||0))
     .slice(0,6);
 
   setHTML("rbCards",rb.map((x,i)=>bestCard(x,i,"rush")).join(""));
