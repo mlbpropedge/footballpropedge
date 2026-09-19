@@ -3,6 +3,14 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "20 11 * 9-12,1 2-4"
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "scripts/**"
+      - "tests/**"
+      - "requirements.txt"
+      - ".github/workflows/update_predictions.yml"
 permissions:
   contents: write
 jobs:
@@ -11,7 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: "3.12", cache: "pip"}
+        with:
+          python-version: "3.12"
+          cache: "pip"
       - run: pip install -r requirements.txt
       - run: python scripts/build_predictions.py
       - run: pytest -q
