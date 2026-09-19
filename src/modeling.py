@@ -91,6 +91,94 @@ def _role_frame(df: pd.DataFrame, target: str) -> pd.DataFrame:
     return df.copy()
 
 
+def _baseline_predictions(test: pd.DataFrame, target: str) -> dict[str, np.ndarray]:
+    if target == "rushing_yards":
+        workload = (
+            pd.to_numeric(test["carries_avg_3"], errors="coerce").fillna(0.0)
+            * pd.to_numeric(test["yards_per_carry_avg_5"], errors="coerce").fillna(0.0)
+        )
+    else:
+        workload = (
+            pd.to_numeric(test["targets_avg_3"], errors="coerce").fillna(0.0)
+            * pd.to_numeric(test["yards_per_target_avg_5"], errors="coerce").fillna(0.0)
+        )
+
+    return {
+        "last_3": np.clip(
+            pd.to_numeric(test[f"{target}_avg_3"], errors="coerce").fillna(0.0).to_numpy(),
+            0,
+            None,
+        ),
+        "last_5": np.clip(
+            pd.to_numeric(test[f"{target}_avg_5"], errors="coerce").fillna(0.0).to_numpy(),
+            0,
+            None,
+        ),
+        "season_average": np.clip(
+            pd.to_numeric(test[f"{target}_season_avg"], errors="coerce").fillna(0.0).to_numpy(),
+            0,
+            None,
+        ),
+        "workload": np.clip(workload.to_numpy(), 0, None),
+    }
+
+
+def benchmark_regression(df: pd.DataFrame, target: str, model_name: str) -> dict:
+    frame = _role_frame(df, target)
+    seasons = sorted(int(s) for s in frame["season"].dropna().unique())
+    test_seasons = seasons[-3:] if len(seasons) >= 4 else seasons[-1:]
+    model_scores = []
+    baseline_scores = {k: [] for k in ("last_3", "last_5", "season_average", "workload")}
+    sample_count = 0
+
+    for test_season in test_seasons:
+        train = frame[frame["season"] < test_season]
+        test = frame[frame["season"] == test_season]
+        if len(train) < 400 or len(test) < 40:
+            continue
+
+        Xtr, ytr = _clean_xy(train, target)
+        Xte, yte = _clean_xy(test, target)
+        model = _regression_candidates()[model_name]
+        model.fit(Xtr, ytr)
+        model_pred = np.clip(model.predict(Xte), 0, None)
+        model_scores.extend(np.abs(yte.to_numpy() - model_pred).tolist())
+        sample_count += len(test)
+
+        for name, pred in _baseline_predictions(test, target).items():
+            baseline_scores[name].extend(np.abs(yte.to_numpy() - pred).tolist())
+
+    model_mae = float(np.mean(model_scores)) if model_scores else None
+    baselines = {
+        name: round(float(np.mean(values)), 3) if values else None
+        for name, values in baseline_scores.items()
+    }
+    valid = {k: v for k, v in baselines.items() if v is not None}
+    best_baseline_name = min(valid, key=valid.get) if valid else None
+    best_baseline_mae = valid.get(best_baseline_name) if best_baseline_name else None
+
+    return {
+        "samples": int(sample_count),
+        "model_mae": round(model_mae, 3) if model_mae is not None else None,
+        "baselines": baselines,
+        "best_baseline": best_baseline_name,
+        "best_baseline_mae": best_baseline_mae,
+        "model_improvement_yards": round(best_baseline_mae - model_mae, 3)
+        if model_mae is not None and best_baseline_mae is not None
+        else None,
+        "model_improvement_pct": round(
+            100.0 * (best_baseline_mae - model_mae) / best_baseline_mae, 2
+        )
+        if model_mae is not None and best_baseline_mae not in (None, 0)
+        else None,
+        "beats_best_baseline": bool(
+            model_mae is not None
+            and best_baseline_mae is not None
+            and model_mae < best_baseline_mae
+        ),
+    }
+
+
 def walk_forward_regression(df: pd.DataFrame, target: str) -> tuple[str, dict]:
     df = _role_frame(df, target)
     seasons = sorted(int(s) for s in df["season"].dropna().unique())
@@ -170,6 +258,9 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
     rec_name, rec_cv = walk_forward_regression(df, "receiving_yards")
     td_name, td_cv = walk_forward_td(df)
 
+    rush_benchmark = benchmark_regression(df, "rushing_yards", rush_name)
+    rec_benchmark = benchmark_regression(df, "receiving_yards", rec_name)
+
     X_rush, y_rush = _clean_xy(rush_df, "rushing_yards")
     rush_model = _regression_candidates()[rush_name]
     rush_model.fit(X_rush, y_rush)
@@ -201,6 +292,7 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
             "walk_forward": rush_cv.get(rush_name, []),
             "cv_mae": avg_cv(rush_cv.get(rush_name, []), "mae"),
             "train_mae": round(float(rush_train_mae), 3),
+            "benchmark": rush_benchmark,
         },
         "receiving": {
             "model": rec_name,
@@ -209,6 +301,7 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
             "walk_forward": rec_cv.get(rec_name, []),
             "cv_mae": avg_cv(rec_cv.get(rec_name, []), "mae"),
             "train_mae": round(float(rec_train_mae), 3),
+            "benchmark": rec_benchmark,
         },
         "touchdown": {
             "model": td_name,
