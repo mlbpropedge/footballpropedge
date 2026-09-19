@@ -1,8 +1,11 @@
 let payload={players:[]}, metrics={}, sortKey="rushing_yards";
 const $=id=>document.getElementById(id);
+const setText=(id,value)=>{const el=$(id); if(el) el.textContent=value;};
+const setHTML=(id,value)=>{const el=$(id); if(el) el.innerHTML=value;};
+const valueOf=id=>{const el=$(id); return el ? el.value : "";};
 
-function initials(name){
-  const cleaned=name.replace(/[^A-Za-z' .-]/g," ").trim();
+function initials(name=""){
+  const cleaned=String(name).replace(/[^A-Za-z' .-]/g," ").trim();
   const parts=cleaned.split(/\s+/).filter(Boolean);
   if(parts.length===0) return "??";
   const first=(parts[0][0]||"").toUpperCase();
@@ -15,18 +18,21 @@ function avatar(x,type,extra=""){
 }
 
 function bestCard(x,i,type){
+  const rush=Number(x.rushing_yards||0);
+  const rec=Number(x.receiving_yards||0);
+  const td=Number(x.td_probability||0);
   const isRush=type==="rush", isRec=type==="receive";
   const value=isRush
-    ? `${x.rushing_yards.toFixed(1)}<small> projected rush yds</small>`
+    ? `${rush.toFixed(1)}<small> projected rush yds</small>`
     : isRec
-      ? `${x.receiving_yards.toFixed(1)}<small> projected rec yds</small>`
-      : `${x.td_probability.toFixed(1)}%<small> TD probability</small>`;
+      ? `${rec.toFixed(1)}<small> projected rec yds</small>`
+      : `${td.toFixed(1)}%<small> TD probability</small>`;
 
   const chips=isRush
-    ? [`${x.recent_carries} carries L3`,`${x.recent_rush_yards} rush yds L3`]
+    ? [`${x.recent_carries ?? 0} carries L3`,`${x.recent_rush_yards ?? 0} rush yds L3`]
     : isRec
-      ? [`${x.recent_targets} targets L3`,`${x.recent_rec_yards} rec yds L3`]
-      : [`${x.rushing_yards.toFixed(1)} rush yds`,`${x.receiving_yards.toFixed(1)} rec yds`];
+      ? [`${x.recent_targets ?? 0} targets L3`,`${x.recent_rec_yards ?? 0} rec yds L3`]
+      : [`${rush.toFixed(1)} rush yds`,`${rec.toFixed(1)} rec yds`];
 
   return `<article class="prediction-card ${type}">
     <div class="card-top">
@@ -44,33 +50,46 @@ function bestCard(x,i,type){
   </article>`;
 }
 
+async function fetchJSON(url){
+  const r=await fetch(url+"?v=5&x="+Date.now(),{cache:"no-store"});
+  if(!r.ok) throw new Error(`${url} returned HTTP ${r.status}`);
+  return r.json();
+}
+
 async function load(){
   const [p,m]=await Promise.all([
-    fetch("data/predictions.json?x="+Date.now()).then(r=>r.json()),
-    fetch("data/model_metrics.json?x="+Date.now()).then(r=>r.json())
+    fetchJSON("data/predictions.json"),
+    fetchJSON("data/model_metrics.json")
   ]);
-  payload=p;metrics=m;
+  payload=p || {players:[]};
+  payload.players=Array.isArray(payload.players)?payload.players:[];
+  metrics=m || {};
   setup();
   renderBest();
   render();
 }
 
 function setup(){
-  $("week").textContent=`${payload.season} • ${payload.week}`;
-  $("navWeek").textContent=payload.week;
-  $("count").textContent=payload.players.length;
-  $("updated").textContent="Updated "+new Date(payload.generated_at).toLocaleString();
+  setText("week",`${payload.season} • ${payload.week}`);
+  setText("navWeek",payload.week);
+  setText("count",payload.players.length);
+  setText("updated","Updated "+new Date(payload.generated_at).toLocaleString());
 
-  [...new Set(payload.players.map(x=>x.team))].sort().forEach(t=>
-    $("team").insertAdjacentHTML("beforeend",`<option>${t}</option>`)
-  );
+  const teamSelect=$("team");
+  if(teamSelect){
+    [...new Set(payload.players.map(x=>x.team).filter(Boolean))].sort().forEach(t=>
+      teamSelect.insertAdjacentHTML("beforeend",`<option>${t}</option>`)
+    );
+  }
 
-  ["search","position","team","metric"].forEach(id=>
-    $(id).addEventListener(id==="search"?"input":"change",()=>{
-      if(id==="metric") sortKey=$("metric").value;
+  ["search","position","team","metric"].forEach(id=>{
+    const el=$(id);
+    if(!el) return;
+    el.addEventListener(id==="search"?"input":"change",()=>{
+      if(id==="metric") sortKey=valueOf("metric") || "rushing_yards";
       render();
-    })
-  );
+    });
+  });
 
   renderMetrics();
 }
@@ -78,27 +97,27 @@ function setup(){
 function renderBest(){
   const rb=[...payload.players]
     .filter(x=>x.position==="RB")
-    .sort((a,b)=>b.rushing_yards-a.rushing_yards)
+    .sort((a,b)=>Number(b.rushing_yards||0)-Number(a.rushing_yards||0))
     .slice(0,6);
 
   const wr=[...payload.players]
     .filter(x=>["WR","TE"].includes(x.position))
-    .sort((a,b)=>b.receiving_yards-a.receiving_yards)
+    .sort((a,b)=>Number(b.receiving_yards||0)-Number(a.receiving_yards||0))
     .slice(0,6);
 
   const td=[...payload.players]
-    .sort((a,b)=>b.td_probability-a.td_probability)
+    .sort((a,b)=>Number(b.td_probability||0)-Number(a.td_probability||0))
     .slice(0,6);
 
-  $("rbCards").innerHTML=rb.map((x,i)=>bestCard(x,i,"rush")).join("");
-  $("wrCards").innerHTML=wr.map((x,i)=>bestCard(x,i,"receive")).join("");
-  $("tdCards").innerHTML=td.map((x,i)=>bestCard(x,i,"touchdown")).join("");
+  setHTML("rbCards",rb.map((x,i)=>bestCard(x,i,"rush")).join(""));
+  setHTML("wrCards",wr.map((x,i)=>bestCard(x,i,"receive")).join(""));
+  setHTML("tdCards",td.map((x,i)=>bestCard(x,i,"touchdown")).join(""));
 }
 
 function render(){
-  const q=$("search").value.toLowerCase();
-  const pos=$("position").value;
-  const team=$("team").value;
+  const q=valueOf("search").toLowerCase();
+  const pos=valueOf("position");
+  const team=valueOf("team");
 
   let rows=payload.players.filter(x=>
     (!q||`${x.player} ${x.team}`.toLowerCase().includes(q)) &&
@@ -106,41 +125,50 @@ function render(){
     (!team||x.team===team)
   );
 
-  rows.sort((a,b)=>b[sortKey]-a[sortKey]);
+  rows.sort((a,b)=>Number(b[sortKey]||0)-Number(a[sortKey]||0));
 
-  $("rows").innerHTML=rows.map(x=>`<tr>
-    <td>
-      <div class="table-player">
-        ${avatar(x,"table-avatar","table-avatar")}
-        <div>
-          <div class="player">${x.player}</div>
-          <div class="muted">${x.recent_carries} carries • ${x.recent_targets} targets L3</div>
+  const html=rows.map(x=>{
+    const rush=Number(x.rushing_yards||0);
+    const rec=Number(x.receiving_yards||0);
+    const td=Number(x.td_probability||0);
+    return `<tr>
+      <td>
+        <div class="table-player">
+          ${avatar(x,"table-avatar","table-avatar")}
+          <div>
+            <div class="player">${x.player}</div>
+            <div class="muted">${x.recent_carries ?? 0} carries • ${x.recent_targets ?? 0} targets L3</div>
+          </div>
         </div>
-      </div>
-    </td>
-    <td>${x.position}</td>
-    <td>${x.team}</td>
-    <td>${x.opponent}</td>
-    <td class="metric">${x.rushing_yards.toFixed(1)}</td>
-    <td class="metric">${x.receiving_yards.toFixed(1)}</td>
-    <td><span class="td">${x.td_probability.toFixed(1)}%</span></td>
-  </tr>`).join("") || `<tr><td colspan="7" class="muted">No players match these filters.</td></tr>`;
+      </td>
+      <td>${x.position}</td>
+      <td>${x.team}</td>
+      <td>${x.opponent}</td>
+      <td class="metric">${rush.toFixed(1)}</td>
+      <td class="metric">${rec.toFixed(1)}</td>
+      <td><span class="td">${td.toFixed(1)}%</span></td>
+    </tr>`;
+  }).join("") || `<tr><td colspan="7" class="muted">No players match these filters.</td></tr>`;
 
-  $("count").textContent=rows.length;
+  setHTML("rows",html);
+  setText("count",rows.length);
 }
 
 function renderMetrics(){
   const labels={rushing:"Rushing",receiving:"Receiving",touchdown:"Touchdown"};
-  $("metrics").innerHTML=Object.entries(metrics).map(([k,v])=>`
+  const html=Object.entries(metrics).map(([k,v])=>`
     <div class="metric-box">
-      <b>${labels[k]}</b>
+      <b>${labels[k]||k}</b>
       <span>${v.model||"—"}<br>
       ${v.cv_mae!=null?`CV MAE: ${v.cv_mae} yds`:v.cv_brier!=null?`Brier: ${v.cv_brier}`:"Validation pending"}
       ${v.overfit_flag?" • overfit flag":""}</span>
     </div>`
   ).join("");
+  setHTML("metrics",html);
 }
 
 load().catch(e=>{
-  $("rows").innerHTML=`<tr><td colspan="7">Prediction data is not available yet. ${e.message}</td></tr>`;
+  console.error("Football Prop Edge render error:",e);
+  setHTML("rows",`<tr><td colspan="7">Prediction data is temporarily unavailable. ${e.message}</td></tr>`);
+  setText("updated","Data load error");
 });
