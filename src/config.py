@@ -1,8 +1,8 @@
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-SITE_DIR = PROJECT_ROOT / "site"
-SITE_DATA_DIR = SITE_DIR / "data"
+SITE_DIR = PROJECT_ROOT
+SITE_DATA_DIR = PROJECT_ROOT / "data"
 MODELS_DIR = PROJECT_ROOT / "models"
 CACHE_DIR = PROJECT_ROOT / ".cache"
 
