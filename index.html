@@ -6,19 +6,20 @@
 </head><body>
 <div class="site-shell">
 <nav class="topnav">
-  <a class="brand" href="index.html">Football Prop Edge</a>
+  <a class="brand" href="#top">Football Prop Edge</a>
   <div class="navlinks">
-    <a class="active" href="index.html">All Projections</a>
-    <a href="best.html">Best Predictions</a>
+    <a href="#best">Best Predictions</a>
+    <a href="#all">All Projections</a>
   </div>
 </nav>
-<header class="hero">
+
+<header class="hero" id="top">
   <div>
     <p class="eyebrow">MACHINE-LEARNING NFL PROJECTIONS</p>
     <h1>Find the edge before kickoff.</h1>
     <p class="sub">Independent rushing, receiving, and touchdown projections built from recent usage and historical NFL data. No sportsbook lines, team logos, or player photos.</p>
     <div class="hero-actions">
-      <a class="primary-btn" href="best.html">View Best Predictions</a>
+      <a class="primary-btn" href="#best">See Best Predictions</a>
       <span id="updated" class="updated">Loading…</span>
     </div>
   </div>
@@ -28,22 +29,47 @@
     <small>Projection Engine</small>
   </div>
 </header>
+
 <main>
 <section class="hero-grid">
-<div class="stat stat-rush"><span>Week</span><strong id="week">—</strong><small>Current slate</small></div>
-<div class="stat stat-rec"><span>Players</span><strong id="count">—</strong><small>Projected</small></div>
-<div class="stat stat-td"><span>Model data</span><strong>nflverse</strong><small>Free + reproducible</small></div>
+  <div class="stat stat-rush"><span>Week</span><strong id="week">—</strong><small>Current slate</small></div>
+  <div class="stat stat-rec"><span>Players</span><strong id="count">—</strong><small>Projected</small></div>
+  <div class="stat stat-td"><span>Model data</span><strong>nflverse</strong><small>Free + reproducible</small></div>
 </section>
-<section class="section-head"><div><p class="eyebrow">FULL BOARD</p><h2>All player projections</h2></div><p>Search and sort the full slate.</p></section>
+
+<section id="best" class="best-section rush-title">
+  <div class="section-head"><div><p class="eyebrow">RUNNING BACKS</p><h2>Top rushing projections</h2></div><p>Highest projected rushing yards among RBs.</p></div>
+  <div id="rbCards" class="prediction-grid"></div>
+</section>
+
+<section class="best-section rec-title">
+  <div class="section-head"><div><p class="eyebrow">RECEIVERS</p><h2>Top receiving projections</h2></div><p>Highest projected receiving yards among WRs and TEs.</p></div>
+  <div id="wrCards" class="prediction-grid"></div>
+</section>
+
+<section class="best-section td-title">
+  <div class="section-head"><div><p class="eyebrow">TOUCHDOWNS</p><h2>Highest touchdown probabilities</h2></div><p>Top model-estimated anytime TD probabilities.</p></div>
+  <div id="tdCards" class="prediction-grid"></div>
+</section>
+
+<section id="all" class="section-head"><div><p class="eyebrow">FULL BOARD</p><h2>All player projections</h2></div><p>Search and sort the full slate.</p></section>
 <section class="controls">
 <input id="search" placeholder="Search player or team…" aria-label="Search">
 <select id="position"><option value="">All positions</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select>
 <select id="team"><option value="">All teams</option></select>
 <select id="metric"><option value="rushing_yards">Rushing yards</option><option value="receiving_yards">Receiving yards</option><option value="td_probability">TD probability</option></select>
 </section>
+
 <section><div class="table-wrap"><table><thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Opp</th><th>Rush Yds</th><th>Rec Yds</th><th>TD %</th></tr></thead><tbody id="rows"></tbody></table></div></section>
-<section class="model-card"><div class="section-head"><div><p class="eyebrow">VALIDATION</p><h2>Model health</h2></div></div><p>Models are selected using walk-forward season validation. Training data is shifted so only prior-game information is used for a projection.</p><div id="metrics" class="metrics"></div></section>
+
+<section class="model-card">
+  <div class="section-head"><div><p class="eyebrow">VALIDATION</p><h2>Model health</h2></div></div>
+  <p>Models are selected using walk-forward season validation. Training data is shifted so only prior-game information is used for a projection.</p>
+  <div id="metrics" class="metrics"></div>
+</section>
 </main>
+
 <footer>For personal analytical use. Projections are estimates, not guarantees.</footer>
 </div>
-<script src="app.js"></script></body></html>
+<script src="app.js"></script>
+</body></html>
