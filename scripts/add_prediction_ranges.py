@@ -107,6 +107,39 @@ def interval_lookup(residuals: pd.DataFrame, market: str) -> dict:
     return lookup
 
 
+def reliability_score(
+    projection: float,
+    interval: list[float],
+    workload_3: float,
+    workload_5: float,
+) -> float:
+    """Score demonstrated projection reliability from 0-100.
+
+    This is not a hit probability. It combines the empirical walk-forward
+    interval width relative to the projection with recent workload stability.
+    """
+    lower, upper = (float(interval[0]), float(interval[1]))
+    half_width = max(0.0, upper - lower) / 2.0
+    relative_uncertainty = half_width / max(float(projection), 10.0)
+    interval_component = 1.0 - min(relative_uncertainty / 1.5, 1.0)
+
+    workload_3 = max(float(workload_3), 0.0)
+    workload_5 = max(float(workload_5), 0.0)
+    workload_stability = 1.0 - min(
+        abs(workload_3 - workload_5) / max(workload_5, 1.0),
+        1.0,
+    )
+    return round(100.0 * (0.65 * interval_component + 0.35 * workload_stability), 1)
+
+
+def reliability_adjusted_score(edge_score: float, reliability: float) -> float:
+    """Retain model upside while giving demonstrated reliability real weight."""
+    return round(
+        max(0.0, min(100.0, 0.75 * float(edge_score) + 0.25 * float(reliability))),
+        1,
+    )
+
+
 def main() -> None:
     predictions_path = SITE_DATA_DIR / "predictions.json"
     bundle_path = MODELS_DIR / "model_bundle.joblib"
@@ -140,6 +173,26 @@ def main() -> None:
         row["rushing_range_80"] = [round(max(0.0, rush + rq[0]), 1), round(max(0.0, rush + rq[1]), 1)]
         row["receiving_range_80"] = [round(max(0.0, rec + cq[0]), 1), round(max(0.0, rec + cq[1]), 1)]
 
+        row["rush_reliability_score"] = reliability_score(
+            rush,
+            row["rushing_range_80"],
+            row.get("recent_carries", 0.0),
+            row.get("recent_carries_5", row.get("recent_carries", 0.0)),
+        )
+        row["receiving_reliability_score"] = reliability_score(
+            rec,
+            row["receiving_range_80"],
+            row.get("recent_targets", 0.0),
+            row.get("recent_targets_5", row.get("recent_targets", 0.0)),
+        )
+        row["rush_rank_score"] = reliability_adjusted_score(
+            row.get("rush_edge_score", 0.0), row["rush_reliability_score"]
+        )
+        row["receiving_rank_score"] = reliability_adjusted_score(
+            row.get("receiving_edge_score", 0.0),
+            row["receiving_reliability_score"],
+        )
+
     payload["prediction_intervals"] = {
         "coverage": 0.80,
         "method": "empirical walk-forward residual quantiles",
@@ -149,6 +202,7 @@ def main() -> None:
             "receiving": int(len(rec_res)),
         },
         "role_aware_min_samples": 100,
+        "ranking": "75% edge score + 25% empirical reliability",
     }
     predictions_path.write_text(json.dumps(payload, indent=2))
 

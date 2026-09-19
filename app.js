@@ -38,11 +38,16 @@ function bestCard(x,i,type){
     : isRec
       ? Number(x.receiving_matchup_score||0)
       : Number(x.td_matchup_score||0);
+  const reliability=isRush
+    ? Number(x.rush_reliability_score||0)
+    : isRec
+      ? Number(x.receiving_reliability_score||0)
+      : null;
 
   const chips=isRush
-    ? [`${x.recent_carries ?? 0} carries L3`,`Matchup ${matchup.toFixed(0)}/100`]
+    ? [`${x.recent_carries ?? 0} carries L3`,`Reliability ${reliability.toFixed(0)}/100`,`Matchup ${matchup.toFixed(0)}/100`]
     : isRec
-      ? [`${x.recent_targets ?? 0} targets L3`,`Matchup ${matchup.toFixed(0)}/100`]
+      ? [`${x.recent_targets ?? 0} targets L3`,`Reliability ${reliability.toFixed(0)}/100`,`Matchup ${matchup.toFixed(0)}/100`]
       : [`${rush.toFixed(1)} rush yds`,`Matchup ${matchup.toFixed(0)}/100`];
 
   return `<article class="prediction-card ${type}">
@@ -109,12 +114,12 @@ function setup(){
 function renderBest(){
   const rb=[...payload.players]
     .filter(x=>x.position==="RB")
-    .sort((a,b)=>Number(b.rush_edge_score||0)-Number(a.rush_edge_score||0))
+    .sort((a,b)=>Number(b.rush_rank_score??b.rush_edge_score??0)-Number(a.rush_rank_score??a.rush_edge_score??0))
     .slice(0,6);
 
   const wr=[...payload.players]
     .filter(x=>["WR","TE"].includes(x.position))
-    .sort((a,b)=>Number(b.receiving_edge_score||0)-Number(a.receiving_edge_score||0))
+    .sort((a,b)=>Number(b.receiving_rank_score??b.receiving_edge_score??0)-Number(a.receiving_rank_score??a.receiving_edge_score??0))
     .slice(0,6);
 
   const td=[...payload.players]
