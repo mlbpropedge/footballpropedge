@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Football Prop Edge</title><link rel="stylesheet" href="styles.css">
+</head><body>
+<header><div><p class="eyebrow">MACHINE-LEARNING NFL PROJECTIONS</p><h1>Football Prop Edge</h1><p class="sub">Independent rushing, receiving, and touchdown projections. No sportsbook lines. No logos. No player photos.</p></div><div id="updated" class="updated">Loading…</div></header>
+<main>
+<section class="controls">
+<input id="search" placeholder="Search player or team…" aria-label="Search">
+<select id="position"><option value="">All positions</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select>
+<select id="team"><option value="">All teams</option></select>
+<select id="metric"><option value="rushing_yards">Rushing yards</option><option value="receiving_yards">Receiving yards</option><option value="td_probability">TD probability</option></select>
+</section>
+<section class="hero-grid">
+<div class="stat"><span>Week</span><strong id="week">—</strong></div>
+<div class="stat"><span>Players</span><strong id="count">—</strong></div>
+<div class="stat"><span>Data</span><strong>nflverse</strong></div>
+</section>
+<section><div class="table-wrap"><table><thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Opp</th><th>Rush Yds</th><th>Rec Yds</th><th>TD %</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+<section class="model-card"><h2>Model validation</h2><p>Models are selected using walk-forward season validation. Training data is shifted so only prior-game information is used for a projection.</p><div id="metrics" class="metrics"></div></section>
+</main>
+<footer>For personal analytical use. Projections are estimates, not guarantees.</footer>
+<script src="app.js"></script></body></html>
