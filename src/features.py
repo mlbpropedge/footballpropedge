@@ -166,6 +166,16 @@ def add_history_features(df: pd.DataFrame) -> pd.DataFrame:
                 .reset_index(level=0, drop=True)
             )
 
+    # Leakage-safe season-to-date averages: current game is excluded.
+    season_group = out.groupby(["player_id", "season"], group_keys=False)
+    for stat in ["rushing_yards", "receiving_yards"]:
+        shifted = season_group[stat].shift(1)
+        counts = season_group.cumcount().replace(0, np.nan)
+        cumulative = shifted.groupby(
+            [out["player_id"], out["season"]]
+        ).cumsum()
+        out[f"{stat}_season_avg"] = (cumulative / counts).fillna(0.0)
+
     defense = _opponent_history(raw)
     out = out.merge(defense, on=["season", "week", "opponent_team"], how="left")
 
@@ -177,7 +187,12 @@ def add_history_features(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def feature_columns() -> list[str]:
-    cols = ["games_prior", "season_week_index"] + CONTEXT_FEATURES + DEFENSE_FEATURES
+    cols = [
+        "games_prior",
+        "season_week_index",
+        "rushing_yards_season_avg",
+        "receiving_yards_season_avg",
+    ] + CONTEXT_FEATURES + DEFENSE_FEATURES
     for stat in BASE_STATS + DERIVED_STATS:
         for window in ROLL_WINDOWS:
             cols.append(f"{stat}_avg_{window}")
@@ -209,6 +224,13 @@ def latest_player_features(stats: pd.DataFrame) -> pd.DataFrame:
     latest["season_week_index"] = (
         pd.to_numeric(latest["week"], errors="coerce").fillna(0) + 1
     )
+
+    current_season = raw.groupby("player_id")["season"].transform("max")
+    season_rows = raw[raw["season"].eq(current_season)].copy()
+    for stat in ["rushing_yards", "receiving_yards"]:
+        season_avg = season_rows.groupby("player_id")[stat].mean()
+        latest[f"{stat}_season_avg"] = latest["player_id"].map(season_avg).fillna(0.0)
+
     for col in DEFENSE_FEATURES:
         latest[col] = 0.0
     return latest
