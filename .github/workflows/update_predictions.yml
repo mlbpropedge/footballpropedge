@@ -27,6 +27,7 @@ jobs:
           cache: "pip"
       - run: pip install -r requirements.txt
       - run: python scripts/build_predictions.py
+      - run: python scripts/add_prediction_ranges.py
       - run: pytest -q
       - name: Commit refreshed outputs
         run: |
