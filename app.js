@@ -161,18 +161,7 @@ function setup(){
       if(details) details.hidden=open;
       return;
     }
-    const row=event.target.closest("tr[data-href]");
-    if(row && !event.target.closest("a,button,input,select")){
-      window.location.href=row.dataset.href;
-    }
   });
-
-  document.addEventListener("keydown",event=>{
-    const row=event.target.closest("tr[data-href]");
-    if(row && (event.key==="Enter"||event.key===" ")){
-      event.preventDefault();
-      window.location.href=row.dataset.href;
-    }
   });
 
   renderMetrics();
@@ -215,7 +204,7 @@ function render(){
     const rush=Number(x.rushing_yards||0);
     const rec=Number(x.receiving_yards||0);
     const td=Number(x.td_probability||0);
-    return `<tr data-href="${playerUrl(x)}" tabindex="0" aria-label="View ${x.player} details">
+    return `<tr aria-label="View ${x.player} details">
       <td data-label="Player">
         <div class="table-player">
           ${avatar(x,"table-avatar","table-avatar")}
