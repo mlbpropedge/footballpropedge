@@ -7,25 +7,25 @@
       {
         "season": 2024,
         "samples": 1836,
-        "mae": 19.782,
-        "rmse": 28.244
+        "mae": 19.502,
+        "rmse": 27.941
       },
       {
         "season": 2025,
         "samples": 1761,
-        "mae": 19.29,
-        "rmse": 28.426
+        "mae": 19.263,
+        "rmse": 28.436
       },
       {
         "season": 2026,
         "samples": 98,
-        "mae": 20.211,
-        "rmse": 28.824
+        "mae": 19.848,
+        "rmse": 28.314
       }
     ],
-    "cv_mae": 19.761,
-    "train_mae": 18.151,
-    "overfit_ratio": 1.09,
+    "cv_mae": 19.538,
+    "train_mae": 18.115,
+    "overfit_ratio": 1.08,
     "overfit_flag": false
   },
   "receiving": {
@@ -36,25 +36,25 @@
       {
         "season": 2024,
         "samples": 3761,
-        "mae": 19.695,
-        "rmse": 27.704
+        "mae": 19.77,
+        "rmse": 27.826
       },
       {
         "season": 2025,
         "samples": 3727,
-        "mae": 19.295,
-        "rmse": 27.121
+        "mae": 19.287,
+        "rmse": 27.171
       },
       {
         "season": 2026,
         "samples": 210,
-        "mae": 20.362,
-        "rmse": 29.055
+        "mae": 20.435,
+        "rmse": 29.15
       }
     ],
-    "cv_mae": 19.784,
-    "train_mae": 19.108,
-    "overfit_ratio": 1.04,
+    "cv_mae": 19.831,
+    "train_mae": 18.917,
+    "overfit_ratio": 1.05,
     "overfit_flag": false
   },
   "touchdown": {
@@ -65,19 +65,19 @@
       {
         "season": 2024,
         "samples": 3798,
-        "brier": 0.1793
+        "brier": 0.1798
       },
       {
         "season": 2025,
         "samples": 3728,
-        "brier": 0.1788
+        "brier": 0.1791
       },
       {
         "season": 2026,
         "samples": 214,
-        "brier": 0.1967
+        "brier": 0.1932
       }
     ],
-    "cv_brier": 0.185
+    "cv_brier": 0.184
   }
 }

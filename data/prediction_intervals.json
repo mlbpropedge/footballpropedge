@@ -1,0 +1,38 @@
+{
+  "coverage": 0.8,
+  "method": "weekly walk-forward; each test week trained only on earlier weeks",
+  "rushing_samples": 1938,
+  "receiving_samples": 4123,
+  "rushing_quantiles": {
+    "GLOBAL": [
+      -21.36,
+      39.2
+    ],
+    "OTHER": [
+      -13.74,
+      28.28
+    ],
+    "RB": [
+      -23.59,
+      48.61
+    ]
+  },
+  "receiving_quantiles": {
+    "GLOBAL": [
+      -21.95,
+      40.18
+    ],
+    "RB": [
+      -13.14,
+      27.27
+    ],
+    "TE": [
+      -20.48,
+      36.36
+    ],
+    "WR": [
+      -26.72,
+      45.83
+    ]
+  }
+}
