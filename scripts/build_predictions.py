@@ -25,11 +25,41 @@ from src.modeling import fit_models, predict
 def next_week_context(
     schedules: pd.DataFrame, season: int, completed_week: int
 ) -> tuple[int, dict]:
+    """Return the next real regular-season slate based on scheduled game dates.
+
+    Do not infer the upcoming week as completed_week + 1. Player-stat feeds can
+    publish a week label before that week's games are complete, which can push
+    projections one week too far into the future.
+    """
     season_games = schedules[schedules["season"] == season].copy()
-    next_week = completed_week + 1
-    max_week = int(pd.to_numeric(season_games["week"], errors="coerce").max())
-    if next_week > max_week:
-        next_week = completed_week
+    if "game_type" in season_games.columns:
+        season_games = season_games[season_games["game_type"].astype(str).eq("REG")]
+
+    if "gameday" not in season_games.columns:
+        raise ValueError("Schedule data is missing required gameday column.")
+
+    season_games["gameday_dt"] = pd.to_datetime(
+        season_games["gameday"], errors="coerce"
+    ).dt.date
+    today_utc = datetime.now(timezone.utc).date()
+
+    future = season_games[
+        season_games["gameday_dt"].notna()
+        & (season_games["gameday_dt"] >= today_utc)
+    ].copy()
+
+    if future.empty:
+        next_week = int(
+            pd.to_numeric(season_games["week"], errors="coerce").dropna().max()
+        )
+    else:
+        next_game_date = future["gameday_dt"].min()
+        next_week = int(
+            pd.to_numeric(
+                future.loc[future["gameday_dt"] == next_game_date, "week"],
+                errors="coerce",
+            ).dropna().min()
+        )
 
     games = season_games[season_games["week"] == next_week]
     opponent = {}
