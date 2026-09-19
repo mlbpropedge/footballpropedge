@@ -1,4 +1,4 @@
-let payload={players:[]}, metrics={}, sortKey="rushing_yards";
+let payload={players:[]}, metrics={}, performance={}, sortKey="rushing_yards";
 const $=id=>document.getElementById(id);
 const setText=(id,value)=>{const el=$(id); if(el) el.textContent=value;};
 const setHTML=(id,value)=>{const el=$(id); if(el) el.innerHTML=value;};
@@ -152,6 +152,50 @@ function render(){
 
   setHTML("rows",html);
   setText("count",rows.length);
+}
+
+function renderResults(){
+  const weeks=Array.isArray(performance.weekly_results)?performance.weekly_results:[];
+  const summary=`
+    <div class="result-stat"><span>Graded weeks</span><strong>${performance.graded_weeks ?? 0}</strong><small>${performance.graded_predictions ?? 0} player grades</small></div>
+    <div class="result-stat rush-result"><span>Rushing MAE</span><strong>${performance.rushing_mae==null?"—":performance.rushing_mae+" yds"}</strong><small>lower is better</small></div>
+    <div class="result-stat rec-result"><span>Receiving MAE</span><strong>${performance.receiving_mae==null?"—":performance.receiving_mae+" yds"}</strong><small>lower is better</small></div>
+    <div class="result-stat td-result"><span>TD Brier</span><strong>${performance.td_brier==null?"—":performance.td_brier}</strong><small>probability calibration</small></div>
+  `;
+  setHTML("resultsSummary",summary);
+
+  if(!weeks.length){
+    setHTML("weeklyResults",`<div class="results-empty">
+      <strong>Tracking starts with the current published week.</strong>
+      <p>${performance.note || "Results will populate automatically after the first archived week is complete."}</p>
+    </div>`);
+    return;
+  }
+
+  setHTML("weeklyResults",weeks.slice(0,4).map(w=>{
+    const sample=(w.sample_predictions||[]).map(x=>`
+      <div class="graded-row">
+        <div class="graded-player">
+          <span class="avatar table-avatar">${initials(x.player)}</span>
+          <div><b>${x.player}</b><small>${x.position} • ${x.team}</small></div>
+        </div>
+        <div><span>Rush</span><b>${x.projected_rushing_yards} → ${x.actual_rushing_yards}</b></div>
+        <div><span>Rec</span><b>${x.projected_receiving_yards} → ${x.actual_receiving_yards}</b></div>
+        <div><span>TD</span><b>${x.td_probability}% → ${x.actual_td?"Yes":"No"}</b></div>
+      </div>`).join("");
+
+    return `<article class="week-result-card">
+      <div class="week-result-head">
+        <div><span class="week-label">WEEK ${w.week}</span><h3>${w.graded_players} graded players</h3></div>
+        <div class="week-metrics">
+          <span>Rush MAE <b>${w.rushing_mae ?? "—"}</b></span>
+          <span>Rec MAE <b>${w.receiving_mae ?? "—"}</b></span>
+          <span>TD Brier <b>${w.td_brier ?? "—"}</b></span>
+        </div>
+      </div>
+      <div class="graded-list">${sample}</div>
+    </article>`;
+  }).join(""));
 }
 
 function renderMetrics(){
