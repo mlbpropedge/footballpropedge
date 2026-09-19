@@ -65,6 +65,7 @@ def evaluate_history(stats: pd.DataFrame, projection_week: int) -> dict:
             saved = json.loads(path.read_text())
         except Exception:
             continue
+
         season = int(saved.get("season", 0))
         week = int(saved.get("week", 0))
         if season != CURRENT_SEASON or week >= projection_week:
@@ -73,6 +74,7 @@ def evaluate_history(stats: pd.DataFrame, projection_week: int) -> dict:
         actual = stats[(stats["season"] == season) & (stats["week"] == week)].copy()
         if actual.empty:
             continue
+
         actual["actual_td"] = (
             pd.to_numeric(actual.get("rushing_tds", 0), errors="coerce").fillna(0)
             + pd.to_numeric(actual.get("receiving_tds", 0), errors="coerce").fillna(0)
@@ -84,45 +86,131 @@ def evaluate_history(stats: pd.DataFrame, projection_week: int) -> dict:
             pid = row.get("player_id")
             if pid not in actual_by_player.index:
                 continue
+
             a = actual_by_player.loc[pid]
             if isinstance(a, pd.DataFrame):
                 a = a.iloc[0]
+
+            projected_rush = float(row.get("rushing_yards", 0))
+            projected_rec = float(row.get("receiving_yards", 0))
+            actual_rush = float(a.get("rushing_yards", 0))
+            actual_rec = float(a.get("receiving_yards", 0))
+            td_prob = float(row.get("td_probability", 0)) / 100.0
+            actual_td = int(a.get("actual_td", 0))
+
             evaluated.append(
                 {
                     "season": season,
                     "week": week,
                     "player": row.get("player"),
-                    "rush_error": abs(
-                        float(row.get("rushing_yards", 0))
-                        - float(a.get("rushing_yards", 0))
-                    ),
-                    "rec_error": abs(
-                        float(row.get("receiving_yards", 0))
-                        - float(a.get("receiving_yards", 0))
-                    ),
-                    "td_prob": float(row.get("td_probability", 0)) / 100.0,
-                    "actual_td": int(a.get("actual_td", 0)),
+                    "position": row.get("position"),
+                    "team": row.get("team"),
+                    "projected_rushing_yards": projected_rush,
+                    "actual_rushing_yards": actual_rush,
+                    "rush_error": abs(projected_rush - actual_rush),
+                    "projected_receiving_yards": projected_rec,
+                    "actual_receiving_yards": actual_rec,
+                    "rec_error": abs(projected_rec - actual_rec),
+                    "td_probability": round(td_prob * 100, 1),
+                    "td_prob_decimal": td_prob,
+                    "actual_td": actual_td,
                     "recent_carries": float(row.get("recent_carries", 0)),
                     "recent_targets": float(row.get("recent_targets", 0)),
                 }
             )
 
     if not evaluated:
-        return {"graded_predictions": 0, "weeks": [], "rushing_mae": None, "receiving_mae": None, "td_brier": None}
+        return {
+            "graded_predictions": 0,
+            "graded_weeks": 0,
+            "weeks": [],
+            "rushing_mae": None,
+            "receiving_mae": None,
+            "td_brier": None,
+            "weekly_results": [],
+            "note": "Weekly grading will appear after an archived prediction week has completed.",
+        }
 
     frame = pd.DataFrame(evaluated)
     rush = frame[frame["recent_carries"] >= 2]
     rec = frame[frame["recent_targets"] >= 1.5]
     td = frame[(frame["recent_carries"] + frame["recent_targets"]) >= 3]
 
+    weekly_results = []
+    for week in sorted(int(x) for x in frame["week"].unique(), reverse=True):
+        wf = frame[frame["week"] == week].copy()
+        wrush = wf[wf["recent_carries"] >= 2]
+        wrec = wf[wf["recent_targets"] >= 1.5]
+        wtd = wf[(wf["recent_carries"] + wf["recent_targets"]) >= 3]
+
+        wf["display_projection"] = wf[
+            ["projected_rushing_yards", "projected_receiving_yards"]
+        ].max(axis=1)
+        samples = (
+            wf.sort_values("display_projection", ascending=False)
+            .head(6)
+            .to_dict("records")
+        )
+
+        weekly_results.append(
+            {
+                "season": CURRENT_SEASON,
+                "week": week,
+                "graded_players": int(len(wf)),
+                "rushing_mae": round(float(wrush["rush_error"].mean()), 2)
+                if not wrush.empty
+                else None,
+                "receiving_mae": round(float(wrec["rec_error"].mean()), 2)
+                if not wrec.empty
+                else None,
+                "td_brier": round(
+                    float(((wtd["td_prob_decimal"] - wtd["actual_td"]) ** 2).mean()),
+                    4,
+                )
+                if not wtd.empty
+                else None,
+                "sample_predictions": [
+                    {
+                        "player": r["player"],
+                        "position": r["position"],
+                        "team": r["team"],
+                        "projected_rushing_yards": round(
+                            float(r["projected_rushing_yards"]), 1
+                        ),
+                        "actual_rushing_yards": round(
+                            float(r["actual_rushing_yards"]), 1
+                        ),
+                        "projected_receiving_yards": round(
+                            float(r["projected_receiving_yards"]), 1
+                        ),
+                        "actual_receiving_yards": round(
+                            float(r["actual_receiving_yards"]), 1
+                        ),
+                        "td_probability": round(float(r["td_probability"]), 1),
+                        "actual_td": bool(r["actual_td"]),
+                    }
+                    for r in samples
+                ],
+            }
+        )
+
     return {
         "graded_predictions": int(len(frame)),
+        "graded_weeks": int(frame["week"].nunique()),
         "weeks": sorted(int(x) for x in frame["week"].unique()),
-        "rushing_mae": round(float(rush["rush_error"].mean()), 2) if not rush.empty else None,
-        "receiving_mae": round(float(rec["rec_error"].mean()), 2) if not rec.empty else None,
-        "td_brier": round(float(((td["td_prob"] - td["actual_td"]) ** 2).mean()), 4) if not td.empty else None,
+        "rushing_mae": round(float(rush["rush_error"].mean()), 2)
+        if not rush.empty
+        else None,
+        "receiving_mae": round(float(rec["rec_error"].mean()), 2)
+        if not rec.empty
+        else None,
+        "td_brier": round(
+            float(((td["td_prob_decimal"] - td["actual_td"]) ** 2).mean()), 4
+        )
+        if not td.empty
+        else None,
+        "weekly_results": weekly_results,
     }
-
 
 def main():
     SITE_DATA_DIR.mkdir(parents=True, exist_ok=True)
