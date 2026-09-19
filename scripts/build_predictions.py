@@ -123,6 +123,89 @@ def attach_matchup_features(
     return out
 
 
+def add_edge_scores(preds: pd.DataFrame, metrics: dict) -> pd.DataFrame:
+    """Create transparent 0-100 ranking scores for each projection market.
+
+    The score is a ranking heuristic, not a probability. It blends projection
+    strength, recent workload, workload stability, matchup quality, and the
+    market model's walk-forward validation quality.
+    """
+    out = preds.copy()
+
+    def pct(col: str) -> pd.Series:
+        values = pd.to_numeric(out.get(col, 0.0), errors="coerce").fillna(0.0)
+        if values.nunique() <= 1:
+            return pd.Series(0.5, index=out.index)
+        return values.rank(pct=True, method="average")
+
+    def stability(short_col: str, medium_col: str) -> pd.Series:
+        short = pd.to_numeric(out.get(short_col, 0.0), errors="coerce").fillna(0.0)
+        medium = pd.to_numeric(out.get(medium_col, 0.0), errors="coerce").fillna(0.0)
+        denom = medium.abs().clip(lower=1.0)
+        return (1.0 - ((short - medium).abs() / denom)).clip(0.0, 1.0)
+
+    rush_cv = metrics.get("rushing", {}).get("cv_mae")
+    rec_cv = metrics.get("receiving", {}).get("cv_mae")
+    td_brier = metrics.get("touchdown", {}).get("cv_brier")
+
+    rush_reliability = max(0.2, min(1.0, 1.0 - float(rush_cv or 30.0) / 50.0))
+    rec_reliability = max(0.2, min(1.0, 1.0 - float(rec_cv or 30.0) / 50.0))
+    td_reliability = max(0.2, min(1.0, 1.0 - float(td_brier or 0.2) / 0.30))
+
+    rush_projection = pct("projected_rushing_yards")
+    rush_workload = pct("carries_avg_3")
+    rush_stability = stability("carries_avg_3", "carries_avg_5")
+    rush_matchup = pct("opp_rush_yards_allowed_avg_4")
+
+    rec_projection = pct("projected_receiving_yards")
+    rec_workload = pct("targets_avg_3")
+    rec_stability = stability("targets_avg_3", "targets_avg_5")
+    rec_matchup = pct("opp_rec_yards_allowed_avg_4")
+
+    td_projection = pct("touchdown_probability")
+    td_workload = pct("opportunities_avg_3")
+    td_stability = stability("opportunities_avg_3", "opportunities_avg_5")
+    td_matchup = pct("opp_td_allowed_avg_4")
+
+    out["rush_edge_score"] = (
+        100.0
+        * (
+            0.35 * rush_projection
+            + 0.22 * rush_workload
+            + 0.18 * rush_stability
+            + 0.20 * rush_matchup
+            + 0.05 * rush_reliability
+        )
+    ).clip(0, 100)
+
+    out["receiving_edge_score"] = (
+        100.0
+        * (
+            0.35 * rec_projection
+            + 0.22 * rec_workload
+            + 0.18 * rec_stability
+            + 0.20 * rec_matchup
+            + 0.05 * rec_reliability
+        )
+    ).clip(0, 100)
+
+    out["td_edge_score"] = (
+        100.0
+        * (
+            0.42 * td_projection
+            + 0.20 * td_workload
+            + 0.13 * td_stability
+            + 0.20 * td_matchup
+            + 0.05 * td_reliability
+        )
+    ).clip(0, 100)
+
+    out["rush_matchup_score"] = (100.0 * rush_matchup).clip(0, 100)
+    out["receiving_matchup_score"] = (100.0 * rec_matchup).clip(0, 100)
+    out["td_matchup_score"] = (100.0 * td_matchup).clip(0, 100)
+    return out
+
+
 def evaluate_history(stats: pd.DataFrame, projection_week: int) -> dict:
     history_dir = SITE_DATA_DIR / "history"
     history_dir.mkdir(parents=True, exist_ok=True)
@@ -315,6 +398,7 @@ def main():
         | (preds["projected_receiving_yards"] >= 8)
     )
     preds = preds[role & (preds["opponent"] != "TBD")].copy()
+    preds = add_edge_scores(preds, bundle.metrics)
 
     rows = []
     for _, r in preds.sort_values(
@@ -336,6 +420,12 @@ def main():
                 "recent_targets": round(float(r.get("targets_avg_3", 0)), 1),
                 "recent_rush_yards": round(float(r.get("rushing_yards_avg_3", 0)), 1),
                 "recent_rec_yards": round(float(r.get("receiving_yards_avg_3", 0)), 1),
+                "rush_edge_score": round(float(r.get("rush_edge_score", 0)), 1),
+                "receiving_edge_score": round(float(r.get("receiving_edge_score", 0)), 1),
+                "td_edge_score": round(float(r.get("td_edge_score", 0)), 1),
+                "rush_matchup_score": round(float(r.get("rush_matchup_score", 0)), 1),
+                "receiving_matchup_score": round(float(r.get("receiving_matchup_score", 0)), 1),
+                "td_matchup_score": round(float(r.get("td_matchup_score", 0)), 1),
             }
         )
 
