@@ -184,7 +184,7 @@
       }
     ],
     "raw_cv_brier": 0.185,
-    "cv_brier": 0.1795,
+    "cv_brier": 0.1794,
     "calibration": {
       "method": "time-aware linear probability scaling",
       "available": true,
@@ -192,12 +192,15 @@
       "samples": 7740,
       "evaluation_samples": 1548,
       "base_rate": 0.2603,
-      "slope": 1.075,
+      "proposed_slope": 1.075,
+      "deployed_slope": 1.0,
+      "applied": false,
       "raw_brier": 0.1794,
       "calibrated_brier": 0.1795,
       "improvement": -0.0001,
       "improvement_pct": -0.05,
-      "improves_brier": false
+      "improves_brier": false,
+      "decision": "rejected; raw probabilities retained"
     }
   }
 }
