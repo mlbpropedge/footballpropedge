@@ -225,12 +225,12 @@ function render(){
           </div>
         </div>
       </td>
-      <td data-label="Position">${x.position}</td>
-      <td data-label="Team">${x.team}</td>
-      <td data-label="Opponent">${x.opponent}</td>
-      <td data-label="Rush Yds" class="metric">${rush.toFixed(1)}</td>
-      <td data-label="Rec Yds" class="metric">${rec.toFixed(1)}</td>
-      <td data-label="TD chance"><span class="td">${td.toFixed(1)}%</span></td>
+      <td data-label="Position"><a class="row-cell-link" href="${playerUrl(x)}">${x.position}</a></td>
+      <td data-label="Team"><a class="row-cell-link" href="${playerUrl(x)}">${x.team}</a></td>
+      <td data-label="Opponent"><a class="row-cell-link" href="${playerUrl(x)}">${x.opponent}</a></td>
+      <td data-label="Rush Yds" class="metric"><a class="row-cell-link" href="${playerUrl(x)}">${rush.toFixed(1)}</a></td>
+      <td data-label="Rec Yds" class="metric"><a class="row-cell-link" href="${playerUrl(x)}">${rec.toFixed(1)}</a></td>
+      <td data-label="TD chance"><a class="row-cell-link" href="${playerUrl(x)}"><span class="td">${td.toFixed(1)}%</span></a></td>
     </tr>`;
   }).join("") || `<tr><td colspan="7" class="muted">No players match these filters.</td></tr>`;
 
