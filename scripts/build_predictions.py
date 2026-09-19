@@ -167,7 +167,7 @@ def evaluate_history(stats: pd.DataFrame, projection_week: int) -> dict:
     td = frame[(frame["recent_carries"] + frame["recent_targets"]) >= 3]
 
     weekly_results = []
-    for week in sorted(int(x) for x in frame["week"].unique(), reverse=True):
+    for week in sorted((int(x) for x in frame["week"].unique()), reverse=True):
         wf = frame[frame["week"] == week].copy()
         wrush = wf[wf["recent_carries"] >= 2]
         wrec = wf[wf["recent_targets"] >= 1.5]
