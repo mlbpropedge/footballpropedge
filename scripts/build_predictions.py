@@ -24,6 +24,11 @@ from src.modeling import fit_models, predict
 def attach_schedule_context(stats: pd.DataFrame, schedules: pd.DataFrame) -> pd.DataFrame:
     """Attach leakage-safe historical home/away context to player rows."""
     out = stats.copy()
+    if "recent_team" not in out.columns:
+        if "team" in out.columns:
+            out["recent_team"] = out["team"]
+        else:
+            raise ValueError("Player stats are missing both recent_team and team columns.")
     season_games = schedules.copy()
     if "game_type" in season_games.columns:
         season_games = season_games[season_games["game_type"].astype(str).eq("REG")]
