@@ -26,10 +26,20 @@ DERIVED_STATS = [
     "wopr",
 ]
 DEFENSE_FEATURES = [
+    "opp_rush_yards_allowed_avg_2",
     "opp_rush_yards_allowed_avg_4",
+    "opp_rush_yards_allowed_avg_8",
+    "opp_rec_yards_allowed_avg_2",
     "opp_rec_yards_allowed_avg_4",
+    "opp_rec_yards_allowed_avg_8",
+    "opp_td_allowed_avg_2",
     "opp_td_allowed_avg_4",
+    "opp_td_allowed_avg_8",
+    "opp_opportunities_allowed_avg_4",
+    "opp_rush_form_trend",
+    "opp_rec_form_trend",
 ]
+CONTEXT_FEATURES = ["home_game"]
 
 
 def _col(df: pd.DataFrame, name: str, default=0.0):
@@ -61,6 +71,8 @@ def normalize_player_stats(df: pd.DataFrame) -> pd.DataFrame:
 
     if "opponent_team" not in df.columns:
         df["opponent_team"] = ""
+    _col(df, "home_game", 0.0)
+    df["home_game"] = pd.to_numeric(df["home_game"], errors="coerce").fillna(0.0)
 
     # QBs matter for rushing projections (e.g. designed runs/scrambles).
     df = df[df["position"].isin(["QB", "RB", "WR", "TE", "FB"])].copy()
@@ -99,25 +111,44 @@ def _opponent_history(raw: pd.DataFrame) -> pd.DataFrame:
             opp_rush_yards_allowed=("rushing_yards", "sum"),
             opp_rec_yards_allowed=("receiving_yards", "sum"),
             opp_td_allowed=("touchdown", "sum"),
+            opp_opportunities_allowed=("opportunities", "sum"),
         )
         .sort_values(["opponent_team", "season", "week"])
     )
 
-    for source, out_col in [
-        ("opp_rush_yards_allowed", "opp_rush_yards_allowed_avg_4"),
-        ("opp_rec_yards_allowed", "opp_rec_yards_allowed_avg_4"),
-        ("opp_td_allowed", "opp_td_allowed_avg_4"),
-    ]:
+    sources = {
+        "opp_rush_yards_allowed": "opp_rush_yards_allowed",
+        "opp_rec_yards_allowed": "opp_rec_yards_allowed",
+        "opp_td_allowed": "opp_td_allowed",
+    }
+    for source, prefix in sources.items():
         shifted = weekly.groupby("opponent_team")[source].shift(1)
-        weekly[out_col] = (
-            shifted.groupby(weekly["opponent_team"])
-            .rolling(4, min_periods=1)
-            .mean()
-            .reset_index(level=0, drop=True)
-        )
+        for window in (2, 4, 8):
+            weekly[f"{prefix}_avg_{window}"] = (
+                shifted.groupby(weekly["opponent_team"])
+                .rolling(window, min_periods=1)
+                .mean()
+                .reset_index(level=0, drop=True)
+            )
+
+    shifted_opp = weekly.groupby("opponent_team")["opp_opportunities_allowed"].shift(1)
+    weekly["opp_opportunities_allowed_avg_4"] = (
+        shifted_opp.groupby(weekly["opponent_team"])
+        .rolling(4, min_periods=1)
+        .mean()
+        .reset_index(level=0, drop=True)
+    )
+
+    weekly["opp_rush_form_trend"] = (
+        weekly["opp_rush_yards_allowed_avg_2"]
+        - weekly["opp_rush_yards_allowed_avg_8"]
+    )
+    weekly["opp_rec_form_trend"] = (
+        weekly["opp_rec_yards_allowed_avg_2"]
+        - weekly["opp_rec_yards_allowed_avg_8"]
+    )
 
     return weekly[["season", "week", "opponent_team"] + DEFENSE_FEATURES]
-
 
 def add_history_features(df: pd.DataFrame) -> pd.DataFrame:
     raw = normalize_player_stats(df)
@@ -146,7 +177,7 @@ def add_history_features(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def feature_columns() -> list[str]:
-    cols = ["games_prior", "season_week_index"] + DEFENSE_FEATURES
+    cols = ["games_prior", "season_week_index"] + CONTEXT_FEATURES + DEFENSE_FEATURES
     for stat in BASE_STATS + DERIVED_STATS:
         for window in ROLL_WINDOWS:
             cols.append(f"{stat}_avg_{window}")
@@ -195,19 +226,42 @@ def latest_defense_features(stats: pd.DataFrame) -> pd.DataFrame:
             opp_rush_yards_allowed=("rushing_yards", "sum"),
             opp_rec_yards_allowed=("receiving_yards", "sum"),
             opp_td_allowed=("touchdown", "sum"),
+            opp_opportunities_allowed=("opportunities", "sum"),
         )
         .sort_values(["opponent_team", "season", "week"])
     )
 
     rows = []
     for team, grp in weekly.groupby("opponent_team"):
-        tail = grp.tail(4)
+        def mean_tail(col, n):
+            return float(grp[col].tail(n).mean())
+
+        rush2 = mean_tail("opp_rush_yards_allowed", 2)
+        rush4 = mean_tail("opp_rush_yards_allowed", 4)
+        rush8 = mean_tail("opp_rush_yards_allowed", 8)
+        rec2 = mean_tail("opp_rec_yards_allowed", 2)
+        rec4 = mean_tail("opp_rec_yards_allowed", 4)
+        rec8 = mean_tail("opp_rec_yards_allowed", 8)
+        td2 = mean_tail("opp_td_allowed", 2)
+        td4 = mean_tail("opp_td_allowed", 4)
+        td8 = mean_tail("opp_td_allowed", 8)
+
         rows.append(
             {
                 "def_team": team,
-                "opp_rush_yards_allowed_avg_4": float(tail["opp_rush_yards_allowed"].mean()),
-                "opp_rec_yards_allowed_avg_4": float(tail["opp_rec_yards_allowed"].mean()),
-                "opp_td_allowed_avg_4": float(tail["opp_td_allowed"].mean()),
+                "opp_rush_yards_allowed_avg_2": rush2,
+                "opp_rush_yards_allowed_avg_4": rush4,
+                "opp_rush_yards_allowed_avg_8": rush8,
+                "opp_rec_yards_allowed_avg_2": rec2,
+                "opp_rec_yards_allowed_avg_4": rec4,
+                "opp_rec_yards_allowed_avg_8": rec8,
+                "opp_td_allowed_avg_2": td2,
+                "opp_td_allowed_avg_4": td4,
+                "opp_td_allowed_avg_8": td8,
+                "opp_opportunities_allowed_avg_4": mean_tail("opp_opportunities_allowed", 4),
+                "opp_rush_form_trend": rush2 - rush8,
+                "opp_rec_form_trend": rec2 - rec8,
             }
         )
     return pd.DataFrame(rows)
+
