@@ -162,7 +162,6 @@ function setup(){
       return;
     }
   });
-  });
 
   renderMetrics();
 }
