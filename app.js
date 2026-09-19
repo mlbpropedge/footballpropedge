@@ -221,6 +221,28 @@ function renderMetrics(){
     </div>`
   ).join("");
   setHTML("metrics",html);
+
+  const benchmarkNames={last_3:"Last 3 average",last_5:"Last 5 average",season_average:"Season average",workload:"Workload baseline"};
+  const benchHtml=["rushing","receiving"].map(k=>{
+    const v=metrics[k]||{};
+    const b=v.benchmark||{};
+    if(b.model_mae==null) return "";
+    const best=benchmarkNames[b.best_baseline]||b.best_baseline||"—";
+    const delta=Number(b.model_improvement_yards||0);
+    const pct=Number(b.model_improvement_pct||0);
+    const result=b.beats_best_baseline
+      ? "<span class=\"benchmark-win\">ML better by "+Math.abs(delta).toFixed(2)+" yds ("+Math.abs(pct).toFixed(1)+"%)</span>"
+      : "<span class=\"benchmark-loss\">Baseline better by "+Math.abs(delta).toFixed(2)+" yds ("+Math.abs(pct).toFixed(1)+"%)</span>";
+    return "<article class=\"benchmark-card\">"+
+      "<div class=\"benchmark-title\">"+(k==="rushing"?"Rushing":"Receiving")+"</div>"+
+      "<div class=\"benchmark-values\">"+
+        "<div><span>ML MAE</span><strong>"+Number(b.model_mae).toFixed(2)+"</strong></div>"+
+        "<div><span>Best baseline</span><strong>"+(b.best_baseline_mae==null?"—":Number(b.best_baseline_mae).toFixed(2))+"</strong></div>"+
+      "</div>"+
+      "<div class=\"benchmark-foot\"><span>"+best+"</span>"+result+"</div>"+
+    "</article>";
+  }).join("");
+  setHTML("benchmarks",benchHtml || "<div class=\"muted\">Benchmark data will appear after the next successful model run.</div>");
 }
 
 load().catch(e=>{
