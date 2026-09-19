@@ -4,6 +4,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
+
 import joblib
 import pandas as pd
 
@@ -12,15 +13,24 @@ sys.path.insert(0, str(ROOT))
 
 from src.config import CURRENT_SEASON, TRAINING_SEASONS, MODELS_DIR, SITE_DATA_DIR
 from src.data import load_player_stats, load_schedules
-from src.features import make_training_frame, latest_player_features
+from src.features import (
+    DEFENSE_FEATURES,
+    latest_defense_features,
+    latest_player_features,
+    make_training_frame,
+)
 from src.modeling import fit_models, predict
 
 
-def next_week_context(schedules: pd.DataFrame, season: int, completed_week: int) -> tuple[int, dict]:
+def next_week_context(
+    schedules: pd.DataFrame, season: int, completed_week: int
+) -> tuple[int, dict]:
     season_games = schedules[schedules["season"] == season].copy()
     next_week = completed_week + 1
-    if next_week > int(pd.to_numeric(season_games["week"], errors="coerce").max()):
+    max_week = int(pd.to_numeric(season_games["week"], errors="coerce").max())
+    if next_week > max_week:
         next_week = completed_week
+
     games = season_games[season_games["week"] == next_week]
     opponent = {}
     for _, g in games.iterrows():
@@ -29,6 +39,89 @@ def next_week_context(schedules: pd.DataFrame, season: int, completed_week: int)
             opponent[str(away)] = str(home)
             opponent[str(home)] = str(away)
     return next_week, opponent
+
+
+def attach_matchup_features(
+    features: pd.DataFrame, stats: pd.DataFrame, opponents: dict
+) -> pd.DataFrame:
+    out = features.copy()
+    out["opponent"] = out["recent_team"].map(opponents).fillna("TBD")
+
+    defense = latest_defense_features(stats)
+    if not defense.empty:
+        lookup = defense.set_index("def_team")
+        for col in DEFENSE_FEATURES:
+            out[col] = out["opponent"].map(lookup[col]).fillna(0.0)
+    return out
+
+
+def evaluate_history(stats: pd.DataFrame, projection_week: int) -> dict:
+    history_dir = SITE_DATA_DIR / "history"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    evaluated = []
+
+    for path in sorted(history_dir.glob("*.json")):
+        try:
+            saved = json.loads(path.read_text())
+        except Exception:
+            continue
+        season = int(saved.get("season", 0))
+        week = int(saved.get("week", 0))
+        if season != CURRENT_SEASON or week >= projection_week:
+            continue
+
+        actual = stats[(stats["season"] == season) & (stats["week"] == week)].copy()
+        if actual.empty:
+            continue
+        actual["actual_td"] = (
+            pd.to_numeric(actual.get("rushing_tds", 0), errors="coerce").fillna(0)
+            + pd.to_numeric(actual.get("receiving_tds", 0), errors="coerce").fillna(0)
+            > 0
+        ).astype(int)
+        actual_by_player = actual.set_index("player_id")
+
+        for row in saved.get("players", []):
+            pid = row.get("player_id")
+            if pid not in actual_by_player.index:
+                continue
+            a = actual_by_player.loc[pid]
+            if isinstance(a, pd.DataFrame):
+                a = a.iloc[0]
+            evaluated.append(
+                {
+                    "season": season,
+                    "week": week,
+                    "player": row.get("player"),
+                    "rush_error": abs(
+                        float(row.get("rushing_yards", 0))
+                        - float(a.get("rushing_yards", 0))
+                    ),
+                    "rec_error": abs(
+                        float(row.get("receiving_yards", 0))
+                        - float(a.get("receiving_yards", 0))
+                    ),
+                    "td_prob": float(row.get("td_probability", 0)) / 100.0,
+                    "actual_td": int(a.get("actual_td", 0)),
+                    "recent_carries": float(row.get("recent_carries", 0)),
+                    "recent_targets": float(row.get("recent_targets", 0)),
+                }
+            )
+
+    if not evaluated:
+        return {"graded_predictions": 0, "weeks": [], "rushing_mae": None, "receiving_mae": None, "td_brier": None}
+
+    frame = pd.DataFrame(evaluated)
+    rush = frame[frame["recent_carries"] >= 2]
+    rec = frame[frame["recent_targets"] >= 1.5]
+    td = frame[(frame["recent_carries"] + frame["recent_targets"]) >= 3]
+
+    return {
+        "graded_predictions": int(len(frame)),
+        "weeks": sorted(int(x) for x in frame["week"].unique()),
+        "rushing_mae": round(float(rush["rush_error"].mean()), 2) if not rush.empty else None,
+        "receiving_mae": round(float(rec["rec_error"].mean()), 2) if not rec.empty else None,
+        "td_brier": round(float(((td["td_prob"] - td["actual_td"]) ** 2).mean()), 4) if not td.empty else None,
+    }
 
 
 def main():
@@ -42,46 +135,50 @@ def main():
         raise RuntimeError(f"No {CURRENT_SEASON} player stats found upstream.")
 
     completed_week = int(pd.to_numeric(current["week"], errors="coerce").max())
+    schedules = load_schedules(refresh=True)
+    projection_week, opponents = next_week_context(
+        schedules, CURRENT_SEASON, completed_week
+    )
+
     training = make_training_frame(stats)
     bundle = fit_models(training)
 
     features = latest_player_features(stats)
     latest_current = features[features["season"] == CURRENT_SEASON].copy()
-
-    schedules = load_schedules(refresh=True)
-    projection_week, opponents = next_week_context(schedules, CURRENT_SEASON, completed_week)
-
-    latest_current["opponent"] = latest_current["recent_team"].map(opponents).fillna("TBD")
+    latest_current = attach_matchup_features(latest_current, stats, opponents)
     latest_current["projection_week"] = projection_week
     preds = predict(bundle, latest_current)
 
     role = (
         (preds["carries_avg_3"] >= 2)
-        | (preds["targets_avg_3"] >= 2)
+        | (preds["targets_avg_3"] >= 1.5)
         | (preds["projected_rushing_yards"] >= 8)
         | (preds["projected_receiving_yards"] >= 8)
     )
-    preds = preds[role].copy()
+    preds = preds[role & (preds["opponent"] != "TBD")].copy()
 
     rows = []
     for _, r in preds.sort_values(
-        ["projected_rushing_yards", "projected_receiving_yards"], ascending=False
+        ["projected_rushing_yards", "projected_receiving_yards"],
+        ascending=False,
     ).iterrows():
-        rows.append({
-            "player_id": str(r["player_id"]),
-            "player": str(r["player_display_name"]),
-            "team": str(r["recent_team"]),
-            "opponent": str(r["opponent"]),
-            "position": str(r["position"]),
-            "week": int(r["projection_week"]),
-            "rushing_yards": round(float(r["projected_rushing_yards"]), 1),
-            "receiving_yards": round(float(r["projected_receiving_yards"]), 1),
-            "td_probability": round(float(r["touchdown_probability"]) * 100, 1),
-            "recent_carries": round(float(r.get("carries_avg_3", 0)), 1),
-            "recent_targets": round(float(r.get("targets_avg_3", 0)), 1),
-            "recent_rush_yards": round(float(r.get("rushing_yards_avg_3", 0)), 1),
-            "recent_rec_yards": round(float(r.get("receiving_yards_avg_3", 0)), 1),
-        })
+        rows.append(
+            {
+                "player_id": str(r["player_id"]),
+                "player": str(r["player_display_name"]),
+                "team": str(r["recent_team"]),
+                "opponent": str(r["opponent"]),
+                "position": str(r["position"]),
+                "week": int(r["projection_week"]),
+                "rushing_yards": round(float(r["projected_rushing_yards"]), 1),
+                "receiving_yards": round(float(r["projected_receiving_yards"]), 1),
+                "td_probability": round(float(r["touchdown_probability"]) * 100, 1),
+                "recent_carries": round(float(r.get("carries_avg_3", 0)), 1),
+                "recent_targets": round(float(r.get("targets_avg_3", 0)), 1),
+                "recent_rush_yards": round(float(r.get("rushing_yards_avg_3", 0)), 1),
+                "recent_rec_yards": round(float(r.get("receiving_yards_avg_3", 0)), 1),
+            }
+        )
 
     payload = {
         "season": CURRENT_SEASON,
@@ -90,10 +187,26 @@ def main():
         "source": "nflverse",
         "players": rows,
     }
+
+    history_dir = SITE_DATA_DIR / "history"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    history_path = history_dir / f"{CURRENT_SEASON}_week_{projection_week:02d}.json"
+
     (SITE_DATA_DIR / "predictions.json").write_text(json.dumps(payload, indent=2))
-    (SITE_DATA_DIR / "model_metrics.json").write_text(json.dumps(bundle.metrics, indent=2))
+    history_path.write_text(json.dumps(payload, indent=2))
+    (SITE_DATA_DIR / "model_metrics.json").write_text(
+        json.dumps(bundle.metrics, indent=2)
+    )
+    performance = evaluate_history(stats, projection_week)
+    (SITE_DATA_DIR / "performance.json").write_text(
+        json.dumps(performance, indent=2)
+    )
+
     joblib.dump(bundle, MODELS_DIR / "model_bundle.joblib")
-    print(f"Wrote {len(rows)} player projections for {CURRENT_SEASON} week {projection_week}.")
+    print(
+        f"Wrote {len(rows)} player projections for "
+        f"{CURRENT_SEASON} week {projection_week}."
+    )
 
 
 if __name__ == "__main__":
