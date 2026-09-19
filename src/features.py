@@ -24,6 +24,8 @@ DERIVED_STATS = [
     "target_share",
     "air_yards_share",
     "wopr",
+    "team_carries",
+    "team_targets",
 ]
 DEFENSE_FEATURES = [
     "opp_rush_yards_allowed_avg_2",
@@ -38,6 +40,9 @@ DEFENSE_FEATURES = [
     "opp_opportunities_allowed_avg_4",
     "opp_rush_form_trend",
     "opp_rec_form_trend",
+    "opp_pos_rush_yards_allowed_avg_4",
+    "opp_pos_rec_yards_allowed_avg_4",
+    "opp_pos_td_allowed_avg_4",
 ]
 CONTEXT_FEATURES = ["home_game"]
 
@@ -94,6 +99,8 @@ def normalize_player_stats(df: pd.DataFrame) -> pd.DataFrame:
     team_targets = df.groupby(team_keys)["targets"].transform("sum")
     df["team_rush_share"] = (df["carries"] / team_carries.replace(0, np.nan)).fillna(0.0)
     df["team_target_share"] = (df["targets"] / team_targets.replace(0, np.nan)).fillna(0.0)
+    df["team_carries"] = team_carries.astype(float)
+    df["team_targets"] = team_targets.astype(float)
 
     return df.sort_values(["player_id", "season", "week"]).reset_index(drop=True)
 
@@ -102,7 +109,7 @@ def _opponent_history(raw: pd.DataFrame) -> pd.DataFrame:
     usable = raw[raw["opponent_team"].astype(str).str.len() > 0].copy()
     if usable.empty:
         return pd.DataFrame(
-            columns=["season", "week", "opponent_team"] + DEFENSE_FEATURES
+            columns=["season", "week", "opponent_team", "position"] + DEFENSE_FEATURES
         )
 
     weekly = (
@@ -116,15 +123,10 @@ def _opponent_history(raw: pd.DataFrame) -> pd.DataFrame:
         .sort_values(["opponent_team", "season", "week"])
     )
 
-    sources = {
-        "opp_rush_yards_allowed": "opp_rush_yards_allowed",
-        "opp_rec_yards_allowed": "opp_rec_yards_allowed",
-        "opp_td_allowed": "opp_td_allowed",
-    }
-    for source, prefix in sources.items():
+    for source in ["opp_rush_yards_allowed", "opp_rec_yards_allowed", "opp_td_allowed"]:
         shifted = weekly.groupby("opponent_team")[source].shift(1)
         for window in (2, 4, 8):
-            weekly[f"{prefix}_avg_{window}"] = (
+            weekly[f"{source}_avg_{window}"] = (
                 shifted.groupby(weekly["opponent_team"])
                 .rolling(window, min_periods=1)
                 .mean()
@@ -138,17 +140,46 @@ def _opponent_history(raw: pd.DataFrame) -> pd.DataFrame:
         .mean()
         .reset_index(level=0, drop=True)
     )
+    weekly["opp_rush_form_trend"] = weekly["opp_rush_yards_allowed_avg_2"] - weekly["opp_rush_yards_allowed_avg_8"]
+    weekly["opp_rec_form_trend"] = weekly["opp_rec_yards_allowed_avg_2"] - weekly["opp_rec_yards_allowed_avg_8"]
 
-    weekly["opp_rush_form_trend"] = (
-        weekly["opp_rush_yards_allowed_avg_2"]
-        - weekly["opp_rush_yards_allowed_avg_8"]
+    positional = (
+        usable.groupby(["season", "week", "opponent_team", "position"], as_index=False)
+        .agg(
+            pos_rush=("rushing_yards", "sum"),
+            pos_rec=("receiving_yards", "sum"),
+            pos_td=("touchdown", "sum"),
+        )
+        .sort_values(["opponent_team", "position", "season", "week"])
     )
-    weekly["opp_rec_form_trend"] = (
-        weekly["opp_rec_yards_allowed_avg_2"]
-        - weekly["opp_rec_yards_allowed_avg_8"]
-    )
+    for source, dest in [
+        ("pos_rush", "opp_pos_rush_yards_allowed_avg_4"),
+        ("pos_rec", "opp_pos_rec_yards_allowed_avg_4"),
+        ("pos_td", "opp_pos_td_allowed_avg_4"),
+    ]:
+        shifted = positional.groupby(["opponent_team", "position"])[source].shift(1)
+        positional[dest] = (
+            shifted.groupby([positional["opponent_team"], positional["position"]])
+            .rolling(4, min_periods=1)
+            .mean()
+            .reset_index(level=[0, 1], drop=True)
+        )
 
-    return weekly[["season", "week", "opponent_team"] + DEFENSE_FEATURES]
+    overall_cols = [
+        "season", "week", "opponent_team",
+        "opp_rush_yards_allowed_avg_2","opp_rush_yards_allowed_avg_4","opp_rush_yards_allowed_avg_8",
+        "opp_rec_yards_allowed_avg_2","opp_rec_yards_allowed_avg_4","opp_rec_yards_allowed_avg_8",
+        "opp_td_allowed_avg_2","opp_td_allowed_avg_4","opp_td_allowed_avg_8",
+        "opp_opportunities_allowed_avg_4","opp_rush_form_trend","opp_rec_form_trend",
+    ]
+    pos_cols = [
+        "season","week","opponent_team","position",
+        "opp_pos_rush_yards_allowed_avg_4",
+        "opp_pos_rec_yards_allowed_avg_4",
+        "opp_pos_td_allowed_avg_4",
+    ]
+    return positional[pos_cols].merge(weekly[overall_cols], on=["season","week","opponent_team"], how="left")
+
 
 def add_history_features(df: pd.DataFrame) -> pd.DataFrame:
     raw = normalize_player_stats(df)
@@ -177,7 +208,7 @@ def add_history_features(df: pd.DataFrame) -> pd.DataFrame:
         out[f"{stat}_season_avg"] = (cumulative / counts).fillna(0.0)
 
     defense = _opponent_history(raw)
-    out = out.merge(defense, on=["season", "week", "opponent_team"], how="left")
+    out = out.merge(defense, on=["season", "week", "opponent_team", "position"], how="left")
 
     out["games_prior"] = group.cumcount()
     out["season_week_index"] = pd.to_numeric(out["week"], errors="coerce").fillna(0)
@@ -240,7 +271,7 @@ def latest_defense_features(stats: pd.DataFrame) -> pd.DataFrame:
     raw = normalize_player_stats(stats)
     usable = raw[raw["opponent_team"].astype(str).str.len() > 0].copy()
     if usable.empty:
-        return pd.DataFrame(columns=["def_team"] + DEFENSE_FEATURES)
+        return pd.DataFrame(columns=["def_team", "position"] + DEFENSE_FEATURES)
 
     weekly = (
         usable.groupby(["season", "week", "opponent_team"], as_index=False)
@@ -252,38 +283,36 @@ def latest_defense_features(stats: pd.DataFrame) -> pd.DataFrame:
         )
         .sort_values(["opponent_team", "season", "week"])
     )
+    positional = (
+        usable.groupby(["season","week","opponent_team","position"],as_index=False)
+        .agg(pos_rush=("rushing_yards","sum"),pos_rec=("receiving_yards","sum"),pos_td=("touchdown","sum"))
+        .sort_values(["opponent_team","position","season","week"])
+    )
 
     rows = []
+    positions = sorted(str(x) for x in usable["position"].dropna().unique())
     for team, grp in weekly.groupby("opponent_team"):
         def mean_tail(col, n):
             return float(grp[col].tail(n).mean())
-
-        rush2 = mean_tail("opp_rush_yards_allowed", 2)
-        rush4 = mean_tail("opp_rush_yards_allowed", 4)
-        rush8 = mean_tail("opp_rush_yards_allowed", 8)
-        rec2 = mean_tail("opp_rec_yards_allowed", 2)
-        rec4 = mean_tail("opp_rec_yards_allowed", 4)
-        rec8 = mean_tail("opp_rec_yards_allowed", 8)
-        td2 = mean_tail("opp_td_allowed", 2)
-        td4 = mean_tail("opp_td_allowed", 4)
-        td8 = mean_tail("opp_td_allowed", 8)
-
-        rows.append(
-            {
-                "def_team": team,
-                "opp_rush_yards_allowed_avg_2": rush2,
-                "opp_rush_yards_allowed_avg_4": rush4,
-                "opp_rush_yards_allowed_avg_8": rush8,
-                "opp_rec_yards_allowed_avg_2": rec2,
-                "opp_rec_yards_allowed_avg_4": rec4,
-                "opp_rec_yards_allowed_avg_8": rec8,
-                "opp_td_allowed_avg_2": td2,
-                "opp_td_allowed_avg_4": td4,
-                "opp_td_allowed_avg_8": td8,
-                "opp_opportunities_allowed_avg_4": mean_tail("opp_opportunities_allowed", 4),
-                "opp_rush_form_trend": rush2 - rush8,
-                "opp_rec_form_trend": rec2 - rec8,
-            }
-        )
+        base = {
+            "opp_rush_yards_allowed_avg_2": mean_tail("opp_rush_yards_allowed",2),
+            "opp_rush_yards_allowed_avg_4": mean_tail("opp_rush_yards_allowed",4),
+            "opp_rush_yards_allowed_avg_8": mean_tail("opp_rush_yards_allowed",8),
+            "opp_rec_yards_allowed_avg_2": mean_tail("opp_rec_yards_allowed",2),
+            "opp_rec_yards_allowed_avg_4": mean_tail("opp_rec_yards_allowed",4),
+            "opp_rec_yards_allowed_avg_8": mean_tail("opp_rec_yards_allowed",8),
+            "opp_td_allowed_avg_2": mean_tail("opp_td_allowed",2),
+            "opp_td_allowed_avg_4": mean_tail("opp_td_allowed",4),
+            "opp_td_allowed_avg_8": mean_tail("opp_td_allowed",8),
+            "opp_opportunities_allowed_avg_4": mean_tail("opp_opportunities_allowed",4),
+        }
+        base["opp_rush_form_trend"] = base["opp_rush_yards_allowed_avg_2"] - base["opp_rush_yards_allowed_avg_8"]
+        base["opp_rec_form_trend"] = base["opp_rec_yards_allowed_avg_2"] - base["opp_rec_yards_allowed_avg_8"]
+        for pos in positions:
+            pg = positional[(positional["opponent_team"]==team)&(positional["position"].astype(str)==pos)]
+            row={"def_team":team,"position":pos,**base}
+            row["opp_pos_rush_yards_allowed_avg_4"]=float(pg["pos_rush"].tail(4).mean()) if not pg.empty else 0.0
+            row["opp_pos_rec_yards_allowed_avg_4"]=float(pg["pos_rec"].tail(4).mean()) if not pg.empty else 0.0
+            row["opp_pos_td_allowed_avg_4"]=float(pg["pos_td"].tail(4).mean()) if not pg.empty else 0.0
+            rows.append(row)
     return pd.DataFrame(rows)
-
