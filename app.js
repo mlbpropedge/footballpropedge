@@ -17,6 +17,16 @@ function avatar(x,type,extra=""){
   return `<span class="avatar ${type} ${extra}" aria-hidden="true">${initials(x.player)}</span>`;
 }
 
+function playerUrl(x){
+  return `player.html?id=${encodeURIComponent(x.player_id||"")}`;
+}
+
+function defenseRank(x,type){
+  const rank=Number(type==="rush"?x.opp_rush_def_rank:x.opp_rec_def_rank);
+  const total=Number(x.opp_def_rank_total||32);
+  return rank>0 ? `#${rank} of ${total}` : "Pending";
+}
+
 function bestCard(x,i,type){
   const rush=Number(x.rushing_yards||0);
   const rec=Number(x.receiving_yards||0);
@@ -43,27 +53,47 @@ function bestCard(x,i,type){
     : isRec
       ? Number(x.receiving_reliability_score||0)
       : null;
-
+  const context=x.season_context||{};
+  const seasonAvg=isRush
+    ? Number(context.season_rushing_avg||0)
+    : isRec
+      ? Number(context.season_receiving_avg||0)
+      : null;
+  const rankType=isRush?"rush":"receive";
   const chips=isRush
     ? [`${x.recent_carries ?? 0} carries L3`,`Reliability ${reliability.toFixed(0)}/100`,`Matchup ${matchup.toFixed(0)}/100`]
     : isRec
       ? [`${x.recent_targets ?? 0} targets L3`,`Reliability ${reliability.toFixed(0)}/100`,`Matchup ${matchup.toFixed(0)}/100`]
       : [`${rush.toFixed(1)} rush yds`,`Matchup ${matchup.toFixed(0)}/100`];
 
-  return `<article class="prediction-card ${type}">
+  const details=isRush||isRec
+    ? `<div class="quick-grid">
+        <div><span>2026 average</span><strong>${seasonAvg.toFixed(1)} yds</strong></div>
+        <div><span>Opponent defense</span><strong>${defenseRank(x,rankType)}</strong></div>
+        <div><span>Games tracked</span><strong>${context.games_played??0}</strong></div>
+      </div>`
+    : `<div class="quick-grid">
+        <div><span>Rush projection</span><strong>${rush.toFixed(1)} yds</strong></div>
+        <div><span>Rec projection</span><strong>${rec.toFixed(1)} yds</strong></div>
+        <div><span>2026 games</span><strong>${context.games_played??0}</strong></div>
+      </div>`;
+
+  return `<article class="prediction-card ${type}" data-player-id="${x.player_id}">
     <div class="card-top">
       <div class="player-line">
         ${avatar(x,type)}
         <div class="player-copy">
-          <h3>${x.player}</h3>
+          <h3><a class="player-name-link" href="${playerUrl(x)}">${x.player}</a></h3>
           <div class="meta">${x.position} • ${x.team} vs ${x.opponent}</div>
         </div>
       </div>
       <div class="rank">#${i+1}</div>
     </div>
     <div class="projection">${value}</div>
-    <div class="edge-row"><span class="edge-label">Edge Score</span><strong class="edge-score">${edge.toFixed(1)}</strong></div>
+    <div class="edge-row" title="Ranking score; not a probability"><span class="edge-label">Edge Score</span><strong class="edge-score">${edge.toFixed(1)}</strong></div>
     <div class="chip-row">${chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>
+    <button class="expand-btn" type="button" aria-expanded="false"><span>Quick look</span><b>＋</b></button>
+    <div class="card-details" hidden>${details}<a class="detail-link" href="${playerUrl(x)}">View full player breakdown →</a></div>
   </article>`;
 }
 
@@ -74,16 +104,19 @@ async function fetchJSON(url){
 }
 
 async function load(){
-  const [p,m]=await Promise.all([
+  const [p,m,r]=await Promise.all([
     fetchJSON("data/predictions.json"),
-    fetchJSON("data/model_metrics.json")
+    fetchJSON("data/model_metrics.json"),
+    fetchJSON("data/performance.json")
   ]);
   payload=p || {players:[]};
   payload.players=Array.isArray(payload.players)?payload.players:[];
   metrics=m || {};
+  performance=r || {};
   setup();
   renderBest();
   render();
+  renderResults();
 }
 
 function setup(){
@@ -106,6 +139,40 @@ function setup(){
       if(id==="metric") sortKey=valueOf("metric") || "rushing_yards";
       render();
     });
+  });
+
+  const filterToggle=$("filterToggle");
+  if(filterToggle){
+    filterToggle.addEventListener("click",()=>{
+      const open=$("boardControls")?.classList.toggle("open");
+      filterToggle.setAttribute("aria-expanded",String(Boolean(open)));
+      const icon=filterToggle.querySelector("span");
+      if(icon) icon.textContent=open?"−":"＋";
+    });
+  }
+
+  document.addEventListener("click",event=>{
+    const button=event.target.closest(".expand-btn");
+    if(button){
+      const details=button.nextElementSibling;
+      const open=button.getAttribute("aria-expanded")==="true";
+      button.setAttribute("aria-expanded",String(!open));
+      button.querySelector("b").textContent=open?"＋":"−";
+      if(details) details.hidden=open;
+      return;
+    }
+    const row=event.target.closest("tr[data-href]");
+    if(row && !event.target.closest("a,button,input,select")){
+      window.location.href=row.dataset.href;
+    }
+  });
+
+  document.addEventListener("keydown",event=>{
+    const row=event.target.closest("tr[data-href]");
+    if(row && (event.key==="Enter"||event.key===" ")){
+      event.preventDefault();
+      window.location.href=row.dataset.href;
+    }
   });
 
   renderMetrics();
@@ -148,22 +215,22 @@ function render(){
     const rush=Number(x.rushing_yards||0);
     const rec=Number(x.receiving_yards||0);
     const td=Number(x.td_probability||0);
-    return `<tr>
-      <td>
+    return `<tr data-href="${playerUrl(x)}" tabindex="0" aria-label="View ${x.player} details">
+      <td data-label="Player">
         <div class="table-player">
           ${avatar(x,"table-avatar","table-avatar")}
           <div>
-            <div class="player">${x.player}</div>
+            <div class="player"><a href="${playerUrl(x)}">${x.player}</a></div>
             <div class="muted">${x.recent_carries ?? 0} carries • ${x.recent_targets ?? 0} targets L3</div>
           </div>
         </div>
       </td>
-      <td>${x.position}</td>
-      <td>${x.team}</td>
-      <td>${x.opponent}</td>
-      <td class="metric">${rush.toFixed(1)}</td>
-      <td class="metric">${rec.toFixed(1)}</td>
-      <td><span class="td">${td.toFixed(1)}%</span></td>
+      <td data-label="Position">${x.position}</td>
+      <td data-label="Team">${x.team}</td>
+      <td data-label="Opponent">${x.opponent}</td>
+      <td data-label="Rush Yds" class="metric">${rush.toFixed(1)}</td>
+      <td data-label="Rec Yds" class="metric">${rec.toFixed(1)}</td>
+      <td data-label="TD chance"><span class="td">${td.toFixed(1)}%</span></td>
     </tr>`;
   }).join("") || `<tr><td colspan="7" class="muted">No players match these filters.</td></tr>`;
 
