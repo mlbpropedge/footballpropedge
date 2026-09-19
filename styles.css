@@ -270,6 +270,21 @@ td{font-size:13px}
 .metric-box{padding:13px;border-radius:11px;background:#0b1520;border:1px solid #203247}
 .metric-box b{display:block;margin-bottom:5px;font-size:13px}
 .metric-box span{color:#8699af;font-size:12px;line-height:1.5}
+.benchmark-wrap{margin-top:16px;padding-top:16px;border-top:1px solid #1c2b3d}
+.benchmark-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}
+.benchmark-head span{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#a8bbcf}
+.benchmark-head small{color:#6f839a;font-size:11px}
+.benchmarks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.benchmark-card{padding:14px;border-radius:12px;background:#0b1520;border:1px solid #203247}
+.benchmark-title{font-size:13px;font-weight:900;margin-bottom:10px}
+.benchmark-values{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.benchmark-values div{padding:10px;border-radius:9px;background:#0e1a28;border:1px solid #1f3145}
+.benchmark-values span{display:block;color:#738aa2;font-size:9px;text-transform:uppercase;letter-spacing:.08em}
+.benchmark-values strong{display:block;margin-top:4px;font-size:20px;letter-spacing:-.03em}
+.benchmark-foot{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:10px;color:#7d91a7;font-size:11px}
+.benchmark-win{color:#72e5a0;font-weight:850}
+.benchmark-loss{color:#ff9b8d;font-weight:850}
+@media(max-width:650px){.benchmarks{grid-template-columns:1fr}.benchmark-head{display:block}.benchmark-head small{display:block;margin-top:4px}}
 
 .results-section{margin-top:46px}
 .results-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
