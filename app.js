@@ -222,7 +222,7 @@ function renderMetrics(){
       <b>${labels[k]||k}</b>
       <span>${v.model||"—"}<br>
       ${v.cv_mae!=null?`CV MAE: ${v.cv_mae} yds`:v.cv_brier!=null?`Calibrated Brier: ${v.cv_brier}`:"Validation pending"}
-      ${k==="touchdown"&&v.calibration?.available?`<br>Calibration change: ${Number(v.calibration.improvement_pct||0).toFixed(1)}%`:""}
+      ${k==="touchdown"&&v.calibration?.available?(v.calibration.applied?`<br>Calibration improvement: ${Number(v.calibration.improvement_pct||0).toFixed(1)}%`:`<br>Calibration tested; raw probabilities retained`):""}
       ${v.overfit_flag?" • overfit flag":""}</span>
     </div>`
   ).join("");

@@ -363,8 +363,10 @@ def fit_td_calibration(df: pd.DataFrame, model_name: str) -> tuple[float, float,
     raw_brier = float(brier_score_loss(eval_actual, eval_raw))
     calibrated_brier = float(brier_score_loss(eval_actual, eval_calibrated))
 
-    deploy_base, deploy_slope = best_parameters(oof)
+    deploy_base, proposed_slope = best_parameters(oof)
     improvement = raw_brier - calibrated_brier
+    improves = calibrated_brier < raw_brier
+    deploy_slope = proposed_slope if improves else 1.0
     return deploy_base, deploy_slope, {
         "method": "time-aware linear probability scaling",
         "available": True,
@@ -372,14 +374,17 @@ def fit_td_calibration(df: pd.DataFrame, model_name: str) -> tuple[float, float,
         "samples": int(len(oof)),
         "evaluation_samples": int(len(newest)),
         "base_rate": round(float(deploy_base), 4),
-        "slope": round(float(deploy_slope), 3),
+        "proposed_slope": round(float(proposed_slope), 3),
+        "deployed_slope": round(float(deploy_slope), 3),
+        "applied": bool(improves),
         "raw_brier": round(raw_brier, 4),
         "calibrated_brier": round(calibrated_brier, 4),
         "improvement": round(improvement, 4),
         "improvement_pct": round(100.0 * improvement / raw_brier, 2)
         if raw_brier > 0
         else 0.0,
-        "improves_brier": bool(calibrated_brier < raw_brier),
+        "improves_brier": bool(improves),
+        "decision": "applied" if improves else "rejected; raw probabilities retained",
     }
 
 
@@ -446,7 +451,11 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
             "training_samples": int(len(td_df)),
             "walk_forward": td_cv.get(td_name, []),
             "raw_cv_brier": avg_cv(td_cv.get(td_name, []), "brier"),
-            "cv_brier": td_calibration.get("calibrated_brier")
+            "cv_brier": (
+                td_calibration.get("calibrated_brier")
+                if td_calibration.get("applied")
+                else td_calibration.get("raw_brier")
+            )
             if td_calibration.get("available")
             else avg_cv(td_cv.get(td_name, []), "brier"),
             "calibration": td_calibration,
