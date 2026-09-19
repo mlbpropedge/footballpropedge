@@ -9,127 +9,22 @@
 </head>
 <body>
 <div class="site-shell">
-
-<nav class="topbar">
-  <div class="topbar-inner">
-    <a class="brand-lockup" href="#top">
-      <span class="brand-mark">FPE</span>
-      <span class="brand-copy">
-        <strong>Football Prop Edge</strong>
-        <small>ML player projections</small>
-      </span>
-    </a>
-
-    <div class="navlinks">
-      <a href="#best">Best Predictions</a>
-      <a href="#results">Results</a>
-      <a href="#all">Full Board</a>
-      <span class="live-pill"><span class="live-dot"></span> Week <span id="navWeek">—</span></span>
-    </div>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="hero-copy">
-    <p class="eyebrow">NFL • MACHINE LEARNING • WEEKLY PROJECTIONS</p>
-    <h1>Cleaner projections.<br><span>Sharper decisions.</span></h1>
-    <p class="sub">Independent rushing, receiving, and touchdown projections built from historical NFL data and recent player usage — without sportsbook lines, player photos, or team logos.</p>
-    <div class="hero-actions">
-      <a class="primary-btn" href="#best">Explore top projections</a>
-      <a class="secondary-btn" href="#all">View full board</a>
-    </div>
-    <div class="hero-meta">
-      <span id="updated">Loading latest model run…</span>
-    </div>
-  </div>
-
-  <div class="hero-panel" aria-hidden="true">
-    <div class="mini-label">Projection engine</div>
-    <div class="hero-score">3</div>
-    <div class="hero-score-label">prediction markets</div>
-    <div class="hero-tags">
-      <span>Rushing</span><span>Receiving</span><span>TD</span>
-    </div>
-  </div>
-</header>
-
+<nav class="topbar"><div class="topbar-inner"><a class="brand-lockup" href="#top"><span class="brand-mark">FPE</span><span class="brand-copy"><strong>Football Prop Edge</strong><small>ML player projections</small></span></a><div class="navlinks"><a href="#best">Best Predictions</a><a href="#results">Results</a><a href="#all">Full Board</a><span class="live-pill"><span class="live-dot"></span> Week <span id="navWeek">—</span></span></div></div></nav>
+<header class="hero" id="top"><div class="hero-copy"><p class="eyebrow">NFL • MACHINE LEARNING • WEEKLY PROJECTIONS</p><h1>Cleaner projections.<br><span>Sharper decisions.</span></h1><p class="sub">Independent rushing, receiving, and touchdown projections built from historical NFL data and recent player usage — without sportsbook lines, player photos, or team logos.</p><div class="hero-actions"><a class="primary-btn" href="#best">Explore top projections</a><a class="secondary-btn" href="#all">View full board</a></div><div class="hero-meta"><span id="updated">Loading latest model run…</span></div></div><div class="hero-panel" aria-hidden="true"><div class="mini-label">Projection engine</div><div class="hero-score">3</div><div class="hero-score-label">prediction markets</div><div class="hero-tags"><span>Rushing</span><span>Receiving</span><span>TD</span></div></div></header>
 <main>
-<section class="hero-grid">
-  <div class="stat stat-rush"><span>Current slate</span><strong id="week">—</strong><small>NFL week</small></div>
-  <div class="stat stat-rec"><span>Player pool</span><strong id="count">—</strong><small>active projections</small></div>
-  <div class="stat stat-td"><span>Data source</span><strong>nflverse</strong><small>free + reproducible</small></div>
-</section>
-
-<section id="best" class="best-section rush-title">
-  <div class="section-head">
-    <div><p class="eyebrow">RUNNING BACKS</p><h2>Top rushing projections</h2></div>
-    <p>Highest projected rushing yards among RBs.</p>
-  </div>
-  <div id="rbCards" class="prediction-grid"></div>
-</section>
-
-<section class="best-section rec-title">
-  <div class="section-head">
-    <div><p class="eyebrow">RECEIVERS</p><h2>Top receiving projections</h2></div>
-    <p>Highest projected receiving yards among WRs and TEs.</p>
-  </div>
-  <div id="wrCards" class="prediction-grid"></div>
-</section>
-
-<section class="best-section td-title">
-  <div class="section-head">
-    <div><p class="eyebrow">TOUCHDOWNS</p><h2>Highest touchdown probabilities</h2></div>
-    <p>Top model-estimated anytime TD probabilities.</p>
-  </div>
-  <div id="tdCards" class="prediction-grid"></div>
-</section>
-
-<section id="all" class="section-head board-head">
-  <div><p class="eyebrow">FULL BOARD</p><h2>All player projections</h2></div>
-  <p>Search, filter, and sort the current slate.</p>
-</section>
-
-<section class="controls">
-  <div class="search-wrap">
-    <span class="search-icon">⌕</span>
-    <input id="search" placeholder="Search player or team…" aria-label="Search">
-  </div>
-  <select id="position"><option value="">All positions</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select>
-  <select id="team"><option value="">All teams</option></select>
-  <select id="metric"><option value="rushing_yards">Sort: rushing yards</option><option value="receiving_yards">Sort: receiving yards</option><option value="td_probability">Sort: TD probability</option></select>
-</section>
-
-<section class="table-wrap">
-<table>
-<thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Opp</th><th>Rush Yds</th><th>Rec Yds</th><th>TD %</th></tr></thead>
-<tbody id="rows"></tbody>
-</table>
-</section>
-
-<section id="results" class="results-section">
-  <div class="section-head">
-    <div><p class="eyebrow">WEEKLY RESULTS</p><h2>How the projections actually performed</h2></div>
-    <p>Archived predictions graded against real NFL results.</p>
-  </div>
-  <div id="resultsSummary" class="results-summary"></div>
-  <div id="weeklyResults" class="weekly-results"></div>
-</section>
-
-<section class="model-card">
-  <div class="section-head">
-    <div><p class="eyebrow">VALIDATION</p><h2>Model health</h2></div>
-    <p>Walk-forward testing, not random splitting.</p>
-  </div>
-  <p class="model-copy">Models are selected using time-aware validation. Training features are shifted so the game being predicted never leaks into its own feature set.</p>
-  <div id="metrics" class="metrics"></div>
-</section>
+<section class="hero-grid"><div class="stat stat-rush"><span>Current slate</span><strong id="week">—</strong><small>NFL week</small></div><div class="stat stat-rec"><span>Player pool</span><strong id="count">—</strong><small>active projections</small></div><div class="stat stat-td"><span>Data source</span><strong>nflverse</strong><small>free + reproducible</small></div></section>
+<section id="best" class="best-section rush-title"><div class="section-head"><div><p class="eyebrow">RUNNING BACKS</p><h2>Top rushing projections</h2></div><p>Best model-ranked rushing projections with empirical 80% ranges.</p></div><div id="rbCards" class="prediction-grid"></div></section>
+<section class="best-section rec-title"><div class="section-head"><div><p class="eyebrow">RECEIVERS</p><h2>Top receiving projections</h2></div><p>Best model-ranked receiving projections with empirical 80% ranges.</p></div><div id="wrCards" class="prediction-grid"></div></section>
+<section class="best-section td-title"><div class="section-head"><div><p class="eyebrow">TOUCHDOWNS</p><h2>Highest touchdown probabilities</h2></div><p>Top model-estimated anytime TD probabilities.</p></div><div id="tdCards" class="prediction-grid"></div></section>
+<section id="all" class="section-head board-head"><div><p class="eyebrow">FULL BOARD</p><h2>All player projections</h2></div><p>Search, filter, and sort the current slate.</p></section>
+<section class="controls"><div class="search-wrap"><span class="search-icon">⌕</span><input id="search" placeholder="Search player or team…" aria-label="Search"></div><select id="position"><option value="">All positions</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select><select id="team"><option value="">All teams</option></select><select id="metric"><option value="rushing_yards">Sort: rushing yards</option><option value="receiving_yards">Sort: receiving yards</option><option value="td_probability">Sort: TD probability</option></select></section>
+<section class="table-wrap"><table><thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Opp</th><th>Rush Yds</th><th>Rec Yds</th><th>TD %</th></tr></thead><tbody id="rows"></tbody></table></section>
+<section id="results" class="results-section"><div class="section-head"><div><p class="eyebrow">WEEKLY RESULTS</p><h2>How the projections actually performed</h2></div><p>Archived predictions graded against real NFL results.</p></div><div id="resultsSummary" class="results-summary"></div><div id="weeklyResults" class="weekly-results"></div></section>
+<section class="model-card"><div class="section-head"><div><p class="eyebrow">VALIDATION</p><h2>Model health</h2></div><p>Walk-forward testing, not random splitting.</p></div><p class="model-copy">Models are selected using time-aware validation. Training features are shifted so the game being predicted never leaks into its own feature set. Rushing and receiving ranges use empirical residuals from historical weekly walk-forward predictions.</p><div id="metrics" class="metrics"></div></section>
 </main>
-
-<footer>
-  <span>Football Prop Edge</span>
-  <span>For personal analytical use. Projections are estimates, not guarantees.</span>
-</footer>
+<footer><span>Football Prop Edge</span><span>For personal analytical use. Projections are estimates, not guarantees.</span></footer>
 </div>
 <script src="app.js?v=6"></script>
+<script src="ranges.js?v=1"></script>
 </body>
 </html>
