@@ -19,6 +19,11 @@ from src.features import feature_columns, make_training_frame
 
 def attach_schedule_context(stats: pd.DataFrame, schedules: pd.DataFrame) -> pd.DataFrame:
     out = stats.copy()
+    if "recent_team" not in out.columns:
+        if "team" in out.columns:
+            out["recent_team"] = out["team"]
+        else:
+            raise ValueError("Player stats are missing both recent_team and team columns.")
     games = schedules.copy()
     if "game_type" in games.columns:
         games = games[games["game_type"].astype(str).eq("REG")]
