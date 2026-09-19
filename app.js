@@ -1,6 +1,19 @@
 let payload={players:[]}, metrics={}, sortKey="rushing_yards";
 const $=id=>document.getElementById(id);
 
+function initials(name){
+  const cleaned=name.replace(/[^A-Za-z' .-]/g," ").trim();
+  const parts=cleaned.split(/\s+/).filter(Boolean);
+  if(parts.length===0) return "??";
+  const first=(parts[0][0]||"").toUpperCase();
+  const last=(parts[parts.length-1][0]||"").toUpperCase();
+  return parts.length===1 ? first : first+last;
+}
+
+function avatar(x,type,extra=""){
+  return `<span class="avatar ${type} ${extra}" aria-hidden="true">${initials(x.player)}</span>`;
+}
+
 function bestCard(x,i,type){
   const isRush=type==="rush", isRec=type==="receive";
   const value=isRush
@@ -16,9 +29,16 @@ function bestCard(x,i,type){
       : [`${x.rushing_yards.toFixed(1)} rush yds`,`${x.receiving_yards.toFixed(1)} rec yds`];
 
   return `<article class="prediction-card ${type}">
-    <div class="rank">#${i+1}</div>
-    <h3>${x.player}</h3>
-    <div class="meta">${x.position} • ${x.team} vs ${x.opponent}</div>
+    <div class="card-top">
+      <div class="player-line">
+        ${avatar(x,type)}
+        <div class="player-copy">
+          <h3>${x.player}</h3>
+          <div class="meta">${x.position} • ${x.team} vs ${x.opponent}</div>
+        </div>
+      </div>
+      <div class="rank">#${i+1}</div>
+    </div>
     <div class="projection">${value}</div>
     <div class="chip-row">${chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>
   </article>`;
@@ -37,6 +57,7 @@ async function load(){
 
 function setup(){
   $("week").textContent=`${payload.season} • ${payload.week}`;
+  $("navWeek").textContent=payload.week;
   $("count").textContent=payload.players.length;
   $("updated").textContent="Updated "+new Date(payload.generated_at).toLocaleString();
 
@@ -88,8 +109,18 @@ function render(){
   rows.sort((a,b)=>b[sortKey]-a[sortKey]);
 
   $("rows").innerHTML=rows.map(x=>`<tr>
-    <td><span class="player">${x.player}</span><br><span class="muted">${x.recent_carries} carries • ${x.recent_targets} targets L3</span></td>
-    <td>${x.position}</td><td>${x.team}</td><td>${x.opponent}</td>
+    <td>
+      <div class="table-player">
+        ${avatar(x,"table-avatar","table-avatar")}
+        <div>
+          <div class="player">${x.player}</div>
+          <div class="muted">${x.recent_carries} carries • ${x.recent_targets} targets L3</div>
+        </div>
+      </div>
+    </td>
+    <td>${x.position}</td>
+    <td>${x.team}</td>
+    <td>${x.opponent}</td>
     <td class="metric">${x.rushing_yards.toFixed(1)}</td>
     <td class="metric">${x.receiving_yards.toFixed(1)}</td>
     <td><span class="td">${x.td_probability.toFixed(1)}%</span></td>
