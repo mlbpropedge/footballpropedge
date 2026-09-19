@@ -19,7 +19,7 @@
 <section id="all" class="section-head board-head"><div><p class="eyebrow">FULL BOARD</p><h2>All player projections</h2></div><p>Search, filter, and sort the current slate.</p></section>
 <button id="filterToggle" class="filter-toggle" type="button" aria-expanded="false" aria-controls="boardControls">Filters & sorting <span>＋</span></button>
 <section id="boardControls" class="controls"><div class="search-wrap"><span class="search-icon">⌕</span><input id="search" placeholder="Search player or team…" aria-label="Search"></div><select id="position"><option value="">All positions</option><option>RB</option><option>WR</option><option>TE</option><option>FB</option></select><select id="team"><option value="">All teams</option></select><select id="metric"><option value="rushing_yards">Sort: rushing yards</option><option value="receiving_yards">Sort: receiving yards</option><option value="td_probability">Sort: TD probability</option></select></section>
-<section class="table-wrap"><table><thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Opp</th><th>Rush Yds</th><th>Rec Yds</th><th>TD %</th></tr></thead><tbody id="rows"></tbody></table></section>
+<section id="rows" class="board-list" aria-live="polite"></section>
 <section id="results" class="results-section"><div class="section-head"><div><p class="eyebrow">WEEKLY RESULTS</p><h2>How the projections actually performed</h2></div><p>Archived predictions graded against real NFL results.</p></div><div id="resultsSummary" class="results-summary"></div><div id="weeklyResults" class="weekly-results"></div></section>
 <section class="guide-card" aria-labelledby="guideTitle"><div><p class="eyebrow">QUICK GUIDE</p><h2 id="guideTitle">Read every projection clearly</h2></div><div class="guide-grid"><div><strong>Edge Score</strong><span>Ranks projection strength, usage, stability, matchup, and model quality. It is not a probability.</span></div><div><strong>Reliability</strong><span>Higher scores mean a tighter historical error range and steadier recent workload.</span></div><div><strong>Defense Rank</strong><span>Position-specific rank where No. 1 is the toughest defense and the highest number is the easiest.</span></div></div></section>
 <section class="model-card"><div class="section-head"><div><p class="eyebrow">VALIDATION</p><h2>Model health</h2></div><p>Walk-forward testing, not random splitting.</p></div><p class="model-copy">Models are selected using time-aware validation. Training features are shifted so the game being predicted never leaks into its own feature set. Rushing and receiving ranges use empirical residuals from historical weekly walk-forward predictions.</p><div id="metrics" class="metrics"></div><div class="benchmark-wrap"><div class="benchmark-head"><span>Baseline benchmark</span><small>ML vs simple historical projections on the same holdout rows</small></div><div id="benchmarks" class="benchmarks"></div></div></section>
@@ -27,7 +27,7 @@
 <footer><span>Football Prop Edge</span><span>For personal analytical use. Projections are estimates, not guarantees.</span></footer>
 </div>
 <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#top"><span>⌂</span>Home</a><a href="#best"><span>★</span>Top</a><a href="#all"><span>⌕</span>Board</a><a href="#results"><span>✓</span>Results</a></nav>
-<script src="app.js?v=11"></script>
+<script src="app.js?v=12"></script>
 <script src="ranges.js?v=1"></script>
 </body>
 </html>

@@ -204,24 +204,18 @@ function render(){
     const rush=Number(x.rushing_yards||0);
     const rec=Number(x.receiving_yards||0);
     const td=Number(x.td_probability||0);
-    return `<tr aria-label="View ${x.player} details">
-      <td data-label="Player">
-        <div class="table-player">
-          ${avatar(x,"table-avatar","table-avatar")}
-          <div>
-            <div class="player"><a href="${playerUrl(x)}">${x.player}</a></div>
-            <div class="muted">${x.recent_carries ?? 0} carries • ${x.recent_targets ?? 0} targets L3</div>
-          </div>
-        </div>
-      </td>
-      <td data-label="Position"><a class="row-cell-link" href="${playerUrl(x)}">${x.position}</a></td>
-      <td data-label="Team"><a class="row-cell-link" href="${playerUrl(x)}">${x.team}</a></td>
-      <td data-label="Opponent"><a class="row-cell-link" href="${playerUrl(x)}">${x.opponent}</a></td>
-      <td data-label="Rush Yds" class="metric"><a class="row-cell-link" href="${playerUrl(x)}">${rush.toFixed(1)}</a></td>
-      <td data-label="Rec Yds" class="metric"><a class="row-cell-link" href="${playerUrl(x)}">${rec.toFixed(1)}</a></td>
-      <td data-label="TD chance"><a class="row-cell-link" href="${playerUrl(x)}"><span class="td">${td.toFixed(1)}%</span></a></td>
-    </tr>`;
-  }).join("") || `<tr><td colspan="7" class="muted">No players match these filters.</td></tr>`;
+    return `<a class="board-row" href="${playerUrl(x)}" aria-label="View ${x.player} details">
+      <div class="board-player">
+        ${avatar(x,"table-avatar","table-avatar")}
+        <div><strong>${x.player}</strong><span>${x.position} • ${x.team} vs ${x.opponent}</span></div>
+      </div>
+      <div class="board-stat"><span>Rush</span><strong>${rush.toFixed(1)}</strong><small>yards</small></div>
+      <div class="board-stat"><span>Receiving</span><strong>${rec.toFixed(1)}</strong><small>yards</small></div>
+      <div class="board-stat"><span>TD chance</span><strong>${td.toFixed(1)}%</strong><small>probability</small></div>
+      <div class="board-usage"><span>${x.recent_carries ?? 0} carries</span><span>${x.recent_targets ?? 0} targets</span><small>last 3 average</small></div>
+      <div class="board-open">View <b>→</b></div>
+    </a>`;
+  }).join("") || `<div class="results-empty"><strong>No players match these filters.</strong><p>Try clearing one of the filters above.</p></div>`;
 
   setHTML("rows",html);
   setText("count",rows.length);
