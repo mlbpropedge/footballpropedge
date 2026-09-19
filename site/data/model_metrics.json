@@ -1,1 +1,68 @@
-{"rushing":{"model":"pending","cv_mae":null},"receiving":{"model":"pending","cv_mae":null},"touchdown":{"model":"pending","cv_brier":null}}
+{
+  "rushing": {
+    "model": "hist_gradient_boosting",
+    "walk_forward": [
+      {
+        "season": 2024,
+        "mae": 6.756,
+        "rmse": 17.245
+      },
+      {
+        "season": 2025,
+        "mae": 5.792,
+        "rmse": 15.886
+      },
+      {
+        "season": 2026,
+        "mae": 5.559,
+        "rmse": 15.864
+      }
+    ],
+    "cv_mae": 6.036,
+    "train_mae": 6.066,
+    "overfit_ratio": 1.0,
+    "overfit_flag": false
+  },
+  "receiving": {
+    "model": "hist_gradient_boosting",
+    "walk_forward": [
+      {
+        "season": 2024,
+        "mae": 15.78,
+        "rmse": 24.414
+      },
+      {
+        "season": 2025,
+        "mae": 15.044,
+        "rmse": 23.472
+      },
+      {
+        "season": 2026,
+        "mae": 16.053,
+        "rmse": 25.235
+      }
+    ],
+    "cv_mae": 15.626,
+    "train_mae": 15.907,
+    "overfit_ratio": 0.98,
+    "overfit_flag": false
+  },
+  "touchdown": {
+    "model": "hist_gradient_boosting",
+    "walk_forward": [
+      {
+        "season": 2024,
+        "brier": 0.1415
+      },
+      {
+        "season": 2025,
+        "brier": 0.1384
+      },
+      {
+        "season": 2026,
+        "brier": 0.1427
+      }
+    ],
+    "cv_brier": 0.141
+  }
+}
