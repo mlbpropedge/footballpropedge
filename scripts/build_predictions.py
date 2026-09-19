@@ -129,7 +129,90 @@ def attach_matchup_features(
                 float(lookup.at[key, col]) if key in lookup.index else 0.0
                 for key in keys
             ]
+
+        ranked = defense.copy()
+        ranked["rush_def_rank"] = ranked.groupby("position")[
+            "opp_pos_rush_yards_allowed_avg_4"
+        ].rank(method="min", ascending=True)
+        ranked["rec_def_rank"] = ranked.groupby("position")[
+            "opp_pos_rec_yards_allowed_avg_4"
+        ].rank(method="min", ascending=True)
+        rank_lookup = ranked.set_index(["def_team", "position"])
+        out["opp_rush_def_rank"] = [
+            int(rank_lookup.at[key, "rush_def_rank"])
+            if key in rank_lookup.index
+            else 0
+            for key in keys
+        ]
+        out["opp_rec_def_rank"] = [
+            int(rank_lookup.at[key, "rec_def_rank"])
+            if key in rank_lookup.index
+            else 0
+            for key in keys
+        ]
+        out["opp_def_rank_total"] = [
+            int((ranked["position"] == position).sum())
+            for position in out["position"].astype(str)
+        ]
+    else:
+        out["opp_rush_def_rank"] = 0
+        out["opp_rec_def_rank"] = 0
+        out["opp_def_rank_total"] = 0
     return out
+
+
+def current_season_player_context(
+    stats: pd.DataFrame, season: int, completed_week: int
+) -> dict[str, dict]:
+    """Return compact current-season-only trends for the player detail UI."""
+    season_rows = stats[
+        (pd.to_numeric(stats["season"], errors="coerce") == season)
+        & (pd.to_numeric(stats["week"], errors="coerce") <= completed_week)
+    ].copy()
+    if season_rows.empty:
+        return {}
+
+    numeric = [
+        "week",
+        "carries",
+        "targets",
+        "rushing_yards",
+        "receiving_yards",
+        "rushing_tds",
+        "receiving_tds",
+    ]
+    for col in numeric:
+        season_rows[col] = pd.to_numeric(
+            season_rows.get(col, 0), errors="coerce"
+        ).fillna(0)
+
+    context = {}
+    for player_id, group in season_rows.groupby("player_id"):
+        group = group.sort_values("week")
+        games = []
+        for _, game in group.tail(5).iterrows():
+            games.append(
+                {
+                    "week": int(game["week"]),
+                    "rushing_yards": round(float(game["rushing_yards"]), 1),
+                    "receiving_yards": round(float(game["receiving_yards"]), 1),
+                    "carries": round(float(game["carries"]), 1),
+                    "targets": round(float(game["targets"]), 1),
+                    "touchdowns": int(
+                        float(game["rushing_tds"]) + float(game["receiving_tds"])
+                    ),
+                }
+            )
+        context[str(player_id)] = {
+            "season": int(season),
+            "games_played": int(len(group)),
+            "season_rushing_avg": round(float(group["rushing_yards"].mean()), 1),
+            "season_receiving_avg": round(float(group["receiving_yards"].mean()), 1),
+            "season_carries_avg": round(float(group["carries"].mean()), 1),
+            "season_targets_avg": round(float(group["targets"].mean()), 1),
+            "recent_games": games,
+        }
+    return context
 
 
 def add_edge_scores(preds: pd.DataFrame, metrics: dict) -> pd.DataFrame:
@@ -385,6 +468,9 @@ def main():
         raise RuntimeError(f"No {CURRENT_SEASON} player stats found upstream.")
 
     completed_week = int(pd.to_numeric(current["week"], errors="coerce").max())
+    player_context = current_season_player_context(
+        stats, CURRENT_SEASON, completed_week
+    )
     projection_week, opponents, home_games = next_week_context(
         schedules, CURRENT_SEASON, completed_week
     )
@@ -414,9 +500,11 @@ def main():
         ["projected_rushing_yards", "projected_receiving_yards"],
         ascending=False,
     ).iterrows():
+        player_id = str(r["player_id"])
+        context = player_context.get(player_id, {})
         rows.append(
             {
-                "player_id": str(r["player_id"]),
+                "player_id": player_id,
                 "player": str(r["player_display_name"]),
                 "team": str(r["recent_team"]),
                 "opponent": str(r["opponent"]),
@@ -437,6 +525,10 @@ def main():
                 "rush_matchup_score": round(float(r.get("rush_matchup_score", 0)), 1),
                 "receiving_matchup_score": round(float(r.get("receiving_matchup_score", 0)), 1),
                 "td_matchup_score": round(float(r.get("td_matchup_score", 0)), 1),
+                "opp_rush_def_rank": int(r.get("opp_rush_def_rank", 0)),
+                "opp_rec_def_rank": int(r.get("opp_rec_def_rank", 0)),
+                "opp_def_rank_total": int(r.get("opp_def_rank_total", 0)),
+                "season_context": context,
             }
         )
 
