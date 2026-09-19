@@ -122,9 +122,13 @@ def attach_matchup_features(
 
     defense = latest_defense_features(stats)
     if not defense.empty:
-        lookup = defense.set_index("def_team")
+        lookup = defense.set_index(["def_team", "position"])
+        keys = list(zip(out["opponent"].astype(str), out["position"].astype(str)))
         for col in DEFENSE_FEATURES:
-            out[col] = out["opponent"].map(lookup[col]).fillna(0.0)
+            out[col] = [
+                float(lookup.at[key, col]) if key in lookup.index else 0.0
+                for key in keys
+            ]
     return out
 
 
