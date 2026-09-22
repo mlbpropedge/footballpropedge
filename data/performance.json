@@ -1,10 +1,88 @@
 {
-  "graded_predictions": 0,
-  "graded_weeks": 0,
-  "weeks": [],
-  "rushing_mae": null,
-  "receiving_mae": null,
-  "td_brier": null,
-  "weekly_results": [],
-  "note": "Weekly grading will appear after an archived prediction week has completed."
+  "graded_predictions": 243,
+  "graded_weeks": 1,
+  "weeks": [
+    2
+  ],
+  "rushing_mae": 18.59,
+  "receiving_mae": 20.36,
+  "td_brier": 0.1469,
+  "weekly_results": [
+    {
+      "season": 2026,
+      "week": 2,
+      "graded_players": 243,
+      "rushing_mae": 18.59,
+      "receiving_mae": 20.36,
+      "td_brier": 0.1469,
+      "sample_predictions": [
+        {
+          "player": "Kenneth Walker III",
+          "position": "RB",
+          "team": "KC",
+          "projected_rushing_yards": 84.7,
+          "actual_rushing_yards": 117.0,
+          "projected_receiving_yards": 19.1,
+          "actual_receiving_yards": 61.0,
+          "td_probability": 54.2,
+          "actual_td": false
+        },
+        {
+          "player": "Derrick Henry",
+          "position": "RB",
+          "team": "BAL",
+          "projected_rushing_yards": 83.3,
+          "actual_rushing_yards": 68.0,
+          "projected_receiving_yards": 0.0,
+          "actual_receiving_yards": 19.0,
+          "td_probability": 60.2,
+          "actual_td": true
+        },
+        {
+          "player": "James Cook",
+          "position": "RB",
+          "team": "BUF",
+          "projected_rushing_yards": 74.1,
+          "actual_rushing_yards": 135.0,
+          "projected_receiving_yards": 11.0,
+          "actual_receiving_yards": 4.0,
+          "td_probability": 46.8,
+          "actual_td": true
+        },
+        {
+          "player": "Bijan Robinson",
+          "position": "RB",
+          "team": "ATL",
+          "projected_rushing_yards": 72.5,
+          "actual_rushing_yards": 72.0,
+          "projected_receiving_yards": 37.9,
+          "actual_receiving_yards": 9.0,
+          "td_probability": 53.4,
+          "actual_td": false
+        },
+        {
+          "player": "Trey McBride",
+          "position": "TE",
+          "team": "ARI",
+          "projected_rushing_yards": 0.0,
+          "actual_rushing_yards": 0.0,
+          "projected_receiving_yards": 72.3,
+          "actual_receiving_yards": 41.0,
+          "td_probability": 41.7,
+          "actual_td": true
+        },
+        {
+          "player": "Chris Olave",
+          "position": "WR",
+          "team": "NO",
+          "projected_rushing_yards": 0.0,
+          "actual_rushing_yards": 0.0,
+          "projected_receiving_yards": 72.2,
+          "actual_receiving_yards": 86.0,
+          "td_probability": 43.9,
+          "actual_td": true
+        }
+      ]
+    }
+  ]
 }
