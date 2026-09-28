@@ -130,11 +130,33 @@ def scheduled_game_dates(schedules: pd.DataFrame, season: int, week: int) -> dic
     return dates
 
 
+def scheduled_game_starts(schedules: pd.DataFrame, season: int, week: int) -> dict[str, str]:
+    """Return kickoff timestamps; nflverse gametime is in Eastern time."""
+    games = schedules[(schedules["season"] == season) & (schedules["week"] == week)]
+    if "game_type" in games.columns:
+        games = games[games["game_type"].astype(str).eq("REG")]
+    starts = {}
+    for _, game in games.iterrows():
+        date, time = game.get("gameday"), game.get("gametime")
+        if pd.isna(date) or pd.isna(time):
+            continue
+        kickoff = datetime.fromisoformat(f"{pd.to_datetime(date).date().isoformat()}T{time}").replace(
+            tzinfo=ZoneInfo("America/New_York")
+        ).isoformat()
+        for team in (game.get("home_team"), game.get("away_team")):
+            if pd.notna(team):
+                starts[str(team)] = kickoff
+    return starts
+
+
 def archive_prediction(payload: dict, path: Path, today=None) -> bool:
-    """Freeze a week's grading snapshot once its first game day has arrived."""
-    today = today or datetime.now(ZoneInfo("America/New_York")).date()
-    dates = [row.get("game_date") for row in payload["players"] if row.get("game_date")]
-    if path.exists() and dates and min(dates) <= today.isoformat():
+    """Freeze a week's grading snapshot once the first game kicks off."""
+    now = today or datetime.now(ZoneInfo("America/New_York"))
+    if not isinstance(now, datetime):
+        now = datetime.combine(now, datetime.min.time(), ZoneInfo("America/New_York"))
+    starts = [datetime.fromisoformat(row["game_start"]) for row in payload["players"]
+              if row.get("game_start")]
+    if path.exists() and starts and min(starts) <= now:
         return False
     path.write_text(json.dumps(payload, indent=2))
     return True
@@ -143,8 +165,11 @@ def archive_prediction(payload: dict, path: Path, today=None) -> bool:
 def preserve_played_games(rows: list[dict], season: int, week: int, path: Path,
                           today=None) -> list[dict]:
     """Keep pregame projections for finished dates during in-week refreshes."""
-    today = today or datetime.now(ZoneInfo("America/New_York")).date()
-    past = {r["team"] for r in rows if r.get("game_date", "") < today.isoformat()}
+    now = today or datetime.now(ZoneInfo("America/New_York"))
+    if not isinstance(now, datetime):
+        now = datetime.combine(now, datetime.min.time(), ZoneInfo("America/New_York"))
+    past = {r["team"] for r in rows if r.get("game_start")
+            and datetime.fromisoformat(r["game_start"]) <= now}
     if not past:
         return rows
     if not path.exists():
@@ -152,8 +177,9 @@ def preserve_played_games(rows: list[dict], season: int, week: int, path: Path,
     previous = json.loads(path.read_text())
     if previous.get("season") != season or previous.get("week") != week:
         raise ValueError("Previous snapshot belongs to another slate.")
-    dates_by_team = {r["team"]: r["game_date"] for r in rows}
-    kept = [dict(r, game_date=dates_by_team[r["team"]]) for r in previous["players"]
+    schedule_by_team = {r["team"]: (r["game_date"], r["game_start"]) for r in rows}
+    kept = [dict(r, game_date=schedule_by_team[r["team"]][0],
+                 game_start=schedule_by_team[r["team"]][1]) for r in previous["players"]
             if r["team"] in past]
     if {r["team"] for r in kept} != past:
         raise ValueError("Pregame snapshot does not cover all played games.")
@@ -522,7 +548,8 @@ def main():
         schedules, CURRENT_SEASON, completed_week
     )
     game_dates = scheduled_game_dates(schedules, CURRENT_SEASON, projection_week)
-    if set(opponents) != set(game_dates):
+    game_starts = scheduled_game_starts(schedules, CURRENT_SEASON, projection_week)
+    if set(opponents) != set(game_dates) or set(opponents) != set(game_starts):
         raise ValueError("Schedule matchup/date coverage is incomplete; refusing to publish.")
 
     training = make_training_frame(stats)
@@ -559,6 +586,7 @@ def main():
                 "team": str(r["recent_team"]),
                 "opponent": str(r["opponent"]),
                 "game_date": game_dates[str(r["recent_team"])],
+                "game_start": game_starts[str(r["recent_team"])],
                 "position": str(r["position"]),
                 "week": int(r["projection_week"]),
                 "rushing_yards": round(float(r["projected_rushing_yards"]), 1),

@@ -18,6 +18,7 @@ def check(payload, performance, now=None):
     for row in players:
         assert row["week"] == payload["week"]
         assert row["game_date"] and row["opponent"] != row["team"]
+        assert datetime.fromisoformat(row["game_start"]).date().isoformat() == row["game_date"]
         assert opponents[row["opponent"]] == row["team"], "Non-reciprocal matchup"
         assert 0 <= row["td_probability"] <= 100
         assert row["rushing_yards"] >= 0 and row["receiving_yards"] >= 0

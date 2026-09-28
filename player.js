@@ -34,7 +34,7 @@ async function loadPlayer(){
   const games=Array.isArray(context.recent_games)?context.recent_games:[];
   const rushReliability=Number(player.rush_reliability_score||0);
   const recReliability=Number(player.receiving_reliability_score||0);
-  const dateText=player.game_date?new Date(player.game_date+"T12:00:00Z").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",timeZone:"UTC"}):"Date pending";
+  const dateText=player.game_start?new Date(player.game_start).toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/New_York"})+" ET":player.game_date?new Date(player.game_date+"T12:00:00Z").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",timeZone:"UTC"}):"Date pending";
   const asOf=new Date(payload.generated_at).toLocaleString();
 
   detail.innerHTML=`

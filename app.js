@@ -5,8 +5,8 @@ const setHTML=(id,value)=>{const el=$(id); if(el) el.innerHTML=value;};
 const valueOf=id=>{const el=$(id); return el ? el.value : "";};
 const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c]);
 const todayET=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"America/New_York",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
-const isPastGame=x=>Boolean(x.game_date && x.game_date<todayET());
-const gameLabel=x=>x.game_date?new Date(x.game_date+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"})+(isPastGame(x)?" • game date passed":""):"Game date pending";
+const isPastGame=x=>Boolean(x.game_started)||(x.game_start?new Date(x.game_start)<=new Date():Boolean(x.game_date && x.game_date<todayET()));
+const gameLabel=x=>x.game_start?new Date(x.game_start).toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/New_York"})+" ET"+(isPastGame(x)?" • started":""):x.game_date?new Date(x.game_date+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"})+(isPastGame(x)?" • date passed":""):"Game date pending";
 const selectablePlayers=()=>payload.players.filter(x=>!isPastGame(x));
 
 function initials(name=""){

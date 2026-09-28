@@ -208,7 +208,10 @@ def main() -> None:
 
     history_path = SITE_DATA_DIR / "history" / f"{payload['season']}_week_{int(payload['week']):02d}.json"
     if history_path.exists():
-        history_path.write_text(json.dumps(payload, indent=2))
+        # Historical grades must use the pregame snapshot, even when this
+        # calibration step runs again after a game has started.
+        from scripts.build_predictions import archive_prediction
+        archive_prediction(payload, history_path)
 
     report = {
         "coverage": 0.80,
