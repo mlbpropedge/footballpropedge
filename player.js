@@ -1,4 +1,5 @@
 const detail=document.getElementById("playerDetail");
+const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c]);
 
 function initials(name=""){
   const parts=String(name).replace(/[^A-Za-z' .-]/g," ").trim().split(/\s+/).filter(Boolean);
@@ -33,11 +34,13 @@ async function loadPlayer(){
   const games=Array.isArray(context.recent_games)?context.recent_games:[];
   const rushReliability=Number(player.rush_reliability_score||0);
   const recReliability=Number(player.receiving_reliability_score||0);
+  const dateText=player.game_date?new Date(player.game_date+"T12:00:00Z").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",timeZone:"UTC"}):"Date pending";
+  const asOf=new Date(payload.generated_at).toLocaleString();
 
   detail.innerHTML=`
     <section class="player-hero">
-      <div class="player-identity"><span class="avatar player-avatar">${initials(player.player)}</span><div><p class="eyebrow">WEEK ${player.week} PLAYER BREAKDOWN</p><h1>${player.player}</h1><p>${player.position} • ${player.team} vs ${player.opponent}</p></div></div>
-      <div class="player-status"><span>2026 data only</span><strong>${context.games_played??0} games tracked</strong></div>
+      <div class="player-identity"><span class="avatar player-avatar">${initials(player.player)}</span><div><p class="eyebrow">WEEK ${Number(player.week)} PLAYER BREAKDOWN</p><h1>${escapeHTML(player.player)}</h1><p>${escapeHTML(player.position)} • ${escapeHTML(player.team)} vs ${escapeHTML(player.opponent)} • ${dateText}</p></div></div>
+      <div class="player-status"><span>Model run ${asOf}</span><strong>${context.games_played??0} games tracked in 2026</strong></div>
     </section>
     <section class="player-metrics-grid">
       ${metric("Rushing",Number(player.rushing_yards||0).toFixed(1),"projected yards","rush-metric")}

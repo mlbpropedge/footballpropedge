@@ -161,6 +161,7 @@ main{padding-top:8px;padding-bottom:42px}
 .stat span{color:#7f93aa;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .stat strong{display:block;margin-top:8px;font-size:26px;letter-spacing:-.03em}
 .stat small{color:#6f839a;font-size:12px}
+.freshness{margin:16px 0 25px;padding:14px 17px;border-radius:13px;border:1px solid rgba(255,200,90,.45);background:rgba(255,200,90,.08);color:#ffe0a1;font-size:13px;line-height:1.5}
 
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:0 0 14px}
 .section-head h2{margin:0;font-size:27px;letter-spacing:-.035em}
@@ -207,6 +208,10 @@ main{padding-top:8px;padding-bottom:42px}
 }
 .projection{font-size:34px;font-weight:950;letter-spacing:-.045em;margin:19px 0 10px}
 .projection small{font-size:12px;color:#8296ac;font-weight:750;letter-spacing:0}
+.prediction-range{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:-2px 0 9px;padding:8px 10px;border:1px solid #20344b;border-radius:10px;background:#0b1622}
+.prediction-range span{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8196ac}
+.prediction-range strong{font-size:13px;color:#dce8f5;white-space:nowrap}
+.game-date{font-size:11px;color:#9bb0c7;margin:0 0 9px}
 .edge-row{display:flex;justify-content:space-between;align-items:center;margin:2px 0 10px;padding:9px 10px;border-radius:10px;background:#0d1926;border:1px solid #20344b}.edge-label{color:#8196ac;font-size:10px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.edge-score{font-size:18px;letter-spacing:-.03em;color:#f5f8fc}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px}
 .chip{
@@ -233,6 +238,14 @@ main{padding-top:8px;padding-bottom:42px}
   padding:11px 13px;font-size:13px;outline:none;
 }
 .search-wrap input{padding-left:38px}
+.board-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:6px 0 12px;color:#91a8bd;font-size:12px}
+.board-toolbar label{display:flex;align-items:center;gap:7px;cursor:pointer}
+.board-toolbar input{accent-color:var(--cyan);width:16px;height:16px}
+.board-toolbar input:disabled{cursor:not-allowed;opacity:.5}
+.board-game-date{display:block;color:#91a8bd;margin-top:2px;font-size:10px}
+.load-more{display:block;margin:18px auto 4px;padding:11px 21px;border:1px solid #36536d;border-radius:11px;background:#112538;color:#d8f2ff;font-weight:800;cursor:pointer}
+.load-more:hover{background:#183851}
+.load-more[hidden]{display:none}
 .controls input:focus,.controls select:focus{border-color:#3b8eaa;box-shadow:0 0 0 3px rgba(59,215,255,.06)}
 
 .table-wrap{
@@ -435,6 +448,7 @@ tbody tr[data-href]{cursor:pointer}tbody tr[data-href]:focus{outline:2px solid v
 .board-stat span,.board-usage small{display:block;color:#6d849a;font-size:9px;text-transform:uppercase;letter-spacing:.07em}.board-stat strong{font-size:15px}.board-stat small{color:#63798f;font-size:9px}.board-usage span{display:inline-block;margin-right:5px;padding:4px 6px;border-radius:999px;background:#122235;color:#91a6ba;font-size:9px}.board-usage small{margin-top:5px}.board-open{color:var(--cyan);font-size:11px;font-weight:850;text-align:right}.board-open b{font-size:16px}
 @media(max-width:800px){.board-row{grid-template-columns:minmax(190px,1.5fr) repeat(3,.55fr)}.board-usage,.board-open{display:none}}
 @media(max-width:650px){.board-list{gap:10px}.board-row{grid-template-columns:repeat(3,1fr);padding:14px}.board-player{grid-column:1/-1;padding-bottom:11px;border-bottom:1px solid #1d3043}.board-stat{padding-top:3px}.board-stat strong{display:block;margin-top:3px;font-size:18px}.board-stat small{display:none}}
+@media(max-width:650px){.board-toolbar{align-items:flex-start}.board-toolbar label{max-width:130px;line-height:1.3}.prediction-range strong{font-size:12px}}
 
 .responsible-use{max-width:1132px;margin:8px auto 20px;padding:16px 18px;display:flex;gap:13px;align-items:flex-start;border:1px solid rgba(255,200,90,.28);border-radius:15px;background:linear-gradient(135deg,rgba(255,200,90,.075),rgba(255,111,179,.025)),#0b1520}
 .responsible-icon{flex:0 0 auto;width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:rgba(255,200,90,.12);border:1px solid rgba(255,200,90,.3);color:var(--gold);font-weight:950}

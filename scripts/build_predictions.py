@@ -4,6 +4,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
+from zoneinfo import ZoneInfo
 
 import joblib
 import pandas as pd
@@ -111,6 +112,52 @@ def next_week_context(
             home_game[str(away)] = 0.0
             home_game[str(home)] = 1.0
     return next_week, opponent, home_game
+
+
+def scheduled_game_dates(schedules: pd.DataFrame, season: int, week: int) -> dict[str, str]:
+    """Use the scheduled Eastern game date for each team, without guessing kickoff time."""
+    games = schedules[(schedules["season"] == season) & (schedules["week"] == week)]
+    if "game_type" in games.columns:
+        games = games[games["game_type"].astype(str).eq("REG")]
+    dates = {}
+    for _, game in games.iterrows():
+        date = pd.to_datetime(game.get("gameday"), errors="coerce")
+        if pd.isna(date):
+            continue
+        for team in (game.get("home_team"), game.get("away_team")):
+            if pd.notna(team):
+                dates[str(team)] = date.strftime("%Y-%m-%d")
+    return dates
+
+
+def archive_prediction(payload: dict, path: Path, today=None) -> bool:
+    """Freeze a week's grading snapshot once its first game day has arrived."""
+    today = today or datetime.now(ZoneInfo("America/New_York")).date()
+    dates = [row.get("game_date") for row in payload["players"] if row.get("game_date")]
+    if path.exists() and dates and min(dates) <= today.isoformat():
+        return False
+    path.write_text(json.dumps(payload, indent=2))
+    return True
+
+
+def preserve_played_games(rows: list[dict], season: int, week: int, path: Path,
+                          today=None) -> list[dict]:
+    """Keep pregame projections for finished dates during in-week refreshes."""
+    today = today or datetime.now(ZoneInfo("America/New_York")).date()
+    past = {r["team"] for r in rows if r.get("game_date", "") < today.isoformat()}
+    if not past:
+        return rows
+    if not path.exists():
+        raise ValueError("No pregame snapshot exists for played games; refusing to publish.")
+    previous = json.loads(path.read_text())
+    if previous.get("season") != season or previous.get("week") != week:
+        raise ValueError("Previous snapshot belongs to another slate.")
+    dates_by_team = {r["team"]: r["game_date"] for r in rows}
+    kept = [dict(r, game_date=dates_by_team[r["team"]]) for r in previous["players"]
+            if r["team"] in past]
+    if {r["team"] for r in kept} != past:
+        raise ValueError("Pregame snapshot does not cover all played games.")
+    return [r for r in rows if r["team"] not in past] + kept
 
 
 def attach_matchup_features(
@@ -474,6 +521,9 @@ def main():
     projection_week, opponents, home_games = next_week_context(
         schedules, CURRENT_SEASON, completed_week
     )
+    game_dates = scheduled_game_dates(schedules, CURRENT_SEASON, projection_week)
+    if set(opponents) != set(game_dates):
+        raise ValueError("Schedule matchup/date coverage is incomplete; refusing to publish.")
 
     training = make_training_frame(stats)
     bundle = fit_models(training)
@@ -508,6 +558,7 @@ def main():
                 "player": str(r["player_display_name"]),
                 "team": str(r["recent_team"]),
                 "opponent": str(r["opponent"]),
+                "game_date": game_dates[str(r["recent_team"])],
                 "position": str(r["position"]),
                 "week": int(r["projection_week"]),
                 "rushing_yards": round(float(r["projected_rushing_yards"]), 1),
@@ -543,9 +594,16 @@ def main():
     history_dir = SITE_DATA_DIR / "history"
     history_dir.mkdir(parents=True, exist_ok=True)
     history_path = history_dir / f"{CURRENT_SEASON}_week_{projection_week:02d}.json"
+    rows = preserve_played_games(rows, CURRENT_SEASON, projection_week, history_path)
+    payload["players"] = rows
+
+    if not rows or len({r["player_id"] for r in rows}) != len(rows):
+        raise ValueError("Empty or duplicate-player projection slate; refusing to publish.")
+    if any(r["team"] not in opponents or opponents[r["team"]] != r["opponent"] for r in rows):
+        raise ValueError("Prediction matchup does not match the schedule; refusing to publish.")
 
     (SITE_DATA_DIR / "predictions.json").write_text(json.dumps(payload, indent=2))
-    history_path.write_text(json.dumps(payload, indent=2))
+    archive_prediction(payload, history_path)
     (SITE_DATA_DIR / "model_metrics.json").write_text(
         json.dumps(bundle.metrics, indent=2)
     )

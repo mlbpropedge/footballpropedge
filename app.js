@@ -1,8 +1,13 @@
-let payload={players:[]}, metrics={}, performance={}, sortKey="rushing_yards";
+let payload={players:[]}, metrics={}, performance={}, sortKey="rushing_yards", visibleRows=36;
 const $=id=>document.getElementById(id);
 const setText=(id,value)=>{const el=$(id); if(el) el.textContent=value;};
 const setHTML=(id,value)=>{const el=$(id); if(el) el.innerHTML=value;};
 const valueOf=id=>{const el=$(id); return el ? el.value : "";};
+const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c]);
+const todayET=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"America/New_York",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+const isPastGame=x=>Boolean(x.game_date && x.game_date<todayET());
+const gameLabel=x=>x.game_date?new Date(x.game_date+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"})+(isPastGame(x)?" • game date passed":""):"Game date pending";
+const selectablePlayers=()=>payload.players.filter(x=>!isPastGame(x));
 
 function initials(name=""){
   const cleaned=String(name).replace(/[^A-Za-z' .-]/g," ").trim();
@@ -78,18 +83,22 @@ function bestCard(x,i,type){
         <div><span>2026 games</span><strong>${context.games_played??0}</strong></div>
       </div>`;
 
-  return `<article class="prediction-card ${type}" data-player-id="${x.player_id}">
+  const range=isRush?x.rushing_range_80:isRec?x.receiving_range_80:null;
+  const rangeHTML=Array.isArray(range)&&range.length===2?`<div class="prediction-range"><span>80% model range</span><strong>${Number(range[0]).toFixed(1)}–${Number(range[1]).toFixed(1)} yds</strong></div>`:"";
+  return `<article class="prediction-card ${type}" data-player-id="${escapeHTML(x.player_id)}">
     <div class="card-top">
       <div class="player-line">
         ${avatar(x,type)}
         <div class="player-copy">
-          <h3><a class="player-name-link" href="${playerUrl(x)}">${x.player}</a></h3>
-          <div class="meta">${x.position} • ${x.team} vs ${x.opponent}</div>
+          <h3><a class="player-name-link" href="${playerUrl(x)}">${escapeHTML(x.player)}</a></h3>
+          <div class="meta">${escapeHTML(x.position)} • ${escapeHTML(x.team)} vs ${escapeHTML(x.opponent)}</div>
         </div>
       </div>
       <div class="rank">#${i+1}</div>
     </div>
     <div class="projection">${value}</div>
+    ${rangeHTML}
+    <div class="game-date">${gameLabel(x)}</div>
     <div class="edge-row" title="Ranking score; not a probability"><span class="edge-label">Edge Score</span><strong class="edge-score">${edge.toFixed(1)}</strong></div>
     <div class="chip-row">${chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>
     <button class="expand-btn" type="button" aria-expanded="false"><span>Quick look</span><b>＋</b></button>
@@ -124,6 +133,20 @@ function setup(){
   setText("navWeek",payload.week);
   setText("count",payload.players.length);
   setText("updated","Updated "+new Date(payload.generated_at).toLocaleString());
+  const ageHours=(Date.now()-new Date(payload.generated_at).getTime())/3600000;
+  const freshness=$("freshness");
+  if(freshness && ageHours>36){
+    freshness.hidden=false;
+    freshness.textContent=`Last model run was ${Math.floor(ageHours/24)} day(s) ago. Check current player availability and game status before using these estimates.`;
+  }
+  const upcoming=$("upcomingOnly");
+  if(upcoming){
+    upcoming.disabled=!payload.players.some(x=>x.game_date);
+    upcoming.parentElement.title=upcoming.disabled?"Game dates will be available after the next model refresh.":"Hide games from earlier dates";
+    upcoming.addEventListener("change",()=>{visibleRows=36;render();});
+  }
+  const more=$("loadMore");
+  more?.addEventListener("click",()=>{visibleRows+=36;render();});
 
   const teamSelect=$("team");
   if(teamSelect){
@@ -137,7 +160,7 @@ function setup(){
     if(!el) return;
     el.addEventListener(id==="search"?"input":"change",()=>{
       if(id==="metric") sortKey=valueOf("metric") || "rushing_yards";
-      render();
+      visibleRows=36;render();
     });
   });
 
@@ -167,23 +190,25 @@ function setup(){
 }
 
 function renderBest(){
-  const rb=[...payload.players]
+  const available=selectablePlayers();
+  const rb=[...available]
     .filter(x=>x.position==="RB")
-    .sort((a,b)=>Number(b.rush_rank_score??b.rush_edge_score??0)-Number(a.rush_rank_score??a.rush_edge_score??0))
+    .sort((a,b)=>Number(b.rushing_yards||0)-Number(a.rushing_yards||0))
     .slice(0,6);
 
-  const wr=[...payload.players]
+  const wr=[...available]
     .filter(x=>["WR","TE"].includes(x.position))
-    .sort((a,b)=>Number(b.receiving_rank_score??b.receiving_edge_score??0)-Number(a.receiving_rank_score??a.receiving_edge_score??0))
+    .sort((a,b)=>Number(b.receiving_yards||0)-Number(a.receiving_yards||0))
     .slice(0,6);
 
-  const td=[...payload.players]
-    .sort((a,b)=>Number(b.td_edge_score||0)-Number(a.td_edge_score||0))
+  const td=[...available]
+    .sort((a,b)=>Number(b.td_probability||0)-Number(a.td_probability||0))
     .slice(0,6);
 
-  setHTML("rbCards",rb.map((x,i)=>bestCard(x,i,"rush")).join(""));
-  setHTML("wrCards",wr.map((x,i)=>bestCard(x,i,"receive")).join(""));
-  setHTML("tdCards",td.map((x,i)=>bestCard(x,i,"touchdown")).join(""));
+  const empty='<div class="results-empty">This week’s games have passed. The next slate will appear after the model refresh.</div>';
+  setHTML("rbCards",rb.map((x,i)=>bestCard(x,i,"rush")).join("")||empty);
+  setHTML("wrCards",wr.map((x,i)=>bestCard(x,i,"receive")).join("")||empty);
+  setHTML("tdCards",td.map((x,i)=>bestCard(x,i,"touchdown")).join("")||empty);
 }
 
 function render(){
@@ -192,21 +217,22 @@ function render(){
   const team=valueOf("team");
 
   let rows=payload.players.filter(x=>
-    (!q||`${x.player} ${x.team}`.toLowerCase().includes(q)) &&
+    (!q||`${x.player} ${x.team} ${x.opponent}`.toLowerCase().includes(q)) &&
     (!pos||x.position===pos) &&
-    (!team||x.team===team)
+    (!team||x.team===team) &&
+    (!$("upcomingOnly")?.checked||!isPastGame(x))
   );
 
   rows.sort((a,b)=>Number(b[sortKey]||0)-Number(a[sortKey]||0));
 
-  const html=rows.map(x=>{
+  const html=rows.slice(0,visibleRows).map(x=>{
     const rush=Number(x.rushing_yards||0);
     const rec=Number(x.receiving_yards||0);
     const td=Number(x.td_probability||0);
-    return `<a class="board-row" href="${playerUrl(x)}" aria-label="View ${x.player} details">
+    return `<a class="board-row" href="${playerUrl(x)}" aria-label="View ${escapeHTML(x.player)} details">
       <div class="board-player">
         ${avatar(x,"table-avatar","table-avatar")}
-        <div><strong>${x.player}</strong><span>${x.position} • ${x.team} vs ${x.opponent}</span></div>
+        <div><strong>${escapeHTML(x.player)}</strong><span>${escapeHTML(x.position)} • ${escapeHTML(x.team)} vs ${escapeHTML(x.opponent)}<small class="board-game-date">${gameLabel(x)}</small></span></div>
       </div>
       <div class="board-stat"><span>Rush</span><strong>${rush.toFixed(1)}</strong><small>yards</small></div>
       <div class="board-stat"><span>Receiving</span><strong>${rec.toFixed(1)}</strong><small>yards</small></div>
@@ -217,7 +243,9 @@ function render(){
   }).join("") || `<div class="results-empty"><strong>No players match these filters.</strong><p>Try clearing one of the filters above.</p></div>`;
 
   setHTML("rows",html);
-  setText("count",rows.length);
+  setText("boardCount",`${Math.min(visibleRows,rows.length)} of ${rows.length} players shown`);
+  const more=$("loadMore");
+  if(more) more.hidden=rows.length<=visibleRows;
 }
 
 function renderResults(){
@@ -302,6 +330,6 @@ function renderMetrics(){
 
 load().catch(e=>{
   console.error("Football Prop Edge render error:",e);
-  setHTML("rows",`<tr><td colspan="7">Prediction data is temporarily unavailable. ${e.message}</td></tr>`);
+  setHTML("rows",`<div class="results-empty"><strong>Predictions are temporarily unavailable.</strong><p>Please try again in a few minutes.</p></div>`);
   setText("updated","Data load error");
 });

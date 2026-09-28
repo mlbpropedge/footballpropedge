@@ -2,7 +2,10 @@ name: Update NFL projections
 on:
   workflow_dispatch:
   schedule:
-    - cron: "20 11 * 9-12,1 2-4"
+    # Refresh every day in season, including Saturday, Sunday and Monday.
+    - cron: "20 11 * 9-12,1 *"
+    # A second pregame Sunday refresh catches late upstream roster/stat changes.
+    - cron: "20 15 * 9-12,1 0"
   push:
     branches: [main]
     paths:
@@ -29,6 +32,8 @@ jobs:
       - run: python scripts/build_predictions.py
       - run: python scripts/add_prediction_ranges.py
       - run: pytest -q
+      - name: Check published slate
+        run: python scripts/check_publication.py
       - name: Commit refreshed outputs
         run: |
           git config user.name "football-prop-edge-bot"
