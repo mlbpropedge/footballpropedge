@@ -1,13 +1,90 @@
 {
-  "graded_predictions": 243,
-  "graded_weeks": 1,
+  "graded_predictions": 496,
+  "graded_weeks": 2,
   "weeks": [
-    2
+    2,
+    3
   ],
-  "rushing_mae": 18.59,
-  "receiving_mae": 20.36,
-  "td_brier": 0.1469,
+  "rushing_mae": 18.53,
+  "receiving_mae": 20.21,
+  "td_brier": 0.1675,
   "weekly_results": [
+    {
+      "season": 2026,
+      "week": 3,
+      "graded_players": 253,
+      "rushing_mae": 18.48,
+      "receiving_mae": 20.07,
+      "td_brier": 0.1881,
+      "sample_predictions": [
+        {
+          "player": "Derrick Henry",
+          "position": "RB",
+          "team": "BAL",
+          "projected_rushing_yards": 90.4,
+          "actual_rushing_yards": 89.0,
+          "projected_receiving_yards": 13.7,
+          "actual_receiving_yards": 0.0,
+          "td_probability": 55.5,
+          "actual_td": true
+        },
+        {
+          "player": "Kenneth Walker III",
+          "position": "RB",
+          "team": "KC",
+          "projected_rushing_yards": 85.7,
+          "actual_rushing_yards": 70.0,
+          "projected_receiving_yards": 25.9,
+          "actual_receiving_yards": 3.0,
+          "td_probability": 55.2,
+          "actual_td": true
+        },
+        {
+          "player": "Chris Olave",
+          "position": "WR",
+          "team": "NO",
+          "projected_rushing_yards": 0.0,
+          "actual_rushing_yards": 0.0,
+          "projected_receiving_yards": 73.7,
+          "actual_receiving_yards": 107.0,
+          "td_probability": 45.3,
+          "actual_td": false
+        },
+        {
+          "player": "Amon-Ra St. Brown",
+          "position": "WR",
+          "team": "DET",
+          "projected_rushing_yards": 0.0,
+          "actual_rushing_yards": 0.0,
+          "projected_receiving_yards": 73.6,
+          "actual_receiving_yards": 19.0,
+          "td_probability": 35.9,
+          "actual_td": true
+        },
+        {
+          "player": "Jaxon Smith-Njigba",
+          "position": "WR",
+          "team": "SEA",
+          "projected_rushing_yards": 0.0,
+          "actual_rushing_yards": 0.0,
+          "projected_receiving_yards": 70.7,
+          "actual_receiving_yards": 128.0,
+          "td_probability": 39.3,
+          "actual_td": true
+        },
+        {
+          "player": "James Cook",
+          "position": "RB",
+          "team": "BUF",
+          "projected_rushing_yards": 70.3,
+          "actual_rushing_yards": 154.0,
+          "projected_receiving_yards": 11.1,
+          "actual_receiving_yards": 0.0,
+          "td_probability": 41.0,
+          "actual_td": true
+        }
+      ]
+    },
     {
       "season": 2026,
       "week": 2,
