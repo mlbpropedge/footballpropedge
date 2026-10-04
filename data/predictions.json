@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "week": 4,
-  "generated_at": "2026-10-03T15:11:55.077391+00:00",
+  "generated_at": "2026-10-04T15:51:29.969310+00:00",
   "source": "nflverse",
   "players": [
     {
@@ -669,80 +669,6 @@
       "receiving_reliability_score": 59.1,
       "rush_rank_score": 81.5,
       "receiving_rank_score": 60.2
-    },
-    {
-      "player_id": "00-0036223",
-      "player": "Jonathan Taylor",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "RB",
-      "week": 4,
-      "rushing_yards": 60.9,
-      "receiving_yards": 15.8,
-      "td_probability": 53.3,
-      "recent_carries": 22.0,
-      "recent_carries_5": 20.2,
-      "recent_targets": 3.7,
-      "recent_targets_5": 3.8,
-      "recent_rush_yards": 86.0,
-      "recent_rec_yards": 22.3,
-      "rush_edge_score": 76.9,
-      "receiving_edge_score": 72.3,
-      "td_edge_score": 88.6,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 5,
-      "opp_rec_def_rank": 23,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 86.0,
-        "season_receiving_avg": 22.3,
-        "season_carries_avg": 22.0,
-        "season_targets_avg": 3.7,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 98.0,
-            "receiving_yards": 23.0,
-            "carries": 19.0,
-            "targets": 4.0,
-            "touchdowns": 2
-          },
-          {
-            "week": 2,
-            "rushing_yards": 92.0,
-            "receiving_yards": 40.0,
-            "carries": 24.0,
-            "targets": 4.0,
-            "touchdowns": 2
-          },
-          {
-            "week": 3,
-            "rushing_yards": 68.0,
-            "receiving_yards": 4.0,
-            "carries": 23.0,
-            "targets": 3.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        37.9,
-        108.1
-      ],
-      "receiving_range_80": [
-        2.3,
-        42.9
-      ],
-      "rush_reliability_score": 71.9,
-      "receiving_reliability_score": 43.4,
-      "rush_rank_score": 75.7,
-      "receiving_rank_score": 65.1
     },
     {
       "player_id": "00-0039361",
@@ -1633,80 +1559,6 @@
       "receiving_rank_score": 52.2
     },
     {
-      "player_id": "00-0040242",
-      "player": "Jacory Croskey-Merritt",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "RB",
-      "week": 4,
-      "rushing_yards": 45.5,
-      "receiving_yards": 5.4,
-      "td_probability": 39.8,
-      "recent_carries": 15.7,
-      "recent_carries_5": 14.2,
-      "recent_targets": 1.0,
-      "recent_targets_5": 0.6,
-      "recent_rush_yards": 47.3,
-      "recent_rec_yards": 1.7,
-      "rush_edge_score": 90.1,
-      "receiving_edge_score": 42.0,
-      "td_edge_score": 88.0,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 27,
-      "opp_rec_def_rank": 20,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 47.3,
-        "season_receiving_avg": 1.7,
-        "season_carries_avg": 15.7,
-        "season_targets_avg": 1.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 63.0,
-            "receiving_yards": -7.0,
-            "carries": 16.0,
-            "targets": 1.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 43.0,
-            "receiving_yards": 5.0,
-            "carries": 12.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 36.0,
-            "receiving_yards": 7.0,
-            "carries": 19.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        22.5,
-        92.7
-      ],
-      "receiving_range_80": [
-        0.0,
-        32.5
-      ],
-      "rush_reliability_score": 62.9,
-      "receiving_reliability_score": 21.0,
-      "rush_rank_score": 83.3,
-      "receiving_rank_score": 36.8
-    },
-    {
       "player_id": "00-0037525",
       "player": "Jordan Mason",
       "team": "MIN",
@@ -2421,72 +2273,6 @@
       "receiving_reliability_score": 37.8,
       "rush_rank_score": 80.6,
       "receiving_rank_score": 29.8
-    },
-    {
-      "player_id": "00-0039910",
-      "player": "Jayden Daniels",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "QB",
-      "week": 4,
-      "rushing_yards": 33.3,
-      "receiving_yards": 0.0,
-      "td_probability": 27.9,
-      "recent_carries": 5.3,
-      "recent_carries_5": 6.8,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.0,
-      "recent_rush_yards": 38.7,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 83.8,
-      "receiving_edge_score": 42.4,
-      "td_edge_score": 74.1,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 23,
-      "opp_rec_def_rank": 1,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 50.0,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 6.0,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 31.0,
-            "receiving_yards": 0.0,
-            "carries": 5.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 69.0,
-            "receiving_yards": 0.0,
-            "carries": 7.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        19.3,
-        60.4
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.1
-      ],
-      "rush_reliability_score": 65.5,
-      "receiving_reliability_score": 41.3,
-      "rush_rank_score": 79.2,
-      "receiving_rank_score": 42.1
     },
     {
       "player_id": "00-0041512",
@@ -3483,80 +3269,6 @@
       "receiving_reliability_score": 41.3,
       "rush_rank_score": 75.6,
       "receiving_rank_score": 35.1
-    },
-    {
-      "player_id": "00-0037256",
-      "player": "Rachaad White",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "RB",
-      "week": 4,
-      "rushing_yards": 23.7,
-      "receiving_yards": 12.6,
-      "td_probability": 25.5,
-      "recent_carries": 7.3,
-      "recent_carries_5": 6.2,
-      "recent_targets": 3.0,
-      "recent_targets_5": 2.6,
-      "recent_rush_yards": 33.3,
-      "recent_rec_yards": 17.0,
-      "rush_edge_score": 83.8,
-      "receiving_edge_score": 62.4,
-      "td_edge_score": 76.7,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 27,
-      "opp_rec_def_rank": 20,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 33.3,
-        "season_receiving_avg": 17.0,
-        "season_carries_avg": 7.3,
-        "season_targets_avg": 3.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 22.0,
-            "receiving_yards": 5.0,
-            "carries": 7.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 43.0,
-            "receiving_yards": 40.0,
-            "carries": 7.0,
-            "targets": 6.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 35.0,
-            "receiving_yards": 6.0,
-            "carries": 8.0,
-            "targets": 1.0,
-            "touchdowns": 1
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.7,
-        70.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        39.7
-      ],
-      "rush_reliability_score": 29.6,
-      "receiving_reliability_score": 29.6,
-      "rush_rank_score": 70.2,
-      "receiving_rank_score": 54.2
     },
     {
       "player_id": "00-0036389",
@@ -4827,72 +4539,6 @@
       "receiving_rank_score": 45.7
     },
     {
-      "player_id": "00-0041096",
-      "player": "Kaytron Allen",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "RB",
-      "week": 4,
-      "rushing_yards": 16.0,
-      "receiving_yards": 0.0,
-      "td_probability": 15.9,
-      "recent_carries": 4.5,
-      "recent_carries_5": 4.5,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.0,
-      "recent_rush_yards": 20.0,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 83.1,
-      "receiving_edge_score": 42.4,
-      "td_edge_score": 58.5,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 27,
-      "opp_rec_def_rank": 20,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 20.0,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 4.5,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 16.0,
-            "receiving_yards": 0.0,
-            "carries": 4.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 24.0,
-            "receiving_yards": 0.0,
-            "carries": 5.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        63.2
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.1
-      ],
-      "rush_reliability_score": 35.0,
-      "receiving_reliability_score": 41.3,
-      "rush_rank_score": 71.1,
-      "receiving_rank_score": 42.1
-    },
-    {
       "player_id": "00-0039299",
       "player": "George Holani",
       "team": "SEA",
@@ -6021,72 +5667,6 @@
       "receiving_rank_score": 38.5
     },
     {
-      "player_id": "00-0032268",
-      "player": "Marcus Mariota",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "QB",
-      "week": 4,
-      "rushing_yards": 10.8,
-      "receiving_yards": 0.0,
-      "td_probability": 14.9,
-      "recent_carries": 2.3,
-      "recent_carries_5": 3.8,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.0,
-      "recent_rush_yards": 4.3,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 71.8,
-      "receiving_edge_score": 42.4,
-      "td_edge_score": 45.9,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 23,
-      "opp_rec_def_rank": 1,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 7.0,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 3.0,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 2,
-            "rushing_yards": 3.0,
-            "receiving_yards": 0.0,
-            "carries": 1.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 11.0,
-            "receiving_yards": 0.0,
-            "carries": 5.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        37.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.1
-      ],
-      "rush_reliability_score": 21.2,
-      "receiving_reliability_score": 41.3,
-      "rush_rank_score": 59.1,
-      "receiving_rank_score": 42.1
-    },
-    {
       "player_id": "00-0034975",
       "player": "Justice Hill",
       "team": "BAL",
@@ -6811,64 +6391,6 @@
       "receiving_rank_score": 34.7
     },
     {
-      "player_id": "00-0041132",
-      "player": "Deion Burks",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 7.5,
-      "receiving_yards": 0.0,
-      "td_probability": 10.4,
-      "recent_carries": 2.0,
-      "recent_carries_5": 2.0,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.0,
-      "recent_rush_yards": 14.0,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 61.3,
-      "receiving_edge_score": 44.5,
-      "td_edge_score": 36.4,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 10,
-      "opp_rec_def_rank": 29,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 1,
-        "season_rushing_avg": 14.0,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 2.0,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 2,
-            "rushing_yards": 14.0,
-            "receiving_yards": 0.0,
-            "carries": 2.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        34.6
-      ],
-      "receiving_range_80": [
-        0.0,
-        46.5
-      ],
-      "rush_reliability_score": 35.0,
-      "receiving_reliability_score": 35.0,
-      "rush_rank_score": 54.7,
-      "receiving_rank_score": 42.1
-    },
-    {
       "player_id": "00-0035719",
       "player": "Deebo Samuel Sr.",
       "team": "SF",
@@ -7207,80 +6729,6 @@
       "receiving_rank_score": 41.2
     },
     {
-      "player_id": "00-0035710",
-      "player": "Daniel Jones",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "QB",
-      "week": 4,
-      "rushing_yards": 6.3,
-      "receiving_yards": 0.0,
-      "td_probability": 10.6,
-      "recent_carries": 2.3,
-      "recent_carries_5": 1.8,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.0,
-      "recent_rush_yards": 6.3,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 55.5,
-      "receiving_edge_score": 44.5,
-      "td_edge_score": 33.9,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 20,
-      "opp_rec_def_rank": 1,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 6.3,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 2.3,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 4.0,
-            "receiving_yards": 0.0,
-            "carries": 1.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 10.0,
-            "receiving_yards": 0.0,
-            "carries": 3.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 5.0,
-            "receiving_yards": 0.0,
-            "carries": 3.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        33.4
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.1
-      ],
-      "rush_reliability_score": 25.3,
-      "receiving_reliability_score": 41.3,
-      "rush_rank_score": 48.0,
-      "receiving_rank_score": 43.7
-    },
-    {
       "player_id": "00-0026498",
       "player": "Matthew Stafford",
       "team": "LA",
@@ -7551,80 +6999,6 @@
       "receiving_reliability_score": 28.4,
       "rush_rank_score": 63.3,
       "receiving_rank_score": 35.2
-    },
-    {
-      "player_id": "00-0041125",
-      "player": "Seth McGowan",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "RB",
-      "week": 4,
-      "rushing_yards": 3.8,
-      "receiving_yards": 0.0,
-      "td_probability": 10.1,
-      "recent_carries": 2.0,
-      "recent_carries_5": 2.0,
-      "recent_targets": 0.3,
-      "recent_targets_5": 0.3,
-      "recent_rush_yards": 4.7,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 59.9,
-      "receiving_edge_score": 46.1,
-      "td_edge_score": 36.5,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 5,
-      "opp_rec_def_rank": 23,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 4.7,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 2.0,
-        "season_targets_avg": 0.3,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 2.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 14.0,
-            "receiving_yards": 0.0,
-            "carries": 4.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        51.0
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.1
-      ],
-      "rush_reliability_score": 35.0,
-      "receiving_reliability_score": 41.3,
-      "rush_rank_score": 53.7,
-      "receiving_rank_score": 44.9
     },
     {
       "player_id": "00-0039880",
@@ -9867,80 +9241,6 @@
       "receiving_rank_score": 77.0
     },
     {
-      "player_id": "00-0038997",
-      "player": "Josh Downs",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 51.1,
-      "td_probability": 27.5,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.2,
-      "recent_targets": 8.0,
-      "recent_targets_5": 6.6,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 62.0,
-      "rush_edge_score": 35.8,
-      "receiving_edge_score": 89.7,
-      "td_edge_score": 74.3,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 10,
-      "opp_rec_def_rank": 29,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 62.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 8.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 37.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 72.0,
-            "carries": 0.0,
-            "targets": 9.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 77.0,
-            "carries": 0.0,
-            "targets": 11.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        25.2,
-        97.6
-      ],
-      "rush_reliability_score": 34.3,
-      "receiving_reliability_score": 61.9,
-      "rush_rank_score": 35.4,
-      "receiving_rank_score": 82.8
-    },
-    {
       "player_id": "00-0035676",
       "player": "A.J. Brown",
       "team": "NE",
@@ -10219,80 +9519,6 @@
       "receiving_reliability_score": 66.7,
       "rush_rank_score": 44.2,
       "receiving_rank_score": 81.1
-    },
-    {
-      "player_id": "00-0035659",
-      "player": "Terry McLaurin",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 46.7,
-      "td_probability": 30.7,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 7.3,
-      "recent_targets_5": 6.6,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 47.0,
-      "rush_edge_score": 55.2,
-      "receiving_edge_score": 87.9,
-      "td_edge_score": 80.7,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 22,
-      "opp_rec_def_rank": 24,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 47.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 7.3,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 14.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 50.0,
-            "carries": 0.0,
-            "targets": 9.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 77.0,
-            "carries": 0.0,
-            "targets": 9.0,
-            "touchdowns": 1
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        20.8,
-        93.2
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 62.7,
-      "rush_rank_score": 51.7,
-      "receiving_rank_score": 81.6
     },
     {
       "player_id": "00-0030506",
@@ -11109,72 +10335,6 @@
       "receiving_rank_score": 63.8
     },
     {
-      "player_id": "00-0037664",
-      "player": "Alec Pierce",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 41.8,
-      "td_probability": 26.7,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 4.7,
-      "recent_targets_5": 4.6,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 68.0,
-      "rush_edge_score": 39.4,
-      "receiving_edge_score": 86.3,
-      "td_edge_score": 69.6,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 10,
-      "opp_rec_def_rank": 29,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 36.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 3.5,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 61.0,
-            "carries": 0.0,
-            "targets": 6.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 11.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        15.9,
-        88.3
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 61.7,
-      "rush_rank_score": 39.9,
-      "receiving_rank_score": 80.1
-    },
-    {
       "player_id": "00-0034827",
       "player": "DJ Moore",
       "team": "BUF",
@@ -11469,80 +10629,6 @@
       "receiving_reliability_score": 58.7,
       "rush_rank_score": 53.5,
       "receiving_rank_score": 68.8
-    },
-    {
-      "player_id": "00-0031588",
-      "player": "Stefon Diggs",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 40.7,
-      "td_probability": 28.7,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 7.3,
-      "recent_targets_5": 6.2,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 45.0,
-      "rush_edge_score": 55.2,
-      "receiving_edge_score": 84.7,
-      "td_edge_score": 78.6,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 22,
-      "opp_rec_def_rank": 24,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 45.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 7.3,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 55.0,
-            "carries": 0.0,
-            "targets": 9.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 47.0,
-            "carries": 0.0,
-            "targets": 6.0,
-            "touchdowns": 2
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 33.0,
-            "carries": 0.0,
-            "targets": 7.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        14.8,
-        87.2
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 55.2,
-      "rush_rank_score": 51.7,
-      "receiving_rank_score": 77.3
     },
     {
       "player_id": "00-0040129",
@@ -12129,80 +11215,6 @@
       "receiving_rank_score": 69.8
     },
     {
-      "player_id": "00-0030279",
-      "player": "Keenan Allen",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 37.2,
-      "td_probability": 26.3,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 6.7,
-      "recent_targets_5": 8.2,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 33.3,
-      "rush_edge_score": 39.4,
-      "receiving_edge_score": 85.0,
-      "td_edge_score": 70.8,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 10,
-      "opp_rec_def_rank": 29,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 33.3,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 6.7,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 32.0,
-            "carries": 0.0,
-            "targets": 6.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 5.0,
-            "carries": 0.0,
-            "targets": 5.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 63.0,
-            "carries": 0.0,
-            "targets": 9.0,
-            "touchdowns": 1
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        11.3,
-        83.7
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 51.4,
-      "rush_rank_score": 39.9,
-      "receiving_rank_score": 76.6
-    },
-    {
       "player_id": "00-0037261",
       "player": "Khalil Shakir",
       "team": "BUF",
@@ -12275,80 +11287,6 @@
       "receiving_reliability_score": 46.4,
       "rush_rank_score": 48.7,
       "receiving_rank_score": 59.1
-    },
-    {
-      "player_id": "00-0040128",
-      "player": "Tyler Warren",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "TE",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 35.7,
-      "td_probability": 23.6,
-      "recent_carries": 0.7,
-      "recent_carries_5": 0.4,
-      "recent_targets": 7.3,
-      "recent_targets_5": 7.0,
-      "recent_rush_yards": 1.7,
-      "recent_rec_yards": 29.7,
-      "rush_edge_score": 42.3,
-      "receiving_edge_score": 87.8,
-      "td_edge_score": 70.1,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 26,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 1.7,
-        "season_receiving_avg": 29.7,
-        "season_carries_avg": 0.7,
-        "season_targets_avg": 7.3,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 13.0,
-            "carries": 0.0,
-            "targets": 5.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 3.0,
-            "receiving_yards": 21.0,
-            "carries": 1.0,
-            "targets": 7.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 3,
-            "rushing_yards": 2.0,
-            "receiving_yards": 55.0,
-            "carries": 1.0,
-            "targets": 10.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        16.7,
-        72.3
-      ],
-      "rush_reliability_score": 30.8,
-      "receiving_reliability_score": 64.8,
-      "rush_rank_score": 39.4,
-      "receiving_rank_score": 82.0
     },
     {
       "player_id": "00-0039919",
@@ -13799,80 +12737,6 @@
       "receiving_rank_score": 58.8
     },
     {
-      "player_id": "00-0041040",
-      "player": "Antonio Williams",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 28.5,
-      "td_probability": 19.6,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 3.7,
-      "recent_targets_5": 3.7,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 34.3,
-      "rush_edge_score": 55.2,
-      "receiving_edge_score": 77.5,
-      "td_edge_score": 62.1,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 22,
-      "opp_rec_def_rank": 24,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 34.3,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 3.7,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 64.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 24.0,
-            "carries": 0.0,
-            "targets": 3.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 15.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        2.6,
-        75.0
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 45.0,
-      "rush_rank_score": 51.7,
-      "receiving_rank_score": 69.4
-    },
-    {
       "player_id": "00-0039410",
       "player": "Ryan Flournoy",
       "team": "DAL",
@@ -14521,64 +13385,6 @@
       "receiving_reliability_score": 36.7,
       "rush_rank_score": 51.2,
       "receiving_rank_score": 64.9
-    },
-    {
-      "player_id": "00-0037809",
-      "player": "Chig Okonkwo",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "TE",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 24.1,
-      "td_probability": 21.1,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 5.0,
-      "recent_targets_5": 5.8,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 24.3,
-      "rush_edge_score": 55.2,
-      "receiving_edge_score": 76.8,
-      "td_edge_score": 65.4,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 28,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 1,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 16.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 3.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 16.0,
-            "carries": 0.0,
-            "targets": 3.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        5.1,
-        60.7
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 45.2,
-      "rush_rank_score": 51.7,
-      "receiving_rank_score": 68.9
     },
     {
       "player_id": "00-0032775",
@@ -17191,72 +15997,6 @@
       "receiving_rank_score": 54.4
     },
     {
-      "player_id": "00-0037742",
-      "player": "Treylon Burks",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 15.5,
-      "td_probability": 12.7,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 2.3,
-      "recent_targets_5": 2.8,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 8.3,
-      "rush_edge_score": 55.2,
-      "receiving_edge_score": 63.0,
-      "td_edge_score": 44.5,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 22,
-      "opp_rec_def_rank": 24,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 6.5,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 1.5,
-        "recent_games": [
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 13.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 1
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        0.0,
-        62.0
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 28.7,
-      "rush_rank_score": 51.7,
-      "receiving_rank_score": 54.4
-    },
-    {
       "player_id": "00-0040237",
       "player": "Tez Johnson",
       "team": "TB",
@@ -19607,80 +18347,6 @@
       "receiving_rank_score": 37.1
     },
     {
-      "player_id": "00-0032951",
-      "player": "Laquon Treadwell",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 10.7,
-      "td_probability": 1.0,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 1.7,
-      "recent_targets_5": 1.0,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 27.0,
-      "rush_edge_score": 39.4,
-      "receiving_edge_score": 48.5,
-      "td_edge_score": 22.9,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 10,
-      "opp_rec_def_rank": 29,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 27.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 1.7,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 61.0,
-            "carries": 0.0,
-            "targets": 3.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 20.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        0.0,
-        57.2
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 10.5,
-      "rush_rank_score": 39.9,
-      "receiving_rank_score": 39.0
-    },
-    {
       "player_id": "00-0038619",
       "player": "Andrei Iosivas",
       "team": "CIN",
@@ -19813,80 +18479,6 @@
       "receiving_rank_score": 45.0
     },
     {
-      "player_id": "00-0036626",
-      "player": "Dyami Brown",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "WR",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 10.1,
-      "td_probability": 10.7,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.2,
-      "recent_targets": 3.0,
-      "recent_targets_5": 2.0,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 7.0,
-      "rush_edge_score": 51.6,
-      "receiving_edge_score": 53.6,
-      "td_edge_score": 39.4,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 22,
-      "opp_rec_def_rank": 24,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 7.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 3.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 21.0,
-            "carries": 0.0,
-            "targets": 6.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        0.0,
-        56.6
-      ],
-      "rush_reliability_score": 34.3,
-      "receiving_reliability_score": 17.5,
-      "rush_rank_score": 47.3,
-      "receiving_rank_score": 44.6
-    },
-    {
       "player_id": "00-0032385",
       "player": "Sterling Shepard",
       "team": "NYJ",
@@ -19943,64 +18535,6 @@
       "receiving_reliability_score": 16.2,
       "rush_rank_score": 43.8,
       "receiving_rank_score": 34.5
-    },
-    {
-      "player_id": "00-0033217",
-      "player": "Mo Alie-Cox",
-      "team": "IND",
-      "opponent": "WAS",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "TE",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 10.0,
-      "td_probability": 11.3,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 2.7,
-      "recent_targets_5": 2.4,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 19.3,
-      "rush_edge_score": 39.4,
-      "receiving_edge_score": 60.7,
-      "td_edge_score": 39.6,
-      "rush_matchup_score": 7.7,
-      "receiving_matchup_score": 95.3,
-      "td_matchup_score": 64.5,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 26,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 1,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 16.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 1.0,
-        "recent_games": [
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 16.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        0.0,
-        46.6
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 30.6,
-      "rush_rank_score": 39.9,
-      "receiving_rank_score": 53.2
     },
     {
       "player_id": "00-0040187",
@@ -20135,72 +18669,6 @@
       "receiving_rank_score": 40.9
     },
     {
-      "player_id": "00-0039912",
-      "player": "Ben Sinnott",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "TE",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 9.7,
-      "td_probability": 1.0,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 1.3,
-      "recent_targets_5": 2.0,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 3.0,
-      "rush_edge_score": 55.2,
-      "receiving_edge_score": 49.0,
-      "td_edge_score": 30.0,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 28,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 3.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 1.0,
-        "recent_games": [
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 6.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        0.0,
-        46.3
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 22.7,
-      "rush_rank_score": 51.7,
-      "receiving_rank_score": 42.4
-    },
-    {
       "player_id": "00-0038488",
       "player": "Brady Russell",
       "team": "SEA",
@@ -20265,72 +18733,6 @@
       "receiving_reliability_score": 21.0,
       "rush_rank_score": 48.7,
       "receiving_rank_score": 38.4
-    },
-    {
-      "player_id": "00-0036628",
-      "player": "John Bates",
-      "team": "WAS",
-      "opponent": "IND",
-      "game_date": "2026-10-04",
-      "game_start": "2026-10-04T09:30:00-04:00",
-      "position": "TE",
-      "week": 4,
-      "rushing_yards": 0.0,
-      "receiving_yards": 9.5,
-      "td_probability": 11.4,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 2.0,
-      "recent_targets_5": 1.6,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 11.7,
-      "rush_edge_score": 55.2,
-      "receiving_edge_score": 53.2,
-      "td_edge_score": 39.6,
-      "rush_matchup_score": 86.4,
-      "receiving_matchup_score": 84.9,
-      "td_matchup_score": 82.8,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 28,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 11.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 2.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 13.0,
-            "carries": 0.0,
-            "targets": 3.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 9.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        27.1
-      ],
-      "receiving_range_80": [
-        0.0,
-        46.1
-      ],
-      "rush_reliability_score": 41.3,
-      "receiving_reliability_score": 26.2,
-      "rush_rank_score": 51.7,
-      "receiving_rank_score": 46.5
     },
     {
       "player_id": "00-0035208",
@@ -22023,6 +20425,80 @@
       "receiving_rank_score": 55.3
     },
     {
+      "player_id": "00-0036223",
+      "player": "Jonathan Taylor",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "RB",
+      "week": 4,
+      "rushing_yards": 61.2,
+      "receiving_yards": 16.5,
+      "td_probability": 44.5,
+      "recent_carries": 22.0,
+      "recent_carries_5": 20.2,
+      "recent_targets": 3.7,
+      "recent_targets_5": 3.8,
+      "recent_rush_yards": 86.0,
+      "recent_rec_yards": 22.3,
+      "rush_edge_score": 76.9,
+      "receiving_edge_score": 73.0,
+      "td_edge_score": 86.8,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 5,
+      "opp_rec_def_rank": 24,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 86.0,
+        "season_receiving_avg": 22.3,
+        "season_carries_avg": 22.0,
+        "season_targets_avg": 3.7,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 98.0,
+            "receiving_yards": 23.0,
+            "carries": 19.0,
+            "targets": 4.0,
+            "touchdowns": 2
+          },
+          {
+            "week": 2,
+            "rushing_yards": 92.0,
+            "receiving_yards": 40.0,
+            "carries": 24.0,
+            "targets": 4.0,
+            "touchdowns": 2
+          },
+          {
+            "week": 3,
+            "rushing_yards": 68.0,
+            "receiving_yards": 4.0,
+            "carries": 23.0,
+            "targets": 3.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        38.2,
+        108.4
+      ],
+      "receiving_range_80": [
+        3.0,
+        43.6
+      ],
+      "rush_reliability_score": 72.0,
+      "receiving_reliability_score": 45.8,
+      "rush_rank_score": 75.7,
+      "receiving_rank_score": 66.2
+    },
+    {
       "player_id": "00-0040784",
       "player": "Quinshon Judkins",
       "team": "CLE",
@@ -22095,6 +20571,80 @@
       "receiving_reliability_score": 28.4,
       "rush_rank_score": 82.0,
       "receiving_rank_score": 48.1
+    },
+    {
+      "player_id": "00-0040242",
+      "player": "Jacory Croskey-Merritt",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "RB",
+      "week": 4,
+      "rushing_yards": 49.5,
+      "receiving_yards": 5.5,
+      "td_probability": 41.8,
+      "recent_carries": 15.7,
+      "recent_carries_5": 14.2,
+      "recent_targets": 1.0,
+      "recent_targets_5": 0.6,
+      "recent_rush_yards": 47.3,
+      "recent_rec_yards": 1.7,
+      "rush_edge_score": 90.3,
+      "receiving_edge_score": 43.2,
+      "td_edge_score": 88.0,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 26,
+      "opp_rec_def_rank": 21,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 47.3,
+        "season_receiving_avg": 1.7,
+        "season_carries_avg": 15.7,
+        "season_targets_avg": 1.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 63.0,
+            "receiving_yards": -7.0,
+            "carries": 16.0,
+            "targets": 1.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 43.0,
+            "receiving_yards": 5.0,
+            "carries": 12.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 36.0,
+            "receiving_yards": 7.0,
+            "carries": 19.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        26.5,
+        96.7
+      ],
+      "receiving_range_80": [
+        0.0,
+        32.6
+      ],
+      "rush_reliability_score": 65.6,
+      "receiving_reliability_score": 21.0,
+      "rush_rank_score": 84.1,
+      "receiving_rank_score": 37.7
     },
     {
       "player_id": "00-0033537",
@@ -22171,6 +20721,146 @@
       "receiving_rank_score": 36.4
     },
     {
+      "player_id": "00-0039910",
+      "player": "Jayden Daniels",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "QB",
+      "week": 4,
+      "rushing_yards": 28.8,
+      "receiving_yards": 0.0,
+      "td_probability": 25.0,
+      "recent_carries": 5.3,
+      "recent_carries_5": 6.8,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.0,
+      "recent_rush_yards": 38.7,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 83.2,
+      "receiving_edge_score": 42.7,
+      "td_edge_score": 70.1,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 23,
+      "opp_rec_def_rank": 1,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 50.0,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 6.0,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 31.0,
+            "receiving_yards": 0.0,
+            "carries": 5.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 69.0,
+            "receiving_yards": 0.0,
+            "carries": 7.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        14.8,
+        55.9
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.1
+      ],
+      "rush_reliability_score": 61.4,
+      "receiving_reliability_score": 41.3,
+      "rush_rank_score": 77.8,
+      "receiving_rank_score": 42.4
+    },
+    {
+      "player_id": "00-0037256",
+      "player": "Rachaad White",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "RB",
+      "week": 4,
+      "rushing_yards": 28.5,
+      "receiving_yards": 11.6,
+      "td_probability": 28.9,
+      "recent_carries": 7.3,
+      "recent_carries_5": 6.2,
+      "recent_targets": 3.0,
+      "recent_targets_5": 2.6,
+      "recent_rush_yards": 33.3,
+      "recent_rec_yards": 17.0,
+      "rush_edge_score": 84.8,
+      "receiving_edge_score": 61.2,
+      "td_edge_score": 80.3,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 26,
+      "opp_rec_def_rank": 21,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 33.3,
+        "season_receiving_avg": 17.0,
+        "season_carries_avg": 7.3,
+        "season_targets_avg": 3.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 22.0,
+            "receiving_yards": 5.0,
+            "carries": 7.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 43.0,
+            "receiving_yards": 40.0,
+            "carries": 7.0,
+            "targets": 6.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 35.0,
+            "receiving_yards": 6.0,
+            "carries": 8.0,
+            "targets": 1.0,
+            "touchdowns": 1
+          }
+        ]
+      },
+      "rushing_range_80": [
+        5.5,
+        75.7
+      ],
+      "receiving_range_80": [
+        0.0,
+        38.7
+      ],
+      "rush_reliability_score": 40.4,
+      "receiving_reliability_score": 29.6,
+      "rush_rank_score": 73.7,
+      "receiving_rank_score": 53.3
+    },
+    {
       "player_id": "00-0036139",
       "player": "Rico Dowdle",
       "team": "PIT",
@@ -22235,6 +20925,72 @@
       "receiving_reliability_score": 32.8,
       "rush_rank_score": 70.4,
       "receiving_rank_score": 52.0
+    },
+    {
+      "player_id": "00-0041096",
+      "player": "Kaytron Allen",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "RB",
+      "week": 4,
+      "rushing_yards": 16.6,
+      "receiving_yards": 0.0,
+      "td_probability": 16.6,
+      "recent_carries": 4.5,
+      "recent_carries_5": 4.5,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.0,
+      "recent_rush_yards": 20.0,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 82.8,
+      "receiving_edge_score": 42.7,
+      "td_edge_score": 59.4,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 26,
+      "opp_rec_def_rank": 21,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 20.0,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 4.5,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 16.0,
+            "receiving_yards": 0.0,
+            "carries": 4.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 24.0,
+            "receiving_yards": 0.0,
+            "carries": 5.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        63.8
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.1
+      ],
+      "rush_reliability_score": 35.0,
+      "receiving_reliability_score": 41.3,
+      "rush_rank_score": 70.8,
+      "receiving_rank_score": 42.4
     },
     {
       "player_id": "00-0038794",
@@ -22493,6 +21249,130 @@
       "receiving_rank_score": 45.9
     },
     {
+      "player_id": "00-0032268",
+      "player": "Marcus Mariota",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "QB",
+      "week": 4,
+      "rushing_yards": 7.8,
+      "receiving_yards": 0.0,
+      "td_probability": 14.9,
+      "recent_carries": 2.3,
+      "recent_carries_5": 3.8,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.0,
+      "recent_rush_yards": 4.3,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 69.8,
+      "receiving_edge_score": 42.7,
+      "td_edge_score": 45.3,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 23,
+      "opp_rec_def_rank": 1,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 7.0,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 3.0,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 2,
+            "rushing_yards": 3.0,
+            "receiving_yards": 0.0,
+            "carries": 1.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 11.0,
+            "receiving_yards": 0.0,
+            "carries": 5.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        34.9
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.1
+      ],
+      "rush_reliability_score": 21.2,
+      "receiving_reliability_score": 41.3,
+      "rush_rank_score": 57.6,
+      "receiving_rank_score": 42.4
+    },
+    {
+      "player_id": "00-0041132",
+      "player": "Deion Burks",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 5.7,
+      "receiving_yards": 0.0,
+      "td_probability": 10.2,
+      "recent_carries": 2.0,
+      "recent_carries_5": 2.0,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.0,
+      "recent_rush_yards": 14.0,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 59.9,
+      "receiving_edge_score": 44.7,
+      "td_edge_score": 36.8,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 10,
+      "opp_rec_def_rank": 29,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 1,
+        "season_rushing_avg": 14.0,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 2.0,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 2,
+            "rushing_yards": 14.0,
+            "receiving_yards": 0.0,
+            "carries": 2.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        32.8
+      ],
+      "receiving_range_80": [
+        0.0,
+        46.5
+      ],
+      "rush_reliability_score": 35.0,
+      "receiving_reliability_score": 35.0,
+      "rush_rank_score": 53.7,
+      "receiving_rank_score": 42.3
+    },
+    {
       "player_id": "00-0040668",
       "player": "Shedeur Sanders",
       "team": "CLE",
@@ -22549,6 +21429,80 @@
       "receiving_reliability_score": 41.3,
       "rush_rank_score": 61.6,
       "receiving_rank_score": 36.4
+    },
+    {
+      "player_id": "00-0035710",
+      "player": "Daniel Jones",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "QB",
+      "week": 4,
+      "rushing_yards": 4.2,
+      "receiving_yards": 0.0,
+      "td_probability": 10.8,
+      "recent_carries": 2.3,
+      "recent_carries_5": 1.8,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.0,
+      "recent_rush_yards": 6.3,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 54.4,
+      "receiving_edge_score": 44.7,
+      "td_edge_score": 35.3,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 20,
+      "opp_rec_def_rank": 1,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 6.3,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 2.3,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 4.0,
+            "receiving_yards": 0.0,
+            "carries": 1.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 10.0,
+            "receiving_yards": 0.0,
+            "carries": 3.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 5.0,
+            "receiving_yards": 0.0,
+            "carries": 3.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        31.3
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.1
+      ],
+      "rush_reliability_score": 25.3,
+      "receiving_reliability_score": 41.3,
+      "rush_rank_score": 47.1,
+      "receiving_rank_score": 43.9
     },
     {
       "player_id": "00-0041547",
@@ -22699,6 +21653,80 @@
       "receiving_rank_score": 38.7
     },
     {
+      "player_id": "00-0041125",
+      "player": "Seth McGowan",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "RB",
+      "week": 4,
+      "rushing_yards": 1.8,
+      "receiving_yards": 0.0,
+      "td_probability": 8.6,
+      "recent_carries": 2.0,
+      "recent_carries_5": 2.0,
+      "recent_targets": 0.3,
+      "recent_targets_5": 0.3,
+      "recent_rush_yards": 4.7,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 58.7,
+      "receiving_edge_score": 46.5,
+      "td_edge_score": 35.6,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 5,
+      "opp_rec_def_rank": 24,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 4.7,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 2.0,
+        "season_targets_avg": 0.3,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 2.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 14.0,
+            "receiving_yards": 0.0,
+            "carries": 4.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        49.0
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.1
+      ],
+      "rush_reliability_score": 35.0,
+      "receiving_reliability_score": 41.3,
+      "rush_rank_score": 52.8,
+      "receiving_rank_score": 45.2
+    },
+    {
       "player_id": "00-0041037",
       "player": "Denzel Boston",
       "team": "CLE",
@@ -22771,6 +21799,154 @@
       "receiving_reliability_score": 70.1,
       "rush_rank_score": 49.9,
       "receiving_rank_score": 77.2
+    },
+    {
+      "player_id": "00-0038997",
+      "player": "Josh Downs",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 52.3,
+      "td_probability": 26.8,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.2,
+      "recent_targets": 8.0,
+      "recent_targets_5": 6.6,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 62.0,
+      "rush_edge_score": 35.3,
+      "receiving_edge_score": 89.7,
+      "td_edge_score": 73.4,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 10,
+      "opp_rec_def_rank": 29,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 62.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 8.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 37.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 72.0,
+            "carries": 0.0,
+            "targets": 9.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 77.0,
+            "carries": 0.0,
+            "targets": 11.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        26.4,
+        98.8
+      ],
+      "rush_reliability_score": 34.3,
+      "receiving_reliability_score": 62.6,
+      "rush_rank_score": 35.0,
+      "receiving_rank_score": 82.9
+    },
+    {
+      "player_id": "00-0035659",
+      "player": "Terry McLaurin",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 46.0,
+      "td_probability": 31.7,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 7.3,
+      "recent_targets_5": 6.6,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 47.0,
+      "rush_edge_score": 54.6,
+      "receiving_edge_score": 87.9,
+      "td_edge_score": 81.4,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 21,
+      "opp_rec_def_rank": 25,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 47.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 7.3,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 14.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 50.0,
+            "carries": 0.0,
+            "targets": 9.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 77.0,
+            "carries": 0.0,
+            "targets": 9.0,
+            "touchdowns": 1
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        20.1,
+        92.5
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 62.2,
+      "rush_rank_score": 51.3,
+      "receiving_rank_score": 81.5
     },
     {
       "player_id": "00-0040663",
@@ -22847,6 +22023,72 @@
       "receiving_rank_score": 74.3
     },
     {
+      "player_id": "00-0037664",
+      "player": "Alec Pierce",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 42.7,
+      "td_probability": 25.0,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 4.7,
+      "recent_targets_5": 4.6,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 68.0,
+      "rush_edge_score": 38.9,
+      "receiving_edge_score": 86.5,
+      "td_edge_score": 67.2,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 10,
+      "opp_rec_def_rank": 29,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 36.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 3.5,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 61.0,
+            "carries": 0.0,
+            "targets": 6.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 11.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        16.8,
+        89.2
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 62.5,
+      "rush_rank_score": 39.5,
+      "receiving_rank_score": 80.5
+    },
+    {
       "player_id": "00-0035640",
       "player": "DK Metcalf",
       "team": "PIT",
@@ -22919,6 +22161,228 @@
       "receiving_reliability_score": 58.8,
       "rush_rank_score": 49.4,
       "receiving_rank_score": 77.0
+    },
+    {
+      "player_id": "00-0031588",
+      "player": "Stefon Diggs",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 39.7,
+      "td_probability": 29.8,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 7.3,
+      "recent_targets_5": 6.2,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 45.0,
+      "rush_edge_score": 54.6,
+      "receiving_edge_score": 84.7,
+      "td_edge_score": 79.1,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 21,
+      "opp_rec_def_rank": 25,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 45.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 7.3,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 55.0,
+            "carries": 0.0,
+            "targets": 9.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 47.0,
+            "carries": 0.0,
+            "targets": 6.0,
+            "touchdowns": 2
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 33.0,
+            "carries": 0.0,
+            "targets": 7.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        13.8,
+        86.2
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 54.3,
+      "rush_rank_score": 51.3,
+      "receiving_rank_score": 77.1
+    },
+    {
+      "player_id": "00-0030279",
+      "player": "Keenan Allen",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 36.7,
+      "td_probability": 28.5,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 6.7,
+      "recent_targets_5": 8.2,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 33.3,
+      "rush_edge_score": 38.9,
+      "receiving_edge_score": 85.3,
+      "td_edge_score": 73.4,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 10,
+      "opp_rec_def_rank": 29,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 33.3,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 6.7,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 32.0,
+            "carries": 0.0,
+            "targets": 6.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 5.0,
+            "carries": 0.0,
+            "targets": 5.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 63.0,
+            "carries": 0.0,
+            "targets": 9.0,
+            "touchdowns": 1
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        10.8,
+        83.2
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 50.9,
+      "rush_rank_score": 39.5,
+      "receiving_rank_score": 76.7
+    },
+    {
+      "player_id": "00-0040128",
+      "player": "Tyler Warren",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "TE",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 34.2,
+      "td_probability": 23.4,
+      "recent_carries": 0.7,
+      "recent_carries_5": 0.4,
+      "recent_targets": 7.3,
+      "recent_targets_5": 7.0,
+      "recent_rush_yards": 1.7,
+      "recent_rec_yards": 29.7,
+      "rush_edge_score": 41.6,
+      "receiving_edge_score": 87.5,
+      "td_edge_score": 70.2,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 26,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 1.7,
+        "season_receiving_avg": 29.7,
+        "season_carries_avg": 0.7,
+        "season_targets_avg": 7.3,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 13.0,
+            "carries": 0.0,
+            "targets": 5.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 3.0,
+            "receiving_yards": 21.0,
+            "carries": 1.0,
+            "targets": 7.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 3,
+            "rushing_yards": 2.0,
+            "receiving_yards": 55.0,
+            "carries": 1.0,
+            "targets": 10.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        15.2,
+        70.8
+      ],
+      "rush_reliability_score": 30.8,
+      "receiving_reliability_score": 63.3,
+      "rush_rank_score": 38.9,
+      "receiving_rank_score": 81.5
     },
     {
       "player_id": "00-0036894",
@@ -22995,6 +22459,80 @@
       "receiving_rank_score": 70.2
     },
     {
+      "player_id": "00-0041040",
+      "player": "Antonio Williams",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 28.3,
+      "td_probability": 19.0,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 3.7,
+      "recent_targets_5": 3.7,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 34.3,
+      "rush_edge_score": 54.6,
+      "receiving_edge_score": 77.5,
+      "td_edge_score": 60.8,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 21,
+      "opp_rec_def_rank": 25,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 34.3,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 3.7,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 64.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 24.0,
+            "carries": 0.0,
+            "targets": 3.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 15.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        2.4,
+        74.8
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 44.6,
+      "rush_rank_score": 51.3,
+      "receiving_rank_score": 69.3
+    },
+    {
       "player_id": "00-0036252",
       "player": "Michael Pittman",
       "team": "PIT",
@@ -23059,6 +22597,64 @@
       "receiving_reliability_score": 38.5,
       "rush_rank_score": 49.4,
       "receiving_rank_score": 64.2
+    },
+    {
+      "player_id": "00-0037809",
+      "player": "Chig Okonkwo",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "TE",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 24.9,
+      "td_probability": 21.2,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 5.0,
+      "recent_targets_5": 5.8,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 24.3,
+      "rush_edge_score": 54.6,
+      "receiving_edge_score": 77.1,
+      "td_edge_score": 65.1,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 28,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 1,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 16.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 3.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 16.0,
+            "carries": 0.0,
+            "targets": 3.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        5.9,
+        61.5
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 46.8,
+      "rush_rank_score": 51.3,
+      "receiving_rank_score": 69.5
     },
     {
       "player_id": "00-0039739",
@@ -23341,6 +22937,72 @@
       "receiving_rank_score": 55.1
     },
     {
+      "player_id": "00-0037742",
+      "player": "Treylon Burks",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 14.3,
+      "td_probability": 11.6,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 2.3,
+      "recent_targets_5": 2.8,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 8.3,
+      "rush_edge_score": 54.6,
+      "receiving_edge_score": 61.8,
+      "td_edge_score": 42.0,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 21,
+      "opp_rec_def_rank": 25,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 6.5,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 1.5,
+        "recent_games": [
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 13.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 1
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        0.0,
+        60.8
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 28.7,
+      "rush_rank_score": 51.3,
+      "receiving_rank_score": 53.5
+    },
+    {
       "player_id": "00-0040782",
       "player": "Isaiah Bond",
       "team": "CLE",
@@ -23397,6 +23059,344 @@
       "receiving_reliability_score": 28.4,
       "rush_rank_score": 52.9,
       "receiving_rank_score": 41.9
+    },
+    {
+      "player_id": "00-0033217",
+      "player": "Mo Alie-Cox",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "TE",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 10.5,
+      "td_probability": 13.4,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 2.7,
+      "recent_targets_5": 2.4,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 19.3,
+      "rush_edge_score": 38.9,
+      "receiving_edge_score": 61.9,
+      "td_edge_score": 43.8,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 26,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 1,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 16.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 1.0,
+        "recent_games": [
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 16.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        0.0,
+        47.1
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 30.6,
+      "rush_rank_score": 39.5,
+      "receiving_rank_score": 54.1
+    },
+    {
+      "player_id": "00-0036626",
+      "player": "Dyami Brown",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 9.7,
+      "td_probability": 10.1,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.2,
+      "recent_targets": 3.0,
+      "recent_targets_5": 2.0,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 7.0,
+      "rush_edge_score": 51.0,
+      "receiving_edge_score": 53.4,
+      "td_edge_score": 38.8,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 21,
+      "opp_rec_def_rank": 25,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 7.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 3.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 21.0,
+            "carries": 0.0,
+            "targets": 6.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        0.0,
+        56.2
+      ],
+      "rush_reliability_score": 34.3,
+      "receiving_reliability_score": 17.5,
+      "rush_rank_score": 46.8,
+      "receiving_rank_score": 44.4
+    },
+    {
+      "player_id": "00-0039912",
+      "player": "Ben Sinnott",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "TE",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 8.8,
+      "td_probability": 1.0,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 1.3,
+      "recent_targets_5": 2.0,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 3.0,
+      "rush_edge_score": 54.6,
+      "receiving_edge_score": 48.9,
+      "td_edge_score": 29.7,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 28,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 3.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 1.0,
+        "recent_games": [
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 6.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        0.0,
+        45.4
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 22.7,
+      "rush_rank_score": 51.3,
+      "receiving_rank_score": 42.3
+    },
+    {
+      "player_id": "00-0032951",
+      "player": "Laquon Treadwell",
+      "team": "IND",
+      "opponent": "WAS",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "WR",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 8.8,
+      "td_probability": 1.0,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 1.7,
+      "recent_targets_5": 1.0,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 27.0,
+      "rush_edge_score": 38.9,
+      "receiving_edge_score": 46.1,
+      "td_edge_score": 22.5,
+      "rush_matchup_score": 7.7,
+      "receiving_matchup_score": 95.0,
+      "td_matchup_score": 63.6,
+      "opp_rush_def_rank": 10,
+      "opp_rec_def_rank": 29,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 27.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 1.7,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 61.0,
+            "carries": 0.0,
+            "targets": 3.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 20.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        0.0,
+        55.3
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 10.5,
+      "rush_rank_score": 39.5,
+      "receiving_rank_score": 37.2
+    },
+    {
+      "player_id": "00-0036628",
+      "player": "John Bates",
+      "team": "WAS",
+      "opponent": "IND",
+      "game_date": "2026-10-04",
+      "game_start": "2026-10-04T09:30:00-04:00",
+      "position": "TE",
+      "week": 4,
+      "rushing_yards": 0.0,
+      "receiving_yards": 8.7,
+      "td_probability": 12.9,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 2.0,
+      "recent_targets_5": 1.6,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 11.7,
+      "rush_edge_score": 54.6,
+      "receiving_edge_score": 52.6,
+      "td_edge_score": 42.6,
+      "rush_matchup_score": 86.4,
+      "receiving_matchup_score": 84.8,
+      "td_matchup_score": 82.1,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 28,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 11.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 2.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 13.0,
+            "carries": 0.0,
+            "targets": 3.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 9.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        0.0,
+        45.3
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 26.2,
+      "rush_rank_score": 51.3,
+      "receiving_rank_score": 46.0
     }
   ],
   "prediction_intervals": {
