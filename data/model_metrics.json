@@ -2,7 +2,7 @@
   "rushing": {
     "model": "hist_gradient_boosting",
     "role_filtered": true,
-    "training_samples": 12324,
+    "training_samples": 12417,
     "walk_forward": [
       {
         "season": 2024,
@@ -18,36 +18,36 @@
       },
       {
         "season": 2026,
-        "samples": 297,
-        "mae": 18.497,
-        "rmse": 26.591
+        "samples": 390,
+        "mae": 18.224,
+        "rmse": 26.651
       }
     ],
-    "cv_mae": 19.028,
-    "train_mae": 17.628,
+    "cv_mae": 18.937,
+    "train_mae": 17.986,
     "benchmark": {
-      "samples": 3894,
-      "model_mae": 19.237,
+      "samples": 3987,
+      "model_mae": 19.193,
       "baselines": {
-        "last_3": 21.255,
-        "last_5": 20.647,
-        "season_average": 21.274,
-        "workload": 20.951
+        "last_3": 21.162,
+        "last_5": 20.609,
+        "season_average": 21.188,
+        "workload": 20.885
       },
       "best_baseline": "last_5",
-      "best_baseline_mae": 20.647,
-      "model_improvement_yards": 1.41,
-      "model_improvement_pct": 6.83,
+      "best_baseline_mae": 20.609,
+      "model_improvement_yards": 1.416,
+      "model_improvement_pct": 6.87,
       "beats_best_baseline": true,
       "error_breakdown": {
         "by_position": {
           "QB": {
-            "samples": 1114,
-            "mae": 13.164
+            "samples": 1138,
+            "mae": 13.106
           },
           "RB": {
-            "samples": 2713,
-            "mae": 21.954
+            "samples": 2782,
+            "mae": 21.9
           },
           "WR": {
             "samples": 42,
@@ -56,24 +56,24 @@
         },
         "by_workload": {
           "low": {
-            "samples": 1283,
-            "mae": 11.941,
-            "avg_workload": 2.79
+            "samples": 1314,
+            "mae": 11.899,
+            "avg_workload": 2.8
           },
           "medium": {
-            "samples": 1118,
-            "mae": 17.086,
-            "avg_workload": 5.87
+            "samples": 1147,
+            "mae": 16.95,
+            "avg_workload": 5.86
           },
           "high": {
-            "samples": 827,
-            "mae": 25.029,
+            "samples": 845,
+            "mae": 25.169,
             "avg_workload": 11.06
           },
           "elite": {
-            "samples": 666,
-            "mae": 29.708,
-            "avg_workload": 17.65
+            "samples": 681,
+            "mae": 29.628,
+            "avg_workload": 17.67
           }
         }
       }
@@ -87,10 +87,10 @@
       ],
       "final_holdout": {
         "season": 2026,
-        "samples": 297,
-        "mae": 18.516
+        "samples": 390,
+        "mae": 18.25
       },
-      "default_holdout_mae": 18.497,
+      "default_holdout_mae": 18.224,
       "selected_candidate": 6,
       "selected_params": {
         "learning_rate": 0.05,
@@ -109,7 +109,7 @@
       "default_selection_mae": 18.867,
       "best_selection_mae": 18.827,
       "selection_gain_yards": 0.04,
-      "holdout_gain_yards": -0.019,
+      "holdout_gain_yards": -0.026,
       "deployed_tuned_params": false,
       "decision": "default parameters retained",
       "candidates": [
@@ -339,13 +339,13 @@
         }
       ]
     },
-    "overfit_ratio": 1.08,
+    "overfit_ratio": 1.05,
     "overfit_flag": false
   },
   "receiving": {
     "model": "hist_gradient_boosting",
     "role_filtered": true,
-    "training_samples": 26402,
+    "training_samples": 26591,
     "walk_forward": [
       {
         "season": 2024,
@@ -361,60 +361,60 @@
       },
       {
         "season": 2026,
-        "samples": 608,
-        "mae": 20.249,
-        "rmse": 29.122
+        "samples": 797,
+        "mae": 20.91,
+        "rmse": 30.113
       }
     ],
-    "cv_mae": 19.687,
-    "train_mae": 19.067,
+    "cv_mae": 19.907,
+    "train_mae": 19.132,
     "benchmark": {
-      "samples": 8096,
-      "model_mae": 19.47,
+      "samples": 8285,
+      "model_mae": 19.551,
       "baselines": {
-        "last_3": 21.925,
-        "last_5": 21.009,
-        "season_average": 21.509,
-        "workload": 21.911
+        "last_3": 21.994,
+        "last_5": 21.078,
+        "season_average": 21.58,
+        "workload": 21.957
       },
       "best_baseline": "last_5",
-      "best_baseline_mae": 21.009,
-      "model_improvement_yards": 1.539,
-      "model_improvement_pct": 7.32,
+      "best_baseline_mae": 21.078,
+      "model_improvement_yards": 1.527,
+      "model_improvement_pct": 7.24,
       "beats_best_baseline": true,
       "error_breakdown": {
         "by_position": {
           "FB": {
-            "samples": 37,
-            "mae": 9.67
+            "samples": 38,
+            "mae": 9.866
           },
           "RB": {
-            "samples": 1770,
-            "mae": 13.001
+            "samples": 1810,
+            "mae": 13.025
           },
           "TE": {
-            "samples": 2021,
-            "mae": 17.448
+            "samples": 2070,
+            "mae": 17.483
           },
           "WR": {
-            "samples": 4268,
-            "mae": 23.195
+            "samples": 4367,
+            "mae": 23.321
           }
         },
         "by_workload": {
           "low": {
-            "samples": 4520,
-            "mae": 15.094,
+            "samples": 4629,
+            "mae": 15.125,
             "avg_workload": 2.61
           },
           "medium": {
-            "samples": 2877,
-            "mae": 24.136,
+            "samples": 2942,
+            "mae": 24.295,
             "avg_workload": 5.8
           },
           "high": {
-            "samples": 692,
-            "mae": 28.584,
+            "samples": 707,
+            "mae": 28.725,
             "avg_workload": 9.84
           }
         }
@@ -429,10 +429,10 @@
       ],
       "final_holdout": {
         "season": 2026,
-        "samples": 608,
-        "mae": 20.291
+        "samples": 797,
+        "mae": 20.919
       },
-      "default_holdout_mae": 20.249,
+      "default_holdout_mae": 20.91,
       "selected_candidate": 4,
       "selected_params": {
         "learning_rate": 0.05,
@@ -451,7 +451,7 @@
       "default_selection_mae": 19.545,
       "best_selection_mae": 19.498,
       "selection_gain_yards": 0.047,
-      "holdout_gain_yards": -0.042,
+      "holdout_gain_yards": -0.009,
       "deployed_tuned_params": false,
       "decision": "default parameters retained",
       "candidates": [
@@ -681,13 +681,13 @@
         }
       ]
     },
-    "overfit_ratio": 1.03,
+    "overfit_ratio": 1.04,
     "overfit_flag": false
   },
   "touchdown": {
     "model": "hist_gradient_boosting",
     "role_filtered": true,
-    "training_samples": 26267,
+    "training_samples": 26463,
     "walk_forward": [
       {
         "season": 2024,
@@ -701,26 +701,26 @@
       },
       {
         "season": 2026,
-        "samples": 624,
-        "brier": 0.1778
+        "samples": 820,
+        "brier": 0.176
       }
     ],
-    "raw_cv_brier": 0.179,
-    "cv_brier": 0.1757,
+    "raw_cv_brier": 0.178,
+    "cv_brier": 0.175,
     "calibration": {
       "method": "time-aware linear probability scaling",
       "available": true,
       "leakage_safe": true,
-      "samples": 8150,
-      "evaluation_samples": 1630,
+      "samples": 8346,
+      "evaluation_samples": 1670,
       "base_rate": 0.2582,
-      "proposed_slope": 1.05,
+      "proposed_slope": 1.075,
       "deployed_slope": 1.0,
       "applied": false,
-      "raw_brier": 0.1757,
-      "calibrated_brier": 0.1759,
-      "improvement": -0.0002,
-      "improvement_pct": -0.11,
+      "raw_brier": 0.175,
+      "calibrated_brier": 0.1754,
+      "improvement": -0.0003,
+      "improvement_pct": -0.18,
       "improves_brier": false,
       "decision": "rejected; raw probabilities retained"
     }

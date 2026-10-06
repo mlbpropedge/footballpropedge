@@ -1,14 +1,91 @@
 {
-  "graded_predictions": 496,
-  "graded_weeks": 2,
+  "graded_predictions": 752,
+  "graded_weeks": 3,
   "weeks": [
     2,
-    3
+    3,
+    4
   ],
-  "rushing_mae": 18.53,
-  "receiving_mae": 20.21,
-  "td_brier": 0.1675,
+  "rushing_mae": 18.25,
+  "receiving_mae": 21.57,
+  "td_brier": 0.1724,
   "weekly_results": [
+    {
+      "season": 2026,
+      "week": 4,
+      "graded_players": 256,
+      "rushing_mae": 17.68,
+      "receiving_mae": 24.29,
+      "td_brier": 0.1821,
+      "sample_predictions": [
+        {
+          "player": "Bijan Robinson",
+          "position": "RB",
+          "team": "ATL",
+          "projected_rushing_yards": 81.1,
+          "actual_rushing_yards": 145.0,
+          "projected_receiving_yards": 28.4,
+          "actual_receiving_yards": 2.0,
+          "td_probability": 51.4,
+          "actual_td": true
+        },
+        {
+          "player": "Jahmyr Gibbs",
+          "position": "RB",
+          "team": "DET",
+          "projected_rushing_yards": 80.4,
+          "actual_rushing_yards": 46.0,
+          "projected_receiving_yards": 33.6,
+          "actual_receiving_yards": 31.0,
+          "td_probability": 53.4,
+          "actual_td": true
+        },
+        {
+          "player": "Derrick Henry",
+          "position": "RB",
+          "team": "BAL",
+          "projected_rushing_yards": 77.4,
+          "actual_rushing_yards": 73.0,
+          "projected_receiving_yards": 8.8,
+          "actual_receiving_yards": 6.0,
+          "td_probability": 58.4,
+          "actual_td": true
+        },
+        {
+          "player": "James Cook",
+          "position": "RB",
+          "team": "BUF",
+          "projected_rushing_yards": 75.9,
+          "actual_rushing_yards": 75.0,
+          "projected_receiving_yards": 8.3,
+          "actual_receiving_yards": 8.0,
+          "td_probability": 40.3,
+          "actual_td": true
+        },
+        {
+          "player": "Kenneth Walker III",
+          "position": "RB",
+          "team": "KC",
+          "projected_rushing_yards": 75.8,
+          "actual_rushing_yards": 177.0,
+          "projected_receiving_yards": 22.1,
+          "actual_receiving_yards": 2.0,
+          "td_probability": 58.2,
+          "actual_td": true
+        },
+        {
+          "player": "Jaxon Smith-Njigba",
+          "position": "WR",
+          "team": "SEA",
+          "projected_rushing_yards": 0.0,
+          "actual_rushing_yards": 0.0,
+          "projected_receiving_yards": 75.5,
+          "actual_receiving_yards": 76.0,
+          "td_probability": 46.8,
+          "actual_td": false
+        }
+      ]
+    },
     {
       "season": 2026,
       "week": 3,
