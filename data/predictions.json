@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "week": 5,
-  "generated_at": "2026-10-10T16:17:39.936935+00:00",
+  "generated_at": "2026-10-11T16:42:25.212152+00:00",
   "source": "nflverse",
   "players": [
     {
@@ -897,88 +897,6 @@
       "receiving_reliability_score": 32.8,
       "rush_rank_score": 83.4,
       "receiving_rank_score": 57.3
-    },
-    {
-      "player_id": "00-0040719",
-      "player": "Bhayshul Tuten",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "RB",
-      "week": 5,
-      "rushing_yards": 58.9,
-      "receiving_yards": 7.5,
-      "td_probability": 43.1,
-      "recent_carries": 15.0,
-      "recent_carries_5": 12.8,
-      "recent_targets": 2.0,
-      "recent_targets_5": 1.4,
-      "recent_rush_yards": 70.3,
-      "recent_rec_yards": 10.7,
-      "rush_edge_score": 86.7,
-      "receiving_edge_score": 39.8,
-      "td_edge_score": 85.1,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 25,
-      "opp_rec_def_rank": 12,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 69.2,
-        "season_receiving_avg": 13.5,
-        "season_carries_avg": 15.0,
-        "season_targets_avg": 1.8,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 66.0,
-            "receiving_yards": 22.0,
-            "carries": 15.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 65.0,
-            "receiving_yards": -3.0,
-            "carries": 13.0,
-            "targets": 2.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 3,
-            "rushing_yards": 73.0,
-            "receiving_yards": 17.0,
-            "carries": 15.0,
-            "targets": 2.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 4,
-            "rushing_yards": 73.0,
-            "receiving_yards": 18.0,
-            "carries": 17.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        36.0,
-        105.6
-      ],
-      "receiving_range_80": [
-        0.0,
-        35.2
-      ],
-      "rush_reliability_score": 68.4,
-      "receiving_reliability_score": 20.0,
-      "rush_rank_score": 82.1,
-      "receiving_rank_score": 34.8
     },
     {
       "player_id": "00-0040122",
@@ -2171,88 +2089,6 @@
       "receiving_rank_score": 51.6
     },
     {
-      "player_id": "00-0034844",
-      "player": "Saquon Barkley",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "RB",
-      "week": 5,
-      "rushing_yards": 37.1,
-      "receiving_yards": 4.8,
-      "td_probability": 22.1,
-      "recent_carries": 7.0,
-      "recent_carries_5": 12.4,
-      "recent_targets": 1.7,
-      "recent_targets_5": 2.6,
-      "recent_rush_yards": 33.0,
-      "recent_rec_yards": 3.7,
-      "rush_edge_score": 65.8,
-      "receiving_edge_score": 47.0,
-      "td_edge_score": 52.3,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 31,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 45.5,
-        "season_receiving_avg": 2.0,
-        "season_carries_avg": 9.0,
-        "season_targets_avg": 1.8,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 83.0,
-            "receiving_yards": -3.0,
-            "carries": 15.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 9.0,
-            "receiving_yards": 11.0,
-            "carries": 4.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 82.0,
-            "receiving_yards": -2.0,
-            "carries": 15.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 8.0,
-            "receiving_yards": 2.0,
-            "carries": 2.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        14.2,
-        83.8
-      ],
-      "receiving_range_80": [
-        0.0,
-        32.5
-      ],
-      "rush_reliability_score": 44.1,
-      "receiving_reliability_score": 22.9,
-      "rush_rank_score": 60.4,
-      "receiving_rank_score": 41.0
-    },
-    {
       "player_id": "00-0040734",
       "player": "TreVeyon Henderson",
       "team": "NE",
@@ -2869,88 +2705,6 @@
       "receiving_rank_score": 36.4
     },
     {
-      "player_id": "00-0038611",
-      "player": "Chris Rodriguez Jr.",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "RB",
-      "week": 5,
-      "rushing_yards": 27.8,
-      "receiving_yards": 0.0,
-      "td_probability": 33.8,
-      "recent_carries": 6.7,
-      "recent_carries_5": 8.4,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.2,
-      "recent_rush_yards": 28.3,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 81.2,
-      "receiving_edge_score": 31.5,
-      "td_edge_score": 76.9,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 25,
-      "opp_rec_def_rank": 12,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 27.0,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 6.5,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 23.0,
-            "receiving_yards": 0.0,
-            "carries": 6.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 13.0,
-            "receiving_yards": 0.0,
-            "carries": 6.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 37.0,
-            "receiving_yards": 0.0,
-            "carries": 8.0,
-            "targets": 0.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 4,
-            "rushing_yards": 35.0,
-            "receiving_yards": 0.0,
-            "carries": 6.0,
-            "targets": 0.0,
-            "touchdowns": 1
-          }
-        ]
-      },
-      "rushing_range_80": [
-        4.9,
-        74.5
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.7
-      ],
-      "rush_reliability_score": 38.7,
-      "receiving_reliability_score": 33.0,
-      "rush_rank_score": 70.6,
-      "receiving_rank_score": 31.9
-    },
-    {
       "player_id": "00-0033906",
       "player": "Alvin Kamara",
       "team": "NO",
@@ -3565,88 +3319,6 @@
       "receiving_reliability_score": 29.6,
       "rush_rank_score": 65.4,
       "receiving_rank_score": 43.1
-    },
-    {
-      "player_id": "00-0036389",
-      "player": "Jalen Hurts",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "QB",
-      "week": 5,
-      "rushing_yards": 23.7,
-      "receiving_yards": 0.0,
-      "td_probability": 18.0,
-      "recent_carries": 4.7,
-      "recent_carries_5": 5.2,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.0,
-      "recent_rush_yards": 19.7,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 68.2,
-      "receiving_edge_score": 44.8,
-      "td_edge_score": 46.5,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 20,
-      "opp_rec_def_rank": 1,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 26.2,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 5.2,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 46.0,
-            "receiving_yards": 0.0,
-            "carries": 7.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 16.0,
-            "receiving_yards": 0.0,
-            "carries": 5.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 25.0,
-            "receiving_yards": 0.0,
-            "carries": 4.0,
-            "targets": 0.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 4,
-            "rushing_yards": 18.0,
-            "receiving_yards": 0.0,
-            "carries": 5.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        9.8,
-        50.6
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.7
-      ],
-      "rush_reliability_score": 59.3,
-      "receiving_reliability_score": 40.0,
-      "rush_rank_score": 66.0,
-      "receiving_rank_score": 43.6
     },
     {
       "player_id": "00-0036139",
@@ -4633,88 +4305,6 @@
       "receiving_reliability_score": 36.5,
       "rush_rank_score": 72.8,
       "receiving_rank_score": 37.8
-    },
-    {
-      "player_id": "00-0038555",
-      "player": "Tank Bigsby",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "RB",
-      "week": 5,
-      "rushing_yards": 20.2,
-      "receiving_yards": 3.4,
-      "td_probability": 20.7,
-      "recent_carries": 9.0,
-      "recent_carries_5": 6.4,
-      "recent_targets": 1.3,
-      "recent_targets_5": 0.8,
-      "recent_rush_yards": 29.3,
-      "recent_rec_yards": 3.3,
-      "rush_edge_score": 63.4,
-      "receiving_edge_score": 41.9,
-      "td_edge_score": 51.1,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 31,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 22.8,
-        "season_receiving_avg": 2.5,
-        "season_carries_avg": 7.0,
-        "season_targets_avg": 1.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 3.0,
-            "receiving_yards": 0.0,
-            "carries": 1.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 33.0,
-            "receiving_yards": 5.0,
-            "carries": 13.0,
-            "targets": 2.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 5.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 55.0,
-            "receiving_yards": 0.0,
-            "carries": 14.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        66.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        31.1
-      ],
-      "rush_reliability_score": 20.8,
-      "receiving_reliability_score": 17.5,
-      "rush_rank_score": 52.8,
-      "receiving_rank_score": 35.8
     },
     {
       "player_id": "00-0040730",
@@ -6321,88 +5911,6 @@
       "receiving_rank_score": 46.9
     },
     {
-      "player_id": "00-0032104",
-      "player": "Ameer Abdullah",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "RB",
-      "week": 5,
-      "rushing_yards": 9.4,
-      "receiving_yards": 0.0,
-      "td_probability": 10.4,
-      "recent_carries": 2.0,
-      "recent_carries_5": 2.2,
-      "recent_targets": 0.7,
-      "recent_targets_5": 1.0,
-      "recent_rush_yards": 4.3,
-      "recent_rec_yards": 0.7,
-      "rush_edge_score": 73.2,
-      "receiving_edge_score": 31.3,
-      "td_edge_score": 37.7,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 25,
-      "opp_rec_def_rank": 12,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 11.2,
-        "season_receiving_avg": 0.5,
-        "season_carries_avg": 2.5,
-        "season_targets_avg": 0.8,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 32.0,
-            "receiving_yards": 0.0,
-            "carries": 4.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 11.0,
-            "receiving_yards": 2.0,
-            "carries": 3.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 2.0,
-            "receiving_yards": 0.0,
-            "carries": 3.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        56.1
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.7
-      ],
-      "rush_reliability_score": 31.8,
-      "receiving_reliability_score": 29.5,
-      "rush_rank_score": 62.9,
-      "receiving_rank_score": 30.9
-    },
-    {
       "player_id": "00-0033119",
       "player": "Jacoby Brissett",
       "team": "ARI",
@@ -6483,88 +5991,6 @@
       "receiving_reliability_score": 40.0,
       "rush_rank_score": 61.1,
       "receiving_rank_score": 44.0
-    },
-    {
-      "player_id": "00-0036971",
-      "player": "Trevor Lawrence",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "QB",
-      "week": 5,
-      "rushing_yards": 8.5,
-      "receiving_yards": 0.0,
-      "td_probability": 11.8,
-      "recent_carries": 3.0,
-      "recent_carries_5": 3.4,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.0,
-      "recent_rush_yards": 10.3,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 73.9,
-      "receiving_edge_score": 35.1,
-      "td_edge_score": 43.5,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 13,
-      "opp_rec_def_rank": 1,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 8.5,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 2.8,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 3.0,
-            "receiving_yards": 0.0,
-            "carries": 2.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 6.0,
-            "receiving_yards": 0.0,
-            "carries": 2.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 25.0,
-            "receiving_yards": 0.0,
-            "carries": 4.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 3.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        35.4
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.7
-      ],
-      "rush_reliability_score": 30.9,
-      "receiving_reliability_score": 40.0,
-      "rush_rank_score": 63.2,
-      "receiving_rank_score": 36.3
     },
     {
       "player_id": "00-0033106",
@@ -6993,88 +6419,6 @@
       "receiving_reliability_score": 39.0,
       "rush_rank_score": 55.8,
       "receiving_rank_score": 52.2
-    },
-    {
-      "player_id": "00-0039746",
-      "player": "Will Shipley",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "RB",
-      "week": 5,
-      "rushing_yards": 7.6,
-      "receiving_yards": 5.2,
-      "td_probability": 11.0,
-      "recent_carries": 4.3,
-      "recent_carries_5": 3.0,
-      "recent_targets": 1.7,
-      "recent_targets_5": 1.4,
-      "recent_rush_yards": 15.7,
-      "recent_rec_yards": 5.3,
-      "rush_edge_score": 56.3,
-      "receiving_edge_score": 50.1,
-      "td_edge_score": 32.8,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 31,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 12.8,
-        "season_receiving_avg": 6.0,
-        "season_carries_avg": 3.8,
-        "season_targets_avg": 1.5,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 4.0,
-            "receiving_yards": 8.0,
-            "carries": 2.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 24.0,
-            "receiving_yards": 5.0,
-            "carries": 7.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 11.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 23.0,
-            "receiving_yards": 0.0,
-            "carries": 6.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        54.3
-      ],
-      "receiving_range_80": [
-        0.0,
-        32.9
-      ],
-      "rush_reliability_score": 19.8,
-      "receiving_reliability_score": 27.5,
-      "rush_rank_score": 47.2,
-      "receiving_rank_score": 44.5
     },
     {
       "player_id": "00-0040466",
@@ -9395,88 +8739,6 @@
       "receiving_rank_score": 76.2
     },
     {
-      "player_id": "00-0038606",
-      "player": "Parker Washington",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 58.3,
-      "td_probability": 36.8,
-      "recent_carries": 0.3,
-      "recent_carries_5": 0.6,
-      "recent_targets": 6.7,
-      "recent_targets_5": 7.6,
-      "recent_rush_yards": 1.0,
-      "recent_rec_yards": 48.3,
-      "rush_edge_score": 53.2,
-      "receiving_edge_score": 81.3,
-      "td_edge_score": 79.8,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 18,
-      "opp_rec_def_rank": 20,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 0.8,
-        "season_receiving_avg": 57.0,
-        "season_carries_avg": 0.2,
-        "season_targets_avg": 6.5,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 83.0,
-            "carries": 0.0,
-            "targets": 6.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 98.0,
-            "carries": 0.0,
-            "targets": 12.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 40.0,
-            "carries": 0.0,
-            "targets": 5.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 4,
-            "rushing_yards": 3.0,
-            "receiving_yards": 7.0,
-            "carries": 1.0,
-            "targets": 3.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        32.1,
-        105.9
-      ],
-      "rush_reliability_score": 31.2,
-      "receiving_reliability_score": 68.4,
-      "rush_rank_score": 47.7,
-      "receiving_rank_score": 78.1
-    },
-    {
       "player_id": "00-0036900",
       "player": "Ja'Marr Chase",
       "team": "CIN",
@@ -9557,80 +8819,6 @@
       "receiving_reliability_score": 70.6,
       "rush_rank_score": 45.4,
       "receiving_rank_score": 83.0
-    },
-    {
-      "player_id": "00-0036912",
-      "player": "DeVonta Smith",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 57.3,
-      "td_probability": 30.3,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 9.0,
-      "recent_targets_5": 8.4,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 78.3,
-      "rush_edge_score": 39.2,
-      "receiving_edge_score": 93.7,
-      "td_edge_score": 66.7,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 29,
-      "opp_rec_def_rank": 32,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 3,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 78.3,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 9.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 53.0,
-            "carries": 0.0,
-            "targets": 6.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 117.0,
-            "carries": 0.0,
-            "targets": 13.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 65.0,
-            "carries": 0.0,
-            "targets": 8.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        31.1,
-        104.9
-      ],
-      "rush_reliability_score": 41.7,
-      "receiving_reliability_score": 69.6,
-      "rush_rank_score": 39.8,
-      "receiving_rank_score": 87.7
     },
     {
       "player_id": "00-0041438",
@@ -12817,88 +12005,6 @@
       "receiving_rank_score": 62.8
     },
     {
-      "player_id": "00-0034960",
-      "player": "Jakobi Meyers",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 35.2,
-      "td_probability": 25.9,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.2,
-      "recent_targets": 4.3,
-      "recent_targets_5": 3.8,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 41.7,
-      "rush_edge_score": 48.0,
-      "receiving_edge_score": 72.0,
-      "td_edge_score": 67.8,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 18,
-      "opp_rec_def_rank": 20,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 0.5,
-        "season_receiving_avg": 41.2,
-        "season_carries_avg": 0.2,
-        "season_targets_avg": 3.8,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 2.0,
-            "receiving_yards": 40.0,
-            "carries": 1.0,
-            "targets": 2.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 28.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 64.0,
-            "carries": 0.0,
-            "targets": 8.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 33.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        9.0,
-        82.8
-      ],
-      "rush_reliability_score": 34.7,
-      "receiving_reliability_score": 50.0,
-      "rush_rank_score": 44.7,
-      "receiving_rank_score": 66.5
-    },
-    {
       "player_id": "00-0039739",
       "player": "Roman Wilson",
       "team": "PIT",
@@ -12979,72 +12085,6 @@
       "receiving_reliability_score": 47.4,
       "rush_rank_score": 50.7,
       "receiving_rank_score": 72.8
-    },
-    {
-      "player_id": "00-0034351",
-      "player": "Dallas Goedert",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "TE",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 35.0,
-      "td_probability": 28.5,
-      "recent_carries": 0.3,
-      "recent_carries_5": 0.2,
-      "recent_targets": 4.7,
-      "recent_targets_5": 4.6,
-      "recent_rush_yards": 0.3,
-      "recent_rec_yards": 38.0,
-      "rush_edge_score": 43.2,
-      "receiving_edge_score": 84.4,
-      "td_edge_score": 60.6,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 32,
-      "opp_rec_def_rank": 5,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 40.5,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 3.5,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 77.0,
-            "carries": 0.0,
-            "targets": 5.0,
-            "touchdowns": 2
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 4.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        15.9,
-        71.5
-      ],
-      "rush_reliability_score": 38.2,
-      "receiving_reliability_score": 64.8,
-      "rush_rank_score": 42.0,
-      "receiving_rank_score": 79.5
     },
     {
       "player_id": "00-0038994",
@@ -13129,88 +12169,6 @@
       "receiving_rank_score": 65.1
     },
     {
-      "player_id": "00-0038393",
-      "player": "Dontayvion Wicks",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 33.9,
-      "td_probability": 22.3,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 5.3,
-      "recent_targets_5": 4.2,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 41.3,
-      "rush_edge_score": 39.2,
-      "receiving_edge_score": 81.0,
-      "td_edge_score": 50.5,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 29,
-      "opp_rec_def_rank": 32,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 49.2,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 5.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 73.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 74.0,
-            "carries": 0.0,
-            "targets": 6.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 32.0,
-            "carries": 0.0,
-            "targets": 5.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 18.0,
-            "carries": 0.0,
-            "targets": 5.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        7.7,
-        81.5
-      ],
-      "rush_reliability_score": 41.7,
-      "receiving_reliability_score": 43.7,
-      "rush_rank_score": 39.8,
-      "receiving_rank_score": 71.7
-    },
-    {
       "player_id": "00-0040669",
       "player": "Isaac TeSlaa",
       "team": "DET",
@@ -13291,88 +12249,6 @@
       "receiving_reliability_score": 35.7,
       "rush_rank_score": 47.7,
       "receiving_rank_score": 62.7
-    },
-    {
-      "player_id": "00-0038935",
-      "player": "Brenton Strange",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "TE",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 33.3,
-      "td_probability": 25.9,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 5.0,
-      "recent_targets_5": 4.6,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 48.0,
-      "rush_edge_score": 51.6,
-      "receiving_edge_score": 73.6,
-      "td_edge_score": 69.7,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 1,
-      "opp_rec_def_rank": 11,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 41.8,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 4.5,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 23.0,
-            "carries": 0.0,
-            "targets": 3.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 17.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 32.0,
-            "carries": 0.0,
-            "targets": 5.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 95.0,
-            "carries": 0.0,
-            "targets": 8.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        14.2,
-        69.8
-      ],
-      "rush_reliability_score": 41.7,
-      "receiving_reliability_score": 60.8,
-      "rush_rank_score": 49.1,
-      "receiving_rank_score": 70.4
     },
     {
       "player_id": "00-0040128",
@@ -14909,88 +13785,6 @@
       "receiving_rank_score": 69.0
     },
     {
-      "player_id": "00-0039893",
-      "player": "Brian Thomas Jr.",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 26.1,
-      "td_probability": 21.5,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 3.7,
-      "recent_targets_5": 3.2,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 21.7,
-      "rush_edge_score": 51.6,
-      "receiving_edge_score": 66.3,
-      "td_edge_score": 58.8,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 18,
-      "opp_rec_def_rank": 20,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 26.2,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 3.5,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 40.0,
-            "carries": 0.0,
-            "targets": 3.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 40.0,
-            "carries": 0.0,
-            "targets": 8.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 8.0,
-            "carries": 0.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 17.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 1
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        73.7
-      ],
-      "rush_reliability_score": 41.7,
-      "receiving_reliability_score": 33.3,
-      "rush_rank_score": 49.1,
-      "receiving_rank_score": 58.0
-    },
-    {
       "player_id": "00-0033090",
       "player": "Hunter Henry",
       "team": "NE",
@@ -15687,154 +14481,6 @@
       "receiving_reliability_score": 22.7,
       "rush_rank_score": 43.3,
       "receiving_rank_score": 42.2
-    },
-    {
-      "player_id": "00-0030061",
-      "player": "Zach Ertz",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "TE",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 23.6,
-      "td_probability": 18.0,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 2.7,
-      "recent_targets_5": 5.8,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 11.0,
-      "rush_edge_score": 39.2,
-      "receiving_edge_score": 64.4,
-      "td_edge_score": 34.8,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 32,
-      "opp_rec_def_rank": 5,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 2,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 11.0,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 3.0,
-        "recent_games": [
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 9.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 13.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        4.5,
-        60.1
-      ],
-      "rush_reliability_score": 41.7,
-      "receiving_reliability_score": 30.2,
-      "rush_rank_score": 39.8,
-      "receiving_rank_score": 55.9
-    },
-    {
-      "player_id": "00-0040867",
-      "player": "Makai Lemon",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 23.0,
-      "td_probability": 13.8,
-      "recent_carries": 0.3,
-      "recent_carries_5": 0.2,
-      "recent_targets": 3.7,
-      "recent_targets_5": 3.8,
-      "recent_rush_yards": -1.7,
-      "recent_rec_yards": 23.3,
-      "rush_edge_score": 44.1,
-      "receiving_edge_score": 76.9,
-      "td_edge_score": 39.8,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 29,
-      "opp_rec_def_rank": 32,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": -1.2,
-        "season_receiving_avg": 16.2,
-        "season_carries_avg": 0.2,
-        "season_targets_avg": 3.8,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": -5.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": -5.0,
-            "receiving_yards": 14.0,
-            "carries": 1.0,
-            "targets": 1.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 29.0,
-            "carries": 0.0,
-            "targets": 4.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 27.0,
-            "carries": 0.0,
-            "targets": 6.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        70.6
-      ],
-      "rush_reliability_score": 38.2,
-      "receiving_reliability_score": 34.1,
-      "rush_rank_score": 42.6,
-      "receiving_rank_score": 66.2
     },
     {
       "player_id": "00-0036407",
@@ -17341,88 +15987,6 @@
       "receiving_rank_score": 55.6
     },
     {
-      "player_id": "00-0040024",
-      "player": "Darius Cooper",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 17.7,
-      "td_probability": 11.8,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 3.3,
-      "recent_targets_5": 2.2,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 19.7,
-      "rush_edge_score": 39.2,
-      "receiving_edge_score": 64.4,
-      "td_edge_score": 26.3,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 29,
-      "opp_rec_def_rank": 32,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 14.8,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 2.5,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 26.0,
-            "carries": 0.0,
-            "targets": 3.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 33.0,
-            "carries": 0.0,
-            "targets": 7.0,
-            "touchdowns": 2
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        65.3
-      ],
-      "rush_reliability_score": 41.7,
-      "receiving_reliability_score": 17.5,
-      "rush_rank_score": 39.8,
-      "receiving_rank_score": 52.7
-    },
-    {
       "player_id": "00-0040590",
       "player": "Konata Mumpfield",
       "team": "LA",
@@ -18327,64 +16891,6 @@
       "receiving_reliability_score": 20.0,
       "rush_rank_score": 41.2,
       "receiving_rank_score": 44.0
-    },
-    {
-      "player_id": "00-0035662",
-      "player": "Marquise Brown",
-      "team": "PHI",
-      "opponent": "JAX",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 14.4,
-      "td_probability": 11.0,
-      "recent_carries": 0.7,
-      "recent_carries_5": 0.4,
-      "recent_targets": 3.0,
-      "recent_targets_5": 2.8,
-      "recent_rush_yards": 4.0,
-      "recent_rec_yards": 23.7,
-      "rush_edge_score": 42.0,
-      "receiving_edge_score": 68.6,
-      "td_edge_score": 29.4,
-      "rush_matchup_score": 8.8,
-      "receiving_matchup_score": 95.6,
-      "td_matchup_score": 6.6,
-      "opp_rush_def_rank": 29,
-      "opp_rec_def_rank": 32,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 1,
-        "season_rushing_avg": 12.0,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 2.0,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 2,
-            "rushing_yards": 12.0,
-            "receiving_yards": 0.0,
-            "carries": 2.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        62.0
-      ],
-      "rush_reliability_score": 31.2,
-      "receiving_reliability_score": 32.5,
-      "rush_rank_score": 39.3,
-      "receiving_rank_score": 59.6
     },
     {
       "player_id": "00-0038619",
@@ -20295,88 +18801,6 @@
       "receiving_reliability_score": 35.0,
       "rush_rank_score": 38.8,
       "receiving_rank_score": 54.2
-    },
-    {
-      "player_id": "00-0041100",
-      "player": "Josh Cameron",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "WR",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 10.6,
-      "td_probability": 1.0,
-      "recent_carries": 0.0,
-      "recent_carries_5": 0.0,
-      "recent_targets": 1.3,
-      "recent_targets_5": 1.5,
-      "recent_rush_yards": 0.0,
-      "recent_rec_yards": 18.0,
-      "rush_edge_score": 51.6,
-      "receiving_edge_score": 47.3,
-      "td_edge_score": 29.8,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 18,
-      "opp_rec_def_rank": 20,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 4,
-        "season_rushing_avg": 0.0,
-        "season_receiving_avg": 18.5,
-        "season_carries_avg": 0.0,
-        "season_targets_avg": 1.5,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": 0.0,
-            "receiving_yards": 20.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 2,
-            "rushing_yards": 0.0,
-            "receiving_yards": 0.0,
-            "carries": 0.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          },
-          {
-            "week": 3,
-            "rushing_yards": 0.0,
-            "receiving_yards": 12.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 1
-          },
-          {
-            "week": 4,
-            "rushing_yards": 0.0,
-            "receiving_yards": 42.0,
-            "carries": 0.0,
-            "targets": 2.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        58.2
-      ],
-      "rush_reliability_score": 41.7,
-      "receiving_reliability_score": 30.3,
-      "rush_rank_score": 49.1,
-      "receiving_rank_score": 43.0
     },
     {
       "player_id": "00-0041067",
@@ -22453,64 +20877,6 @@
       "receiving_rank_score": 38.1
     },
     {
-      "player_id": "00-0033319",
-      "player": "Nick Mullens",
-      "team": "JAX",
-      "opponent": "PHI",
-      "game_date": "2026-10-11",
-      "game_start": "2026-10-11T09:30:00-04:00",
-      "position": "QB",
-      "week": 5,
-      "rushing_yards": 0.0,
-      "receiving_yards": 0.0,
-      "td_probability": 9.2,
-      "recent_carries": 3.0,
-      "recent_carries_5": 3.0,
-      "recent_targets": 0.0,
-      "recent_targets_5": 0.0,
-      "recent_rush_yards": -2.3,
-      "recent_rec_yards": 0.0,
-      "rush_edge_score": 61.9,
-      "receiving_edge_score": 35.1,
-      "td_edge_score": 38.2,
-      "rush_matchup_score": 71.0,
-      "receiving_matchup_score": 47.2,
-      "td_matchup_score": 71.5,
-      "opp_rush_def_rank": 13,
-      "opp_rec_def_rank": 1,
-      "opp_def_rank_total": 32,
-      "season_context": {
-        "season": 2026,
-        "games_played": 1,
-        "season_rushing_avg": -3.0,
-        "season_receiving_avg": 0.0,
-        "season_carries_avg": 3.0,
-        "season_targets_avg": 0.0,
-        "recent_games": [
-          {
-            "week": 1,
-            "rushing_yards": -3.0,
-            "receiving_yards": 0.0,
-            "carries": 3.0,
-            "targets": 0.0,
-            "touchdowns": 0
-          }
-        ]
-      },
-      "rushing_range_80": [
-        0.0,
-        26.9
-      ],
-      "receiving_range_80": [
-        0.0,
-        27.7
-      ],
-      "rush_reliability_score": 41.7,
-      "receiving_reliability_score": 40.0,
-      "rush_rank_score": 56.8,
-      "receiving_rank_score": 36.3
-    },
-    {
       "player_id": "00-0029604",
       "player": "Kirk Cousins",
       "team": "LV",
@@ -22675,6 +21041,88 @@
       "receiving_rank_score": 49.4
     },
     {
+      "player_id": "00-0040719",
+      "player": "Bhayshul Tuten",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "RB",
+      "week": 5,
+      "rushing_yards": 55.5,
+      "receiving_yards": 8.1,
+      "td_probability": 43.6,
+      "recent_carries": 15.0,
+      "recent_carries_5": 12.8,
+      "recent_targets": 2.0,
+      "recent_targets_5": 1.4,
+      "recent_rush_yards": 70.3,
+      "recent_rec_yards": 10.7,
+      "rush_edge_score": 86.4,
+      "receiving_edge_score": 40.7,
+      "td_edge_score": 84.7,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 26,
+      "opp_rec_def_rank": 12,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 69.2,
+        "season_receiving_avg": 13.5,
+        "season_carries_avg": 15.0,
+        "season_targets_avg": 1.8,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 66.0,
+            "receiving_yards": 22.0,
+            "carries": 15.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 65.0,
+            "receiving_yards": -3.0,
+            "carries": 13.0,
+            "targets": 2.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 3,
+            "rushing_yards": 73.0,
+            "receiving_yards": 17.0,
+            "carries": 15.0,
+            "targets": 2.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 4,
+            "rushing_yards": 73.0,
+            "receiving_yards": 18.0,
+            "carries": 17.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        32.6,
+        102.2
+      ],
+      "receiving_range_80": [
+        0.0,
+        35.8
+      ],
+      "rush_reliability_score": 66.8,
+      "receiving_reliability_score": 20.0,
+      "rush_rank_score": 81.5,
+      "receiving_rank_score": 35.5
+    },
+    {
       "player_id": "00-0036997",
       "player": "Javonte Williams",
       "team": "DAL",
@@ -22757,6 +21205,170 @@
       "receiving_rank_score": 52.2
     },
     {
+      "player_id": "00-0034844",
+      "player": "Saquon Barkley",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "RB",
+      "week": 5,
+      "rushing_yards": 41.3,
+      "receiving_yards": 5.1,
+      "td_probability": 23.6,
+      "recent_carries": 7.0,
+      "recent_carries_5": 12.4,
+      "recent_targets": 1.7,
+      "recent_targets_5": 2.6,
+      "recent_rush_yards": 33.0,
+      "recent_rec_yards": 3.7,
+      "rush_edge_score": 65.6,
+      "receiving_edge_score": 46.6,
+      "td_edge_score": 54.4,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 31,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 45.5,
+        "season_receiving_avg": 2.0,
+        "season_carries_avg": 9.0,
+        "season_targets_avg": 1.8,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 83.0,
+            "receiving_yards": -3.0,
+            "carries": 15.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 9.0,
+            "receiving_yards": 11.0,
+            "carries": 4.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 82.0,
+            "receiving_yards": -2.0,
+            "carries": 15.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 8.0,
+            "receiving_yards": 2.0,
+            "carries": 2.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        18.4,
+        88.0
+      ],
+      "receiving_range_80": [
+        0.0,
+        32.8
+      ],
+      "rush_reliability_score": 48.2,
+      "receiving_reliability_score": 22.9,
+      "rush_rank_score": 61.2,
+      "receiving_rank_score": 40.7
+    },
+    {
+      "player_id": "00-0038611",
+      "player": "Chris Rodriguez Jr.",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "RB",
+      "week": 5,
+      "rushing_yards": 30.4,
+      "receiving_yards": 0.0,
+      "td_probability": 33.7,
+      "recent_carries": 6.7,
+      "recent_carries_5": 8.4,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.2,
+      "recent_rush_yards": 28.3,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 81.3,
+      "receiving_edge_score": 32.0,
+      "td_edge_score": 76.6,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 26,
+      "opp_rec_def_rank": 12,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 27.0,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 6.5,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 23.0,
+            "receiving_yards": 0.0,
+            "carries": 6.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 13.0,
+            "receiving_yards": 0.0,
+            "carries": 6.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 37.0,
+            "receiving_yards": 0.0,
+            "carries": 8.0,
+            "targets": 0.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 4,
+            "rushing_yards": 35.0,
+            "receiving_yards": 0.0,
+            "carries": 6.0,
+            "targets": 0.0,
+            "touchdowns": 1
+          }
+        ]
+      },
+      "rushing_range_80": [
+        7.5,
+        77.1
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.7
+      ],
+      "rush_reliability_score": 43.3,
+      "receiving_reliability_score": 33.0,
+      "rush_rank_score": 71.8,
+      "receiving_rank_score": 32.2
+    },
+    {
       "player_id": "00-0034855",
       "player": "Baker Mayfield",
       "team": "TB",
@@ -22829,6 +21441,170 @@
       "receiving_reliability_score": 40.0,
       "rush_rank_score": 79.8,
       "receiving_rank_score": 38.7
+    },
+    {
+      "player_id": "00-0038555",
+      "player": "Tank Bigsby",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "RB",
+      "week": 5,
+      "rushing_yards": 21.7,
+      "receiving_yards": 3.6,
+      "td_probability": 19.6,
+      "recent_carries": 9.0,
+      "recent_carries_5": 6.4,
+      "recent_targets": 1.3,
+      "recent_targets_5": 0.8,
+      "recent_rush_yards": 29.3,
+      "recent_rec_yards": 3.3,
+      "rush_edge_score": 63.7,
+      "receiving_edge_score": 41.8,
+      "td_edge_score": 50.2,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 31,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 22.8,
+        "season_receiving_avg": 2.5,
+        "season_carries_avg": 7.0,
+        "season_targets_avg": 1.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 3.0,
+            "receiving_yards": 0.0,
+            "carries": 1.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 33.0,
+            "receiving_yards": 5.0,
+            "carries": 13.0,
+            "targets": 2.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 5.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 55.0,
+            "receiving_yards": 0.0,
+            "carries": 14.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        68.4
+      ],
+      "receiving_range_80": [
+        0.0,
+        31.3
+      ],
+      "rush_reliability_score": 20.8,
+      "receiving_reliability_score": 17.5,
+      "rush_rank_score": 53.0,
+      "receiving_rank_score": 35.7
+    },
+    {
+      "player_id": "00-0036389",
+      "player": "Jalen Hurts",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "QB",
+      "week": 5,
+      "rushing_yards": 21.1,
+      "receiving_yards": 0.0,
+      "td_probability": 20.3,
+      "recent_carries": 4.7,
+      "recent_carries_5": 5.2,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.0,
+      "recent_rush_yards": 19.7,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 66.7,
+      "receiving_edge_score": 44.6,
+      "td_edge_score": 48.4,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 20,
+      "opp_rec_def_rank": 1,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 26.2,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 5.2,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 46.0,
+            "receiving_yards": 0.0,
+            "carries": 7.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 16.0,
+            "receiving_yards": 0.0,
+            "carries": 5.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 25.0,
+            "receiving_yards": 0.0,
+            "carries": 4.0,
+            "targets": 0.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 4,
+            "rushing_yards": 18.0,
+            "receiving_yards": 0.0,
+            "carries": 5.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        7.2,
+        48.0
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.7
+      ],
+      "rush_reliability_score": 54.7,
+      "receiving_reliability_score": 40.0,
+      "rush_rank_score": 63.7,
+      "receiving_rank_score": 43.5
     },
     {
       "player_id": "00-0041251",
@@ -23127,6 +21903,88 @@
       "receiving_rank_score": 60.9
     },
     {
+      "player_id": "00-0039746",
+      "player": "Will Shipley",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "RB",
+      "week": 5,
+      "rushing_yards": 8.8,
+      "receiving_yards": 5.8,
+      "td_probability": 10.9,
+      "recent_carries": 4.3,
+      "recent_carries_5": 3.0,
+      "recent_targets": 1.7,
+      "recent_targets_5": 1.4,
+      "recent_rush_yards": 15.7,
+      "recent_rec_yards": 5.3,
+      "rush_edge_score": 56.3,
+      "receiving_edge_score": 50.2,
+      "td_edge_score": 32.0,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 31,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 12.8,
+        "season_receiving_avg": 6.0,
+        "season_carries_avg": 3.8,
+        "season_targets_avg": 1.5,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 4.0,
+            "receiving_yards": 8.0,
+            "carries": 2.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 24.0,
+            "receiving_yards": 5.0,
+            "carries": 7.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 11.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 23.0,
+            "receiving_yards": 0.0,
+            "carries": 6.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        55.5
+      ],
+      "receiving_range_80": [
+        0.0,
+        33.5
+      ],
+      "rush_reliability_score": 19.8,
+      "receiving_reliability_score": 27.5,
+      "rush_rank_score": 47.2,
+      "receiving_rank_score": 44.5
+    },
+    {
       "player_id": "00-0038951",
       "player": "Sean Tucker",
       "team": "TB",
@@ -23183,6 +22041,170 @@
       "receiving_reliability_score": 36.5,
       "rush_rank_score": 66.8,
       "receiving_rank_score": 37.2
+    },
+    {
+      "player_id": "00-0036971",
+      "player": "Trevor Lawrence",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "QB",
+      "week": 5,
+      "rushing_yards": 7.6,
+      "receiving_yards": 0.0,
+      "td_probability": 11.4,
+      "recent_carries": 3.0,
+      "recent_carries_5": 3.4,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.0,
+      "recent_rush_yards": 10.3,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 73.0,
+      "receiving_edge_score": 35.6,
+      "td_edge_score": 41.1,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 13,
+      "opp_rec_def_rank": 1,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 8.5,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 2.8,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 3.0,
+            "receiving_yards": 0.0,
+            "carries": 2.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 6.0,
+            "receiving_yards": 0.0,
+            "carries": 2.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 25.0,
+            "receiving_yards": 0.0,
+            "carries": 4.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 3.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        34.5
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.7
+      ],
+      "rush_reliability_score": 30.9,
+      "receiving_reliability_score": 40.0,
+      "rush_rank_score": 62.5,
+      "receiving_rank_score": 36.7
+    },
+    {
+      "player_id": "00-0032104",
+      "player": "Ameer Abdullah",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "RB",
+      "week": 5,
+      "rushing_yards": 7.6,
+      "receiving_yards": 0.0,
+      "td_probability": 9.7,
+      "recent_carries": 2.0,
+      "recent_carries_5": 2.2,
+      "recent_targets": 0.7,
+      "recent_targets_5": 1.0,
+      "recent_rush_yards": 4.3,
+      "recent_rec_yards": 0.7,
+      "rush_edge_score": 71.7,
+      "receiving_edge_score": 31.8,
+      "td_edge_score": 35.1,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 26,
+      "opp_rec_def_rank": 12,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 11.2,
+        "season_receiving_avg": 0.5,
+        "season_carries_avg": 2.5,
+        "season_targets_avg": 0.8,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 32.0,
+            "receiving_yards": 0.0,
+            "carries": 4.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 11.0,
+            "receiving_yards": 2.0,
+            "carries": 3.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 2.0,
+            "receiving_yards": 0.0,
+            "carries": 3.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        54.3
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.7
+      ],
+      "rush_reliability_score": 31.8,
+      "receiving_reliability_score": 29.5,
+      "rush_rank_score": 61.7,
+      "receiving_rank_score": 31.2
     },
     {
       "player_id": "00-0037120",
@@ -23249,6 +22271,64 @@
       "receiving_reliability_score": 29.5,
       "rush_rank_score": 49.7,
       "receiving_rank_score": 28.5
+    },
+    {
+      "player_id": "00-0033319",
+      "player": "Nick Mullens",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "QB",
+      "week": 5,
+      "rushing_yards": 0.2,
+      "receiving_yards": 0.0,
+      "td_probability": 8.3,
+      "recent_carries": 3.0,
+      "recent_carries_5": 3.0,
+      "recent_targets": 0.0,
+      "recent_targets_5": 0.0,
+      "recent_rush_yards": -2.3,
+      "recent_rec_yards": 0.0,
+      "rush_edge_score": 72.4,
+      "receiving_edge_score": 35.6,
+      "td_edge_score": 37.1,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 13,
+      "opp_rec_def_rank": 1,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 1,
+        "season_rushing_avg": -3.0,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 3.0,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": -3.0,
+            "receiving_yards": 0.0,
+            "carries": 3.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        27.1
+      ],
+      "receiving_range_80": [
+        0.0,
+        27.7
+      ],
+      "rush_reliability_score": 41.3,
+      "receiving_reliability_score": 40.0,
+      "rush_rank_score": 64.6,
+      "receiving_rank_score": 36.7
     },
     {
       "player_id": "00-0036358",
@@ -23331,6 +22411,162 @@
       "receiving_reliability_score": 66.4,
       "rush_rank_score": 42.7,
       "receiving_rank_score": 74.2
+    },
+    {
+      "player_id": "00-0038606",
+      "player": "Parker Washington",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 59.7,
+      "td_probability": 39.7,
+      "recent_carries": 0.3,
+      "recent_carries_5": 0.6,
+      "recent_targets": 6.7,
+      "recent_targets_5": 7.6,
+      "recent_rush_yards": 1.0,
+      "recent_rec_yards": 48.3,
+      "rush_edge_score": 53.0,
+      "receiving_edge_score": 82.0,
+      "td_edge_score": 80.3,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 17,
+      "opp_rec_def_rank": 20,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 0.8,
+        "season_receiving_avg": 57.0,
+        "season_carries_avg": 0.2,
+        "season_targets_avg": 6.5,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 83.0,
+            "carries": 0.0,
+            "targets": 6.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 98.0,
+            "carries": 0.0,
+            "targets": 12.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 40.0,
+            "carries": 0.0,
+            "targets": 5.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 4,
+            "rushing_yards": 3.0,
+            "receiving_yards": 7.0,
+            "carries": 1.0,
+            "targets": 3.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        33.5,
+        107.3
+      ],
+      "rush_reliability_score": 31.2,
+      "receiving_reliability_score": 69.1,
+      "rush_rank_score": 47.5,
+      "receiving_rank_score": 78.8
+    },
+    {
+      "player_id": "00-0036912",
+      "player": "DeVonta Smith",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 53.9,
+      "td_probability": 30.0,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 9.0,
+      "recent_targets_5": 8.4,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 78.3,
+      "rush_edge_score": 38.4,
+      "receiving_edge_score": 92.9,
+      "td_edge_score": 66.8,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 30,
+      "opp_rec_def_rank": 32,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 3,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 78.3,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 9.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 53.0,
+            "carries": 0.0,
+            "targets": 6.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 117.0,
+            "carries": 0.0,
+            "targets": 13.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 65.0,
+            "carries": 0.0,
+            "targets": 8.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        27.7,
+        101.5
+      ],
+      "rush_reliability_score": 41.7,
+      "receiving_reliability_score": 67.8,
+      "rush_rank_score": 39.2,
+      "receiving_rank_score": 86.6
     },
     {
       "player_id": "00-0037247",
@@ -23497,6 +22733,88 @@
       "receiving_rank_score": 75.7
     },
     {
+      "player_id": "00-0034960",
+      "player": "Jakobi Meyers",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 34.9,
+      "td_probability": 26.9,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.2,
+      "recent_targets": 4.3,
+      "recent_targets_5": 3.8,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 41.7,
+      "rush_edge_score": 47.8,
+      "receiving_edge_score": 72.2,
+      "td_edge_score": 69.4,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 17,
+      "opp_rec_def_rank": 20,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 0.5,
+        "season_receiving_avg": 41.2,
+        "season_carries_avg": 0.2,
+        "season_targets_avg": 3.8,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 2.0,
+            "receiving_yards": 40.0,
+            "carries": 1.0,
+            "targets": 2.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 28.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 64.0,
+            "carries": 0.0,
+            "targets": 8.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 33.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        8.7,
+        82.5
+      ],
+      "rush_reliability_score": 34.7,
+      "receiving_reliability_score": 49.6,
+      "rush_rank_score": 44.5,
+      "receiving_rank_score": 66.6
+    },
+    {
       "player_id": "00-0040129",
       "player": "Emeka Egbuka",
       "team": "TB",
@@ -23659,6 +22977,236 @@
       "receiving_reliability_score": 51.6,
       "rush_rank_score": 39.7,
       "receiving_rank_score": 67.1
+    },
+    {
+      "player_id": "00-0038935",
+      "player": "Brenton Strange",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "TE",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 34.2,
+      "td_probability": 27.6,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 5.0,
+      "recent_targets_5": 4.6,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 48.0,
+      "rush_edge_score": 51.4,
+      "receiving_edge_score": 74.2,
+      "td_edge_score": 71.9,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 1,
+      "opp_rec_def_rank": 10,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 41.8,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 4.5,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 23.0,
+            "carries": 0.0,
+            "targets": 3.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 17.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 32.0,
+            "carries": 0.0,
+            "targets": 5.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 95.0,
+            "carries": 0.0,
+            "targets": 8.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        15.1,
+        70.7
+      ],
+      "rush_reliability_score": 41.7,
+      "receiving_reliability_score": 61.7,
+      "rush_rank_score": 49.0,
+      "receiving_rank_score": 71.1
+    },
+    {
+      "player_id": "00-0034351",
+      "player": "Dallas Goedert",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "TE",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 33.9,
+      "td_probability": 27.2,
+      "recent_carries": 0.3,
+      "recent_carries_5": 0.2,
+      "recent_targets": 4.7,
+      "recent_targets_5": 4.6,
+      "recent_rush_yards": 0.3,
+      "recent_rec_yards": 38.0,
+      "rush_edge_score": 42.4,
+      "receiving_edge_score": 83.6,
+      "td_edge_score": 59.7,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 32,
+      "opp_rec_def_rank": 5,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 40.5,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 3.5,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 77.0,
+            "carries": 0.0,
+            "targets": 5.0,
+            "touchdowns": 2
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 4.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        14.8,
+        70.4
+      ],
+      "rush_reliability_score": 38.2,
+      "receiving_reliability_score": 63.7,
+      "rush_rank_score": 41.3,
+      "receiving_rank_score": 78.6
+    },
+    {
+      "player_id": "00-0038393",
+      "player": "Dontayvion Wicks",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 32.9,
+      "td_probability": 21.7,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 5.3,
+      "recent_targets_5": 4.2,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 41.3,
+      "rush_edge_score": 38.4,
+      "receiving_edge_score": 79.8,
+      "td_edge_score": 49.5,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 30,
+      "opp_rec_def_rank": 32,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 49.2,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 5.0,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 73.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 74.0,
+            "carries": 0.0,
+            "targets": 6.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 32.0,
+            "carries": 0.0,
+            "targets": 5.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 18.0,
+            "carries": 0.0,
+            "targets": 5.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        6.7,
+        80.5
+      ],
+      "rush_reliability_score": 41.7,
+      "receiving_reliability_score": 42.2,
+      "rush_rank_score": 39.2,
+      "receiving_rank_score": 70.4
     },
     {
       "player_id": "00-0041048",
@@ -23825,6 +23373,236 @@
       "receiving_rank_score": 61.8
     },
     {
+      "player_id": "00-0039893",
+      "player": "Brian Thomas Jr.",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 28.0,
+      "td_probability": 22.6,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 3.7,
+      "recent_targets_5": 3.2,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 21.7,
+      "rush_edge_score": 51.4,
+      "receiving_edge_score": 67.0,
+      "td_edge_score": 60.5,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 17,
+      "opp_rec_def_rank": 20,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 26.2,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 3.5,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 40.0,
+            "carries": 0.0,
+            "targets": 3.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 40.0,
+            "carries": 0.0,
+            "targets": 8.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 8.0,
+            "carries": 0.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 17.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 1
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        1.8,
+        75.6
+      ],
+      "rush_reliability_score": 41.7,
+      "receiving_reliability_score": 37.4,
+      "rush_rank_score": 49.0,
+      "receiving_rank_score": 59.6
+    },
+    {
+      "player_id": "00-0030061",
+      "player": "Zach Ertz",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "TE",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 26.3,
+      "td_probability": 17.1,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 2.7,
+      "recent_targets_5": 5.8,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 11.0,
+      "rush_edge_score": 38.4,
+      "receiving_edge_score": 65.0,
+      "td_edge_score": 32.5,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 32,
+      "opp_rec_def_rank": 5,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 2,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 11.0,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 3.0,
+        "recent_games": [
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 9.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 13.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        7.2,
+        62.8
+      ],
+      "rush_reliability_score": 41.7,
+      "receiving_reliability_score": 35.5,
+      "rush_rank_score": 39.2,
+      "receiving_rank_score": 57.6
+    },
+    {
+      "player_id": "00-0040867",
+      "player": "Makai Lemon",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 22.8,
+      "td_probability": 13.2,
+      "recent_carries": 0.3,
+      "recent_carries_5": 0.2,
+      "recent_targets": 3.7,
+      "recent_targets_5": 3.8,
+      "recent_rush_yards": -1.7,
+      "recent_rec_yards": 23.3,
+      "rush_edge_score": 43.3,
+      "receiving_edge_score": 76.7,
+      "td_edge_score": 36.9,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 30,
+      "opp_rec_def_rank": 32,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": -1.2,
+        "season_receiving_avg": 16.2,
+        "season_carries_avg": 0.2,
+        "season_targets_avg": 3.8,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": -5.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": -5.0,
+            "receiving_yards": 14.0,
+            "carries": 1.0,
+            "targets": 1.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 29.0,
+            "carries": 0.0,
+            "targets": 4.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 27.0,
+            "carries": 0.0,
+            "targets": 6.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        0.0,
+        70.4
+      ],
+      "rush_reliability_score": 38.2,
+      "receiving_reliability_score": 34.1,
+      "rush_rank_score": 42.0,
+      "receiving_rank_score": 66.1
+    },
+    {
       "player_id": "00-0038041",
       "player": "Jake Ferguson",
       "team": "DAL",
@@ -23905,6 +23683,88 @@
       "receiving_reliability_score": 32.0,
       "rush_rank_score": 39.7,
       "receiving_rank_score": 52.0
+    },
+    {
+      "player_id": "00-0040024",
+      "player": "Darius Cooper",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 15.9,
+      "td_probability": 11.6,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 3.3,
+      "recent_targets_5": 2.2,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 19.7,
+      "rush_edge_score": 38.4,
+      "receiving_edge_score": 62.5,
+      "td_edge_score": 24.6,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 30,
+      "opp_rec_def_rank": 32,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 14.8,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 2.5,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 26.0,
+            "carries": 0.0,
+            "targets": 3.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 33.0,
+            "carries": 0.0,
+            "targets": 7.0,
+            "touchdowns": 2
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        0.0,
+        63.5
+      ],
+      "rush_reliability_score": 41.7,
+      "receiving_reliability_score": 17.5,
+      "rush_rank_score": 39.2,
+      "receiving_rank_score": 51.2
     },
     {
       "player_id": "00-0039855",
@@ -24045,6 +23905,146 @@
       "receiving_reliability_score": 22.7,
       "rush_rank_score": 51.7,
       "receiving_rank_score": 47.1
+    },
+    {
+      "player_id": "00-0035662",
+      "player": "Marquise Brown",
+      "team": "PHI",
+      "opponent": "JAX",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 12.6,
+      "td_probability": 10.9,
+      "recent_carries": 0.7,
+      "recent_carries_5": 0.4,
+      "recent_targets": 3.0,
+      "recent_targets_5": 2.8,
+      "recent_rush_yards": 4.0,
+      "recent_rec_yards": 23.7,
+      "rush_edge_score": 41.2,
+      "receiving_edge_score": 65.6,
+      "td_edge_score": 29.0,
+      "rush_matchup_score": 5.7,
+      "receiving_matchup_score": 95.6,
+      "td_matchup_score": 6.6,
+      "opp_rush_def_rank": 30,
+      "opp_rec_def_rank": 32,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 1,
+        "season_rushing_avg": 12.0,
+        "season_receiving_avg": 0.0,
+        "season_carries_avg": 2.0,
+        "season_targets_avg": 0.0,
+        "recent_games": [
+          {
+            "week": 2,
+            "rushing_yards": 12.0,
+            "receiving_yards": 0.0,
+            "carries": 2.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        0.0,
+        60.2
+      ],
+      "rush_reliability_score": 31.2,
+      "receiving_reliability_score": 32.5,
+      "rush_rank_score": 38.7,
+      "receiving_rank_score": 57.3
+    },
+    {
+      "player_id": "00-0041100",
+      "player": "Josh Cameron",
+      "team": "JAX",
+      "opponent": "PHI",
+      "game_date": "2026-10-11",
+      "game_start": "2026-10-11T09:30:00-04:00",
+      "position": "WR",
+      "week": 5,
+      "rushing_yards": 0.0,
+      "receiving_yards": 12.2,
+      "td_probability": 1.0,
+      "recent_carries": 0.0,
+      "recent_carries_5": 0.0,
+      "recent_targets": 1.3,
+      "recent_targets_5": 1.5,
+      "recent_rush_yards": 0.0,
+      "recent_rec_yards": 18.0,
+      "rush_edge_score": 51.4,
+      "receiving_edge_score": 48.9,
+      "td_edge_score": 29.3,
+      "rush_matchup_score": 70.7,
+      "receiving_matchup_score": 50.5,
+      "td_matchup_score": 69.8,
+      "opp_rush_def_rank": 17,
+      "opp_rec_def_rank": 20,
+      "opp_def_rank_total": 32,
+      "season_context": {
+        "season": 2026,
+        "games_played": 4,
+        "season_rushing_avg": 0.0,
+        "season_receiving_avg": 18.5,
+        "season_carries_avg": 0.0,
+        "season_targets_avg": 1.5,
+        "recent_games": [
+          {
+            "week": 1,
+            "rushing_yards": 0.0,
+            "receiving_yards": 20.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 2,
+            "rushing_yards": 0.0,
+            "receiving_yards": 0.0,
+            "carries": 0.0,
+            "targets": 0.0,
+            "touchdowns": 0
+          },
+          {
+            "week": 3,
+            "rushing_yards": 0.0,
+            "receiving_yards": 12.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 1
+          },
+          {
+            "week": 4,
+            "rushing_yards": 0.0,
+            "receiving_yards": 42.0,
+            "carries": 0.0,
+            "targets": 2.0,
+            "touchdowns": 0
+          }
+        ]
+      },
+      "rushing_range_80": [
+        0.0,
+        26.9
+      ],
+      "receiving_range_80": [
+        0.0,
+        59.8
+      ],
+      "rush_reliability_score": 41.7,
+      "receiving_reliability_score": 30.3,
+      "rush_rank_score": 49.0,
+      "receiving_rank_score": 44.2
     }
   ],
   "prediction_intervals": {
