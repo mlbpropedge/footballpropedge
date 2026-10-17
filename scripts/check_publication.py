@@ -13,6 +13,8 @@ def check(payload, performance, now=None):
     players = payload["players"]
     assert len(players) >= 100, "Unexpectedly small player slate"
     assert len({row["player_id"] for row in players}) == len(players), "Duplicate players"
+    ruled_out = {row["player_id"] for row in payload.get("ruled_out", [])}
+    assert not ruled_out & {row["player_id"] for row in players}, "Ruled-out player is projected"
     opponents = {row["team"]: row["opponent"] for row in players}
     assert 20 <= len(opponents) <= 32 and len(opponents) % 2 == 0, "Invalid game slate"
     for row in players:

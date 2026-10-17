@@ -4,6 +4,10 @@ Zero-cost NFL player projection site for rushing yards, receiving yards, and any
 
 ## Architecture
 - **Data:** nflverse weekly player stats + schedules (free/open tooling)
+- **Availability:** nflverse injury reports and weekly rosters. Players listed Out, on a reserve list, released or inactive are removed from the slate and shown in a "Ruled out" list; Questionable/Doubtful players are tagged. Traded players use their current roster team. Every availability feed is optional, so an outage never blocks a refresh.
+- **Usage context:** nflverse snap counts (offensive snap share, last 3 games) and games-missed streaks (bye weeks excluded)
+- **Change tags:** each refresh compares against the previous run of the same slate and tags moves of 5+ yards or 5+ TD points
+- **Results:** graded weekly with 80%-range hit rates, TD calibration buckets, and a simple TD baseline (last-8 TD rate blended with league rate); the full graded list is in `data/results_detail.json`
 - **Models:** candidate gradient-boosting / tree regressors and classifiers, chosen by walk-forward validation
 - **Leakage control:** rolling player features are shifted so the game being predicted never appears in its own features
 - **Overfitting checks:** train-vs-walk-forward error ratio is recorded with each build

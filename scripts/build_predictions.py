@@ -12,6 +12,15 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from src.availability import (
+    games_missed,
+    load_injuries,
+    load_player_ids,
+    load_roster,
+    load_snap_counts,
+    player_availability,
+    snap_share_context,
+)
 from src.config import CURRENT_SEASON, TRAINING_SEASONS, MODELS_DIR, SITE_DATA_DIR
 from src.data import load_player_stats, load_schedules
 from src.features import (
@@ -288,6 +297,59 @@ def current_season_player_context(
     return context
 
 
+CHANGE_FIELDS = ("rushing_yards", "receiving_yards", "td_probability")
+# A move this size (yards, or TD percentage points) is worth flagging.
+CHANGE_THRESHOLD = 5.0
+
+
+def apply_change_markers(rows: list[dict], previous: dict | None, season: int, week: int) -> bool:
+    """Mark projections that moved since the last published run of this slate.
+
+    Returns True when a comparable previous run existed. Played games keep
+    their frozen pregame numbers, so they never show movement.
+    """
+    if not previous or previous.get("season") != season or previous.get("week") != week:
+        for row in rows:
+            row.pop("change", None)
+            row.pop("new_to_slate", None)
+        return False
+    before = {str(r.get("player_id")): r for r in previous.get("players", [])}
+    for row in rows:
+        row.pop("change", None)
+        row.pop("new_to_slate", None)
+        old = before.get(str(row.get("player_id")))
+        if old is None:
+            row["new_to_slate"] = True
+            continue
+        deltas = {}
+        for field in CHANGE_FIELDS:
+            try:
+                delta = round(float(row.get(field, 0)) - float(old.get(field, 0)), 1)
+            except (TypeError, ValueError):
+                continue
+            if abs(delta) >= CHANGE_THRESHOLD:
+                deltas[field] = delta
+        if deltas:
+            row["change"] = deltas
+    return True
+
+
+def availability_row_fields(player_id: str, availability: dict, absences: dict, snaps: dict) -> dict:
+    """Public availability/usage fields for one projected player."""
+    status = availability.get(player_id, {})
+    absence = absences.get(player_id, {})
+    snap = snaps.get(player_id, {})
+    fields = {
+        "injury_status": status.get("status"),
+        "injury_detail": status.get("detail"),
+        "last_played_week": absence.get("last_played_week"),
+        "games_missed": int(absence.get("games_missed", 0) or 0),
+        "snap_share_3": snap.get("snap_share_3"),
+        "snap_share_season": snap.get("snap_share_season"),
+    }
+    return fields
+
+
 def add_edge_scores(preds: pd.DataFrame, metrics: dict) -> pd.DataFrame:
     """Create transparent 0-100 ranking scores for each projection market.
 
@@ -371,10 +433,78 @@ def add_edge_scores(preds: pd.DataFrame, metrics: dict) -> pd.DataFrame:
     return out
 
 
-def evaluate_history(stats: pd.DataFrame, projection_week: int) -> dict:
+CALIBRATION_BINS = [(0, 10), (10, 20), (20, 30), (30, 40), (40, 50), (50, 101)]
+
+
+def range_hit(actual: float, interval) -> bool | None:
+    """True when the actual result landed inside the published 80% range."""
+    if not isinstance(interval, (list, tuple)) or len(interval) != 2:
+        return None
+    try:
+        low, high = float(interval[0]), float(interval[1])
+    except (TypeError, ValueError):
+        return None
+    return bool(low <= float(actual) <= high)
+
+
+def calibration_buckets(probabilities, actuals, min_samples: int = 10) -> list[dict]:
+    """Group TD probabilities (0-100) and compare to how often players scored."""
+    frame = pd.DataFrame({"p": list(probabilities), "y": list(actuals)})
+    out = []
+    for low, high in CALIBRATION_BINS:
+        part = frame[(frame["p"] >= low) & (frame["p"] < high)]
+        if len(part) < min_samples:
+            continue
+        out.append(
+            {
+                "label": f"{low}%+" if high > 100 else f"{low}–{high}%",
+                "samples": int(len(part)),
+                "avg_predicted": round(float(part["p"].mean()), 1),
+                "actual_rate": round(100.0 * float(part["y"].mean()), 1),
+            }
+        )
+    return out
+
+
+def prior_td_rates(stats: pd.DataFrame, window: int = 8) -> dict[tuple, float]:
+    """Each player's TD rate over his previous `window` games (no leakage)."""
+    rows = stats[["player_id", "season", "week"]].copy()
+    rows["td"] = (
+        pd.to_numeric(stats.get("rushing_tds", 0), errors="coerce").fillna(0)
+        + pd.to_numeric(stats.get("receiving_tds", 0), errors="coerce").fillna(0)
+        > 0
+    ).astype(float)
+    rows = rows.sort_values(["player_id", "season", "week"])
+    rows["rate"] = (
+        rows.groupby("player_id")["td"]
+        .transform(lambda s: s.shift(1).rolling(window, min_periods=1).mean())
+    )
+    rows = rows.dropna(subset=["rate"])
+    return {
+        (str(p), int(s), int(w)): float(r)
+        for p, s, w, r in zip(rows["player_id"], rows["season"], rows["week"], rows["rate"])
+    }
+
+
+def _mean(series) -> float | None:
+    return round(float(series.mean()), 2) if len(series) else None
+
+
+def _rate(series) -> float | None:
+    clean = series.dropna()
+    return round(100.0 * float(clean.astype(float).mean()), 1) if len(clean) else None
+
+
+def _brier(prob, actual) -> float | None:
+    return round(float(((prob - actual) ** 2).mean()), 4) if len(prob) else None
+
+
+def evaluate_history(stats: pd.DataFrame, projection_week: int, td_base_rate: float | None = None) -> dict:
     history_dir = SITE_DATA_DIR / "history"
     history_dir.mkdir(parents=True, exist_ok=True)
     evaluated = []
+    league_rate = float(td_base_rate) if td_base_rate else 0.2
+    td_rates = prior_td_rates(stats)
 
     for path in sorted(history_dir.glob("*.json")):
         try:
@@ -413,120 +543,126 @@ def evaluate_history(stats: pd.DataFrame, projection_week: int) -> dict:
             actual_rec = float(a.get("receiving_yards", 0))
             td_prob = float(row.get("td_probability", 0)) / 100.0
             actual_td = int(a.get("actual_td", 0))
+            prior_rate = td_rates.get((str(pid), season, week))
+            baseline_td = 0.5 * (prior_rate if prior_rate is not None else league_rate) + 0.5 * league_rate
 
             evaluated.append(
                 {
                     "season": season,
                     "week": week,
+                    "player_id": pid,
                     "player": row.get("player"),
                     "position": row.get("position"),
                     "team": row.get("team"),
+                    "opponent": row.get("opponent"),
                     "projected_rushing_yards": projected_rush,
                     "actual_rushing_yards": actual_rush,
                     "rush_error": abs(projected_rush - actual_rush),
+                    "rush_in_range": range_hit(actual_rush, row.get("rushing_range_80")),
                     "projected_receiving_yards": projected_rec,
                     "actual_receiving_yards": actual_rec,
                     "rec_error": abs(projected_rec - actual_rec),
+                    "rec_in_range": range_hit(actual_rec, row.get("receiving_range_80")),
                     "td_probability": round(td_prob * 100, 1),
                     "td_prob_decimal": td_prob,
+                    "baseline_td": baseline_td,
                     "actual_td": actual_td,
                     "recent_carries": float(row.get("recent_carries", 0)),
                     "recent_targets": float(row.get("recent_targets", 0)),
                 }
             )
 
+    empty = {
+        "graded_predictions": 0,
+        "graded_weeks": 0,
+        "weeks": [],
+        "rushing_mae": None,
+        "receiving_mae": None,
+        "td_brier": None,
+        "weekly_results": [],
+        "note": "Weekly grading will appear after an archived prediction week has completed.",
+    }
+    detail_path = SITE_DATA_DIR / "results_detail.json"
     if not evaluated:
-        return {
-            "graded_predictions": 0,
-            "graded_weeks": 0,
-            "weeks": [],
-            "rushing_mae": None,
-            "receiving_mae": None,
-            "td_brier": None,
-            "weekly_results": [],
-            "note": "Weekly grading will appear after an archived prediction week has completed.",
-        }
+        detail_path.write_text(json.dumps({"weeks": []}, indent=2))
+        return empty
 
     frame = pd.DataFrame(evaluated)
-    rush = frame[frame["recent_carries"] >= 2]
-    rec = frame[frame["recent_targets"] >= 1.5]
-    td = frame[(frame["recent_carries"] + frame["recent_targets"]) >= 3]
+    # Grade each market only on players who had a real pre-game role in it.
+    rush_role = frame["recent_carries"] >= 2
+    rec_role = frame["recent_targets"] >= 1.5
+    td_role = (frame["recent_carries"] + frame["recent_targets"]) >= 3
+
+    def summarize(part: pd.DataFrame) -> dict:
+        rush = part[rush_role.loc[part.index]]
+        rec = part[rec_role.loc[part.index]]
+        td = part[td_role.loc[part.index]]
+        model_brier = _brier(td["td_prob_decimal"], td["actual_td"])
+        baseline_brier = _brier(td["baseline_td"], td["actual_td"])
+        return {
+            "rushing_graded": int(len(rush)),
+            "receiving_graded": int(len(rec)),
+            "td_graded": int(len(td)),
+            "rushing_mae": _mean(rush["rush_error"]),
+            "receiving_mae": _mean(rec["rec_error"]),
+            "rushing_range_hit_rate": _rate(rush["rush_in_range"]),
+            "receiving_range_hit_rate": _rate(rec["rec_in_range"]),
+            "rushing_within_15": _rate(rush["rush_error"] <= 15) if len(rush) else None,
+            "receiving_within_15": _rate(rec["rec_error"] <= 15) if len(rec) else None,
+            "td_brier": model_brier,
+            "td_baseline_brier": baseline_brier,
+        }
+
+    def public_row(r) -> dict:
+        return {
+            "player_id": r["player_id"],
+            "player": r["player"],
+            "position": r["position"],
+            "team": r["team"],
+            "opponent": r["opponent"],
+            "projected_rushing_yards": round(float(r["projected_rushing_yards"]), 1),
+            "actual_rushing_yards": round(float(r["actual_rushing_yards"]), 1),
+            "rush_in_range": r["rush_in_range"],
+            "projected_receiving_yards": round(float(r["projected_receiving_yards"]), 1),
+            "actual_receiving_yards": round(float(r["actual_receiving_yards"]), 1),
+            "rec_in_range": r["rec_in_range"],
+            "td_probability": round(float(r["td_probability"]), 1),
+            "actual_td": bool(r["actual_td"]),
+        }
 
     weekly_results = []
+    detail_weeks = []
     for week in sorted((int(x) for x in frame["week"].unique()), reverse=True):
         wf = frame[frame["week"] == week].copy()
-        wrush = wf[wf["recent_carries"] >= 2]
-        wrec = wf[wf["recent_targets"] >= 1.5]
-        wtd = wf[(wf["recent_carries"] + wf["recent_targets"]) >= 3]
-
         wf["display_projection"] = wf[
             ["projected_rushing_yards", "projected_receiving_yards"]
         ].max(axis=1)
-        samples = (
-            wf.sort_values("display_projection", ascending=False)
-            .head(6)
-            .to_dict("records")
-        )
-
+        ordered = wf.sort_values("display_projection", ascending=False)
         weekly_results.append(
             {
                 "season": CURRENT_SEASON,
                 "week": week,
                 "graded_players": int(len(wf)),
-                "rushing_mae": round(float(wrush["rush_error"].mean()), 2)
-                if not wrush.empty
-                else None,
-                "receiving_mae": round(float(wrec["rec_error"].mean()), 2)
-                if not wrec.empty
-                else None,
-                "td_brier": round(
-                    float(((wtd["td_prob_decimal"] - wtd["actual_td"]) ** 2).mean()),
-                    4,
-                )
-                if not wtd.empty
-                else None,
-                "sample_predictions": [
-                    {
-                        "player": r["player"],
-                        "position": r["position"],
-                        "team": r["team"],
-                        "projected_rushing_yards": round(
-                            float(r["projected_rushing_yards"]), 1
-                        ),
-                        "actual_rushing_yards": round(
-                            float(r["actual_rushing_yards"]), 1
-                        ),
-                        "projected_receiving_yards": round(
-                            float(r["projected_receiving_yards"]), 1
-                        ),
-                        "actual_receiving_yards": round(
-                            float(r["actual_receiving_yards"]), 1
-                        ),
-                        "td_probability": round(float(r["td_probability"]), 1),
-                        "actual_td": bool(r["actual_td"]),
-                    }
-                    for r in samples
-                ],
+                **summarize(wf),
+                "sample_predictions": [public_row(r) for r in ordered.head(6).to_dict("records")],
             }
         )
+        detail_weeks.append(
+            {"week": week, "players": [public_row(r) for r in ordered.to_dict("records")]}
+        )
 
+    td_all = frame[td_role]
+    detail_path.write_text(json.dumps({"season": CURRENT_SEASON, "weeks": detail_weeks}))
     return {
         "graded_predictions": int(len(frame)),
         "graded_weeks": int(frame["week"].nunique()),
         "weeks": sorted(int(x) for x in frame["week"].unique()),
-        "rushing_mae": round(float(rush["rush_error"].mean()), 2)
-        if not rush.empty
-        else None,
-        "receiving_mae": round(float(rec["rec_error"].mean()), 2)
-        if not rec.empty
-        else None,
-        "td_brier": round(
-            float(((td["td_prob_decimal"] - td["actual_td"]) ** 2).mean()), 4
-        )
-        if not td.empty
-        else None,
+        **summarize(frame),
+        "td_baseline": "Player's last-8-game TD rate blended 50/50 with the league rate",
+        "td_calibration": calibration_buckets(td_all["td_probability"], td_all["actual_td"]),
         "weekly_results": weekly_results,
     }
+
 
 def main():
     SITE_DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -555,8 +691,33 @@ def main():
     training = make_training_frame(stats)
     bundle = fit_models(training)
 
+    # Free availability and usage feeds. Each is optional: if one is down the
+    # slate still publishes, just without that context.
+    status = player_availability(
+        load_injuries(CURRENT_SEASON),
+        load_roster(CURRENT_SEASON),
+        CURRENT_SEASON,
+        projection_week,
+    )
+    availability = status["availability"]
+    snap_context = snap_share_context(
+        load_snap_counts(CURRENT_SEASON),
+        load_player_ids(),
+        CURRENT_SEASON,
+        completed_week,
+    )
+    absences = games_missed(stats, CURRENT_SEASON, completed_week)
+
     features = latest_player_features(stats)
     latest_current = features[features["season"] == CURRENT_SEASON].copy()
+    # Traded players: use the current roster team so the matchup is right.
+    roster_team = latest_current["player_id"].astype(str).map(status["teams"])
+    moved = roster_team.notna() & roster_team.isin(list(opponents)) & (
+        roster_team != latest_current["recent_team"].astype(str)
+    )
+    if moved.any():
+        print(f"Updated team for {int(moved.sum())} player(s) from the weekly roster.")
+        latest_current.loc[moved, "recent_team"] = roster_team[moved]
     latest_current = attach_matchup_features(
         latest_current, stats, opponents, home_games
     )
@@ -570,6 +731,31 @@ def main():
         | (preds["projected_receiving_yards"] >= 8)
     )
     preds = preds[role & (preds["opponent"] != "TBD")].copy()
+
+    # Players ruled out (injury report Out, IR/reserve, released, inactive)
+    # get no projection; they are listed separately so readers know why.
+    unavailable = preds["player_id"].astype(str).map(
+        lambda pid: bool(availability.get(pid, {}).get("unavailable"))
+    )
+    ruled_out = []
+    for _, r in preds[unavailable].iterrows():
+        info = availability.get(str(r["player_id"]), {})
+        ruled_out.append(
+            {
+                "player_id": str(r["player_id"]),
+                "player": str(r["player_display_name"]),
+                "team": str(r["recent_team"]),
+                "opponent": str(r["opponent"]),
+                "position": str(r["position"]),
+                "status": info.get("status"),
+                "detail": info.get("detail"),
+                "game_start": game_starts[str(r["recent_team"])],
+            }
+        )
+    ruled_out.sort(key=lambda x: (x["team"], x["player"]))
+    preds = preds[~unavailable].copy()
+    if ruled_out:
+        print(f"Removed {len(ruled_out)} unavailable player(s) from the slate.")
     preds = add_edge_scores(preds, bundle.metrics)
 
     rows = []
@@ -578,7 +764,12 @@ def main():
         ascending=False,
     ).iterrows():
         player_id = str(r["player_id"])
-        context = player_context.get(player_id, {})
+        context = dict(player_context.get(player_id, {}))
+        by_week = snap_context.get(player_id, {}).get("by_week", {})
+        if context.get("recent_games") and by_week:
+            context["recent_games"] = [
+                dict(g, snap_pct=by_week.get(int(g["week"]))) for g in context["recent_games"]
+            ]
         rows.append(
             {
                 "player_id": player_id,
@@ -607,6 +798,7 @@ def main():
                 "opp_rush_def_rank": int(r.get("opp_rush_def_rank", 0)),
                 "opp_rec_def_rank": int(r.get("opp_rec_def_rank", 0)),
                 "opp_def_rank_total": int(r.get("opp_def_rank_total", 0)),
+                **availability_row_fields(player_id, availability, absences, snap_context),
                 "season_context": context,
             }
         )
@@ -617,6 +809,12 @@ def main():
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "nflverse",
         "players": rows,
+        "ruled_out": ruled_out,
+        "availability": {
+            **status["info"],
+            "snap_share_players": len(snap_context),
+            "note": "Players listed Out, on a reserve list, released or inactive are not projected.",
+        },
     }
 
     history_dir = SITE_DATA_DIR / "history"
@@ -624,18 +822,36 @@ def main():
     history_path = history_dir / f"{CURRENT_SEASON}_week_{projection_week:02d}.json"
     rows = preserve_played_games(rows, CURRENT_SEASON, projection_week, history_path)
     payload["players"] = rows
+    # Pregame rows restored from the snapshot cover played games; drop any
+    # ruled-out entry for a player whose frozen projection is on the board.
+    on_board = {r["player_id"] for r in rows}
+    payload["ruled_out"] = [r for r in ruled_out if r["player_id"] not in on_board]
+
+    predictions_path = SITE_DATA_DIR / "predictions.json"
+    previous = None
+    if predictions_path.exists():
+        try:
+            previous = json.loads(predictions_path.read_text())
+        except Exception:
+            previous = None
+    if apply_change_markers(rows, previous, CURRENT_SEASON, projection_week):
+        payload["previous_generated_at"] = previous.get("generated_at")
 
     if not rows or len({r["player_id"] for r in rows}) != len(rows):
         raise ValueError("Empty or duplicate-player projection slate; refusing to publish.")
     if any(r["team"] not in opponents or opponents[r["team"]] != r["opponent"] for r in rows):
         raise ValueError("Prediction matchup does not match the schedule; refusing to publish.")
 
-    (SITE_DATA_DIR / "predictions.json").write_text(json.dumps(payload, indent=2))
+    predictions_path.write_text(json.dumps(payload, indent=2))
     archive_prediction(payload, history_path)
     (SITE_DATA_DIR / "model_metrics.json").write_text(
         json.dumps(bundle.metrics, indent=2)
     )
-    performance = evaluate_history(stats, projection_week)
+    performance = evaluate_history(
+        stats,
+        projection_week,
+        bundle.metrics.get("touchdown", {}).get("calibration", {}).get("base_rate"),
+    )
     (SITE_DATA_DIR / "performance.json").write_text(
         json.dumps(performance, indent=2)
     )

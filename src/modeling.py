@@ -408,12 +408,37 @@ def walk_forward_regression(df: pd.DataFrame, target: str) -> tuple[str, dict]:
     return winner, details
 
 
-def walk_forward_td(df: pd.DataFrame) -> tuple[str, dict]:
+TD_BASELINE_LABELS = {
+    "league_rate": "League TD rate",
+    "last_8_rate": "Player's last-8 TD rate",
+    "blend": "Last-8 rate blended with league rate",
+}
+
+
+def td_baseline_predictions(test: pd.DataFrame, league_rate: float) -> dict[str, np.ndarray]:
+    """Simple, leakage-safe TD baselines for the same rows the model predicts."""
+    last_8 = (
+        pd.to_numeric(test["touchdown_avg_8"], errors="coerce")
+        .fillna(float(league_rate))
+        .to_numpy(dtype=float)
+    )
+    league = np.full(len(test), float(league_rate))
+    return {
+        "league_rate": league,
+        "last_8_rate": np.clip(last_8, 0.001, 0.999),
+        "blend": np.clip(0.5 * last_8 + 0.5 * league, 0.001, 0.999),
+    }
+
+
+def walk_forward_td(df: pd.DataFrame) -> tuple[str, dict, dict]:
     df = _role_frame(df, "touchdown")
     seasons = sorted(int(s) for s in df["season"].dropna().unique())
     test_seasons = seasons[-3:] if len(seasons) >= 4 else seasons[-1:]
     scores = {name: [] for name in _classification_candidates()}
     details = {}
+    # Squared errors on identical rows so model and baselines compare fairly.
+    squared = {name: [] for name in _classification_candidates()}
+    baseline_squared = {name: [] for name in TD_BASELINE_LABELS}
 
     for test_season in test_seasons:
         train = df[df["season"] < test_season]
@@ -422,11 +447,13 @@ def walk_forward_td(df: pd.DataFrame) -> tuple[str, dict]:
             continue
         Xtr, ytr = _clean_xy(train, "touchdown")
         Xte, yte = _clean_xy(test, "touchdown")
+        actual = yte.to_numpy(dtype=float)
         for name, model in _classification_candidates().items():
             model.fit(Xtr, ytr)
             prob = np.clip(model.predict_proba(Xte)[:, 1], 0.001, 0.999)
             brier = brier_score_loss(yte, prob)
             scores[name].append(brier)
+            squared[name].extend(((prob - actual) ** 2).tolist())
             details.setdefault(name, []).append(
                 {
                     "season": test_season,
@@ -434,12 +461,37 @@ def walk_forward_td(df: pd.DataFrame) -> tuple[str, dict]:
                     "brier": round(float(brier), 4),
                 }
             )
+        for name, prob in td_baseline_predictions(test, float(ytr.mean())).items():
+            baseline_squared[name].extend(((prob - actual) ** 2).tolist())
 
     viable = {k: v for k, v in scores.items() if v}
     if not viable:
-        return "hist_gradient_boosting", details
+        return "hist_gradient_boosting", details, {}
     winner = min(viable, key=lambda k: float(np.mean(viable[k])))
-    return winner, details
+
+    model_brier = float(np.mean(squared[winner]))
+    baselines = {
+        name: round(float(np.mean(values)), 4)
+        for name, values in baseline_squared.items()
+        if values
+    }
+    best = min(baselines, key=baselines.get) if baselines else None
+    best_brier = baselines.get(best) if best else None
+    benchmark = {
+        "samples": int(len(squared[winner])),
+        "model_brier": round(model_brier, 4),
+        "baselines": baselines,
+        "baseline_labels": TD_BASELINE_LABELS,
+        "best_baseline": best,
+        "best_baseline_brier": best_brier,
+        "model_improvement": round(best_brier - model_brier, 4) if best_brier is not None else None,
+        "model_improvement_pct": round(100.0 * (best_brier - model_brier) / best_brier, 2)
+        if best_brier
+        else None,
+        "beats_best_baseline": bool(best_brier is not None and model_brier < best_brier),
+        "note": "Raw model probabilities before calibration; lower Brier is better.",
+    }
+    return winner, details, benchmark
 
 
 def apply_td_calibration(
@@ -558,7 +610,7 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
     rec_tuning = tune_regression_hyperparameters(df, "receiving_yards")
     rush_params = rush_tuning.get("selected_params") if rush_name == "hist_gradient_boosting" else None
     rec_params = rec_tuning.get("selected_params") if rec_name == "hist_gradient_boosting" else None
-    td_name, td_cv = walk_forward_td(df)
+    td_name, td_cv, td_benchmark = walk_forward_td(df)
     td_base_rate, td_calibration_slope, td_calibration = fit_td_calibration(
         df, td_name
     )
@@ -628,6 +680,7 @@ def fit_models(df: pd.DataFrame) -> ModelBundle:
             if td_calibration.get("available")
             else avg_cv(td_cv.get(td_name, []), "brier"),
             "calibration": td_calibration,
+            "benchmark": td_benchmark,
         },
     }
 
