@@ -723,6 +723,26 @@
       "improvement_pct": -0.11,
       "improves_brier": false,
       "decision": "rejected; raw probabilities retained"
+    },
+    "benchmark": {
+      "samples": 8563,
+      "model_brier": 0.179,
+      "baselines": {
+        "league_rate": 0.1918,
+        "last_8_rate": 0.1964,
+        "blend": 0.1833
+      },
+      "baseline_labels": {
+        "league_rate": "League TD rate",
+        "last_8_rate": "Player's last-8 TD rate",
+        "blend": "Last-8 rate blended with league rate"
+      },
+      "best_baseline": "blend",
+      "best_baseline_brier": 0.1833,
+      "model_improvement": 0.0043,
+      "model_improvement_pct": 2.36,
+      "beats_best_baseline": true,
+      "note": "Raw model probabilities before calibration; lower Brier is better."
     }
   }
 }
