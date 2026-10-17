@@ -529,3 +529,17 @@ tbody tr[data-href]{cursor:pointer}tbody tr[data-href]:focus{outline:2px solid v
 .player-alert.info{border-color:rgba(59,215,255,.35);background:rgba(59,215,255,.06);color:#c9f1ff}
 .trend-columns:has(>div:nth-child(3)){grid-template-columns:repeat(3,1fr)}
 @media(max-width:650px){.trend-columns:has(>div:nth-child(3)){grid-template-columns:1fr}}
+
+/* Static search pages (players/, projections/) */
+.seo-main{display:grid;gap:14px;padding-bottom:30px}
+.seo-main .player-metrics-grid{margin:0}
+.seo-main .detail-panel h2{margin:4px 0 10px;font-size:22px}
+.seo-main .table-wrap{min-width:0}
+.seo-crumbs{color:#7890a8;font-size:12px}.seo-crumbs a{color:#a7b8ca}
+.seo-prose p{color:#c3d1de;line-height:1.65;margin:0 0 12px}.seo-prose b{color:#fff}.seo-prose a:not(.primary-btn){color:var(--cyan)}
+.seo-note{color:#8da2b7}
+.seo-links ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px 18px}
+.seo-links a{color:#dbe6f0;font-weight:700}.seo-links a:hover{color:var(--cyan)}.seo-links small{color:#6f879f;margin-left:4px}
+.seo-switch{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.seo-main td a{color:#e7eef5;font-weight:700}.seo-main td a:hover{color:var(--cyan)}
+.seo-main th{position:static}

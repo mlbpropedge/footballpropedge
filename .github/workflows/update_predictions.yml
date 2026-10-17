@@ -34,11 +34,13 @@ jobs:
       - run: pytest -q
       - name: Check published slate
         run: python scripts/check_publication.py
+      - name: Build search pages and sitemap
+        run: python scripts/build_seo_pages.py
       - name: Commit refreshed outputs
         run: |
           git config user.name "football-prop-edge-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data models || true
+          git add data models players projections sitemap.xml || true
           git diff --cached --quiet || git commit -m "Update NFL projections"
 
           # The site/code can receive commits while this longer model run is
