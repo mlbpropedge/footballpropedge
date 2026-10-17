@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "week": 6,
-  "generated_at": "2026-10-17T11:20:20.197895+00:00",
+  "generated_at": "2026-10-17T11:46:57.984737+00:00",
   "source": "nflverse",
   "players": [
     {
@@ -25348,7 +25348,7 @@
     "snap_share_players": 1816,
     "note": "Players listed Out, on a reserve list, released or inactive are not projected."
   },
-  "previous_generated_at": "2026-10-16T15:25:16.284748+00:00",
+  "previous_generated_at": "2026-10-17T11:20:20.197895+00:00",
   "prediction_intervals": {
     "coverage": 0.8,
     "method": "empirical walk-forward residual quantiles",
