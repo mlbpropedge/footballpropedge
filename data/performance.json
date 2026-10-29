@@ -1,64 +1,173 @@
 {
-  "graded_predictions": 1224,
-  "graded_weeks": 5,
+  "graded_predictions": 1453,
+  "graded_weeks": 6,
   "weeks": [
     2,
     3,
     4,
     5,
-    6
+    6,
+    7
   ],
-  "rushing_graded": 446,
-  "receiving_graded": 939,
-  "td_graded": 966,
-  "rushing_mae": 18.42,
-  "receiving_mae": 20.57,
-  "rushing_range_hit_rate": 81.2,
-  "receiving_range_hit_rate": 75.6,
-  "rushing_within_15": 54.9,
-  "receiving_within_15": 54.6,
-  "td_brier": 0.1753,
-  "td_baseline_brier": 0.1816,
+  "rushing_graded": 522,
+  "receiving_graded": 1128,
+  "td_graded": 1148,
+  "rushing_mae": 18.97,
+  "receiving_mae": 20.36,
+  "rushing_range_hit_rate": 80.1,
+  "receiving_range_hit_rate": 76.3,
+  "rushing_within_15": 54.6,
+  "receiving_within_15": 54.5,
+  "td_brier": 0.1777,
+  "td_baseline_brier": 0.1847,
   "td_baseline": "Player's last-8-game TD rate blended 50/50 with the league rate",
   "td_calibration": [
     {
       "label": "0\u201310%",
-      "samples": 32,
+      "samples": 34,
       "avg_predicted": 9.0,
-      "actual_rate": 9.4
+      "actual_rate": 8.8
     },
     {
       "label": "10\u201320%",
-      "samples": 333,
+      "samples": 401,
       "avg_predicted": 15.3,
-      "actual_rate": 16.2
+      "actual_rate": 16.0
     },
     {
       "label": "20\u201330%",
-      "samples": 330,
+      "samples": 388,
       "avg_predicted": 24.3,
-      "actual_rate": 23.9
+      "actual_rate": 25.5
     },
     {
       "label": "30\u201340%",
-      "samples": 163,
-      "avg_predicted": 34.6,
-      "actual_rate": 32.5
+      "samples": 199,
+      "avg_predicted": 34.5,
+      "actual_rate": 33.2
     },
     {
       "label": "40\u201350%",
-      "samples": 71,
+      "samples": 83,
       "avg_predicted": 44.5,
-      "actual_rate": 40.8
+      "actual_rate": 45.8
     },
     {
       "label": "50%+",
-      "samples": 37,
-      "avg_predicted": 55.3,
-      "actual_rate": 56.8
+      "samples": 43,
+      "avg_predicted": 55.2,
+      "actual_rate": 53.5
     }
   ],
   "weekly_results": [
+    {
+      "season": 2026,
+      "week": 7,
+      "graded_players": 229,
+      "rushing_graded": 76,
+      "receiving_graded": 189,
+      "td_graded": 182,
+      "rushing_mae": 22.2,
+      "receiving_mae": 19.33,
+      "rushing_range_hit_rate": 73.7,
+      "receiving_range_hit_rate": 79.9,
+      "rushing_within_15": 52.6,
+      "receiving_within_15": 54.0,
+      "td_brier": 0.1904,
+      "td_baseline_brier": 0.2014,
+      "sample_predictions": [
+        {
+          "player_id": "00-0038134",
+          "player": "Kenneth Walker III",
+          "position": "RB",
+          "team": "KC",
+          "opponent": "SEA",
+          "projected_rushing_yards": 81.0,
+          "actual_rushing_yards": 36.0,
+          "rush_in_range": false,
+          "projected_receiving_yards": 13.2,
+          "actual_receiving_yards": 21.0,
+          "rec_in_range": true,
+          "td_probability": 54.6,
+          "actual_td": false
+        },
+        {
+          "player_id": "00-0039075",
+          "player": "Puka Nacua",
+          "position": "WR",
+          "team": "LA",
+          "opponent": "LV",
+          "projected_rushing_yards": 0.3,
+          "actual_rushing_yards": 10.0,
+          "rush_in_range": true,
+          "projected_receiving_yards": 79.9,
+          "actual_receiving_yards": 68.0,
+          "rec_in_range": true,
+          "td_probability": 43.9,
+          "actual_td": true
+        },
+        {
+          "player_id": "00-0038543",
+          "player": "Jaxon Smith-Njigba",
+          "position": "WR",
+          "team": "SEA",
+          "opponent": "KC",
+          "projected_rushing_yards": 0.0,
+          "actual_rushing_yards": 13.0,
+          "rush_in_range": true,
+          "projected_receiving_yards": 79.0,
+          "actual_receiving_yards": 150.0,
+          "rec_in_range": false,
+          "td_probability": 46.7,
+          "actual_td": true
+        },
+        {
+          "player_id": "00-0039064",
+          "player": "Zay Flowers",
+          "position": "WR",
+          "team": "BAL",
+          "opponent": "CIN",
+          "projected_rushing_yards": 0.0,
+          "actual_rushing_yards": 0.0,
+          "rush_in_range": true,
+          "projected_receiving_yards": 73.1,
+          "actual_receiving_yards": 137.0,
+          "rec_in_range": false,
+          "td_probability": 38.5,
+          "actual_td": true
+        },
+        {
+          "player_id": "00-0032764",
+          "player": "Derrick Henry",
+          "position": "RB",
+          "team": "BAL",
+          "opponent": "CIN",
+          "projected_rushing_yards": 72.7,
+          "actual_rushing_yards": 45.0,
+          "rush_in_range": false,
+          "projected_receiving_yards": 9.9,
+          "actual_receiving_yards": 4.0,
+          "rec_in_range": true,
+          "td_probability": 52.6,
+          "actual_td": false
+        },
+        {
+          "player_id": "00-0038542",
+          "player": "Bijan Robinson",
+          "position": "RB",
+          "team": "ATL",
+          "opponent": "SF",
+          "projected_rushing_yards": 72.3,
+          "actual_rushing_yards": 63.0,
+          "rush_in_range": true,
+          "projected_receiving_yards": 18.9,
+          "actual_receiving_yards": 59.0,
+          "rec_in_range": false,
+          "td_probability": 42.5,
+          "actual_td": false
+        }
+      ]
+    },
     {
       "season": 2026,
       "week": 6,
